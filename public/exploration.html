@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Rillmark — three visual studies</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: 42px 28px; background: #f0f0eb; color: #253b3b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .page-header { max-width: 1460px; margin: 0 auto 32px; }
+      .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+      h1 { font-size: clamp(28px, 3vw, 42px); letter-spacing: -.045em; font-weight: 550; margin: 12px 0; }
+      .page-header p { max-width: 760px; font-size: 15px; line-height: 1.65; color: #506361; }
+      .studies { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; max-width: 1460px; margin: 0 auto; }
+      .study { min-width: 0; }
+      .study > header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+      .study h2 { margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -.025em; }
+      .choice { font-size: 11px; background: #245f55; color: white; padding: 6px 9px; border-radius: 5px; }
+      .study > p { font-size: 13px; line-height: 1.65; color: #506361; margin: 16px 0; }
+      .screen { min-height: 658px; overflow: hidden; background: var(--canvas); color: var(--ink); border: 1px solid var(--line); border-radius: var(--shell-radius); font-size: 12px; box-shadow: 0 6px 18px #1a2c2810; }
+      .topbar { display: flex; align-items: center; justify-content: space-between; padding: 17px 18px; background: var(--panel); border-bottom: 1px solid var(--line); }
+      .brand { display: flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 700; letter-spacing: -.03em; }
+      .mark { height: 19px; width: 19px; background: var(--accent); border-radius: var(--small-radius); position: relative; }
+      .mark::after { content: ""; position: absolute; left: 6px; top: 3px; width: 3px; height: 13px; border-left: 2px solid var(--panel); border-right: 2px solid var(--panel); transform: rotate(25deg); }
+      .avatar { height: 26px; width: 26px; display: grid; place-content: center; background: var(--tint); border-radius: 50%; font-weight: 700; font-size: 10px; color: var(--ink); }
+      .nav { display: flex; gap: 5px; padding: 12px 18px; background: var(--panel); border-bottom: 1px solid var(--line); }
+      .nav span { padding: 8px 9px; color: var(--muted); }
+      .nav .selected { color: var(--accent); background: var(--tint); border-radius: var(--control-radius); font-weight: 650; }
+      .body { padding: 22px 18px; }
+      .title-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 5px; }
+      h3 { font-size: 23px; letter-spacing: -.04em; font-weight: 600; margin: 0; }
+      .date { margin: 0 0 21px; color: var(--muted); font-size: 11px; }
+      .action { padding: 9px 11px; border-radius: var(--control-radius); background: var(--accent); color: var(--on-accent); white-space: nowrap; font-size: 11px; font-weight: 600; }
+      .metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 19px; }
+      .metric { padding: 14px 10px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--panel-radius); }
+      .metric small { display: block; color: var(--muted); font-size: 10px; white-space: nowrap; }
+      .metric strong { font-size: 28px; display: block; font-weight: 500; margin: 8px 0 4px; font-variant-numeric: tabular-nums; letter-spacing: -.06em; }
+      .metric em { font-style: normal; font-size: 10px; color: var(--accent); }
+      .projects { border-radius: var(--panel-radius); border: 1px solid var(--line); background: var(--panel); overflow: hidden; }
+      .toolbar { padding: 12px; display: flex; gap: 7px; border-bottom: 1px solid var(--line); }
+      .search { flex: 1; color: var(--muted); padding: 8px; border: 1px solid var(--line); border-radius: var(--control-radius); font-size: 10px; }
+      .filter { padding: 8px; border: 1px solid var(--line); border-radius: var(--control-radius); color: var(--ink); font-size: 10px; }
+      table { width: 100%; border-collapse: collapse; text-align: left; font-size: 10px; }
+      th { color: var(--muted); font-size: 9px; font-weight: 550; background: var(--canvas); }
+      td, th { padding: 12px 10px; border-bottom: 1px solid var(--line); }
+      tbody tr:last-child td { border-bottom: 0; }
+      td:first-child { font-weight: 600; }
+      td:last-child { color: var(--muted); white-space: nowrap; }
+      .status { font-size: 9px; display: inline-block; white-space: nowrap; padding: 4px 5px; color: var(--accent); background: var(--tint); border-radius: var(--small-radius); font-weight: 500; }
+      .status.review { background: var(--warm); color: var(--on-warm); }
+      .status.queued { color: var(--muted); background: var(--canvas); }
+      .review-card { margin-top: 16px; padding: 15px; background: var(--warm); color: var(--on-warm); border-radius: var(--panel-radius); display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
+      .review-card strong { font-weight: 650; font-size: 12px; }
+      .review-card p { margin: 5px 0 0; font-size: 10px; line-height: 1.5; }
+      .arrow { font-size: 20px; }
+      .screen-footer { margin-top: 17px; display: flex; justify-content: space-between; color: var(--muted); font-size: 10px; }
+      .signal { --canvas:#f4f6fa; --panel:#ffffff; --ink:#1f314f; --muted:#5b687e; --line:#d5dde9; --accent:#285ac1; --on-accent:#ffffff; --tint:#e7eefb; --warm:#eef0f7; --on-warm:#394c6b; --shell-radius:2px; --control-radius:3px; --panel-radius:2px; --small-radius:2px; }
+      .signal .metric { border-top: 3px solid var(--accent); }
+      .signal .nav .selected { background: transparent; border-bottom: 2px solid var(--accent); }
+      .signal .metric strong { font-family: ui-monospace, monospace; font-size: 26px; }
+      .fieldnotes { --canvas:#f5f4ed; --panel:#fffdf7; --ink:#243b3d; --muted:#566765; --line:#d2d8cd; --accent:#245f55; --on-accent:#fffdf7; --tint:#dfeae1; --warm:#f3dec3; --on-warm:#68441f; --shell-radius:18px 18px 6px 18px; --control-radius:8px; --panel-radius:14px 14px 5px 14px; --small-radius:4px; }
+      .fieldnotes .review-card { border-left: 3px solid #a7763f; }
+      .fieldnotes .date { font-family: Georgia, serif; font-style: italic; font-size: 12px; }
+      .terrace { --canvas:#f1e9df; --panel:#fffbf5; --ink:#48382d; --muted:#756051; --line:#dfd1c1; --accent:#9b4a30; --on-accent:#fffbf5; --tint:#f5e1d4; --warm:#e8e3c9; --on-warm:#555131; --shell-radius:24px; --control-radius:20px; --panel-radius:17px; --small-radius:10px; }
+      .terrace .topbar { background: var(--ink); color: var(--panel); }
+      .terrace h3 { font-family: Georgia, serif; font-weight: 500; }
+      .terrace .metric { border: 0; padding-top: 16px; padding-bottom: 16px; }
+      .terrace .projects { border: 0; padding: 5px; }
+      .terrace .toolbar { border: 0; }
+      .terrace th { background: var(--panel); }
+      .terrace td { border-color: var(--panel); background: var(--canvas); border-bottom-width: 5px; }
+      .decision { max-width: 1460px; margin: 32px auto 0; border-top: 1px solid #cad2c8; padding-top: 23px; display: grid; grid-template-columns: 180px 1fr; gap: 24px; }
+      .decision h2 { font-size: 15px; margin: 0; }
+      .decision p { margin: 0; max-width: 900px; font-size: 14px; line-height: 1.75; color: #506361; }
+      footer { max-width: 1460px; margin: 28px auto 0; color: #506361; font-size: 11px; }
+      footer a { color: #245f55; }
+      @media (max-width: 1150px) { .studies { grid-template-columns: 1fr; max-width: 520px; gap: 32px; } .screen { min-height: 0; } .page-header, .decision, footer { max-width: 700px; } }
+      @media (max-width: 500px) { body { padding: 28px 16px; } .decision { display: block; } .decision h2 { margin-bottom: 12px; } .body { padding: 20px 12px; } .topbar, .nav { padding-left: 12px; padding-right: 12px; } .metric { padding-left: 8px; padding-right: 8px; } td, th { padding-left: 7px; padding-right: 7px; } }
+    </style>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="eyebrow">Rillmark / Design studies / 01</div>
+      <h1>One workspace. Three expressions.</h1>
+      <p>A brief exploration of the same realistic application screen. Content and structure stay consistent so typography, surfaces, shape and spacing can do the talking. These are static visual studies.</p>
+    </header>
+    <main>
+      <div class="studies" id="studies"></div>
+      <section class="decision" aria-labelledby="decision-title">
+        <h2 id="decision-title">Why Fieldnotes</h2>
+        <p>Its character is present in an ordinary filter, a selected tab, and the quiet edge of a card. Warm surfaces and mineral ink give dense work a human quality; the small corner contrast adds recognition without consuming space. It scales naturally from a project table to settings and discovery. Signal is efficient but familiar; Terrace is welcoming but heavier at density.</p>
+      </section>
+    </main>
+    <footer>Research notes live in <code>docs/research.md</code>. Production tokens remain canonical in <code>tokens.json</code>. <a href="/">Back to Rillmark</a></footer>
+    <script>
+      const directions = [
+        { id: "signal", name: "01 / Signal", description: "Precise and technical. Cool surfaces, sharp rules and a compact numerical hierarchy make the work easy to scan, but the overall language is familiar." },
+        { id: "fieldnotes", name: "02 / Fieldnotes", description: "Considered and tactile. Warm paper, mineral ink, mint selection and a restrained unequal corner bring a distinct character to everyday application controls.", selected: true },
+        { id: "terrace", name: "03 / Terrace", description: "Welcoming and grounded. Espresso, terracotta and broad rounded modules suit onboarding; the heavier framing is less efficient in a dense workspace." }
+      ];
+      const dashboard = `<div class="topbar"><div class="brand"><span class="mark" aria-hidden="true"></span>Fieldwork</div><span class="avatar">AL</span></div>
+        <div class="nav"><span class="selected">Overview</span><span>Projects</span><span>People</span><span>Settings</span></div>
+        <div class="body"><div class="title-row"><h3>Studio overview</h3><span class="action">+ New project</span></div><p class="date">Tuesday, 3 November · A good day to make progress.</p>
+          <div class="metrics"><div class="metric"><small>Active projects</small><strong>12</strong><em>↑ 2 this month</em></div><div class="metric"><small>Ready for review</small><strong>04</strong><em>Across 3 teams</em></div><div class="metric"><small>On-time delivery</small><strong>96<span style="font-size:15px">%</span></strong><em>↑ 8% this quarter</em></div></div>
+          <div class="projects"><div class="toolbar"><span class="search">⌕ &nbsp; Search projects…</span><span class="filter">All statuses ⌄</span></div>
+            <table><thead><tr><th scope="col">Project</th><th scope="col">Status</th><th scope="col">Due date</th></tr></thead><tbody>
+              <tr><td>Harbor identity</td><td><span class="status review">In review</span></td><td>Nov 06</td></tr>
+              <tr><td>Good Things shop</td><td><span class="status">In progress</span></td><td>Nov 12</td></tr>
+              <tr><td>Orchard journal</td><td><span class="status">In progress</span></td><td>Nov 18</td></tr>
+              <tr><td>Northline wayfinding</td><td><span class="status queued">Planned</span></td><td>Nov 24</td></tr>
+            </tbody></table>
+          </div>
+          <div class="review-card"><div><strong>A fresh perspective is waiting</strong><p>4 projects are ready for your team's feedback.</p></div><span class="arrow" aria-hidden="true">↗</span></div>
+          <div class="screen-footer"><span>8 people making good work</span><span>Updated just now</span></div>
+        </div>`;
+      document.getElementById("studies").innerHTML = directions.map(direction => `<article class="study"><header><h2>${direction.name}</h2>${direction.selected ? '<span class="choice">Selected direction</span>' : ''}</header><div class="screen ${direction.id}" aria-label="${direction.name} dashboard visual study">${dashboard}</div><p>${direction.description}</p></article>`).join("");
+    </script>
+  </body>
+</html>
