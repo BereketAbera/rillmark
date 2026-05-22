@@ -1,7 +1,7 @@
 "use client"
 import * as React from 'react'
 import { Progress as Primitive } from 'radix-ui'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/rillmark-utils'
 export function Progress({ className, value, max = 100, ...props }: React.ComponentProps<typeof Primitive.Root>) {
   const limit = max > 0 ? max : 100
   const normalized = value == null ? null : Math.min(limit, Math.max(0, value))

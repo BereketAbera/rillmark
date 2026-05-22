@@ -5,7 +5,7 @@
     "strict": true, "skipLibCheck": true, "esModuleInterop": true,
     "resolveJsonModule": true, "isolatedModules": true, "noEmit": true,
     "allowImportingTsExtensions": true, "types": ["vite/client", "node"],
-    "paths": { "@/*": ["./src/*"], "@/components/ui/*": ["./registry/rillmark/ui/*"], "@/lib/utils": ["./registry/rillmark/lib/utils.ts"] }
+    "paths": { "@/*": ["./src/*"], "@/components/ui/*": ["./registry/rillmark/ui/*"], "@/lib/rillmark-utils": ["./registry/rillmark/lib/rillmark-utils.ts"] }
   },
   "include": ["src", "registry", "tests", "vite.config.ts", "playwright.config.ts"]
 }

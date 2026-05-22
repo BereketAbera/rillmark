@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/rillmark-utils"
 import { useFieldControl } from "@/components/ui/field"
 
 export function Input({ className, type = "text", ...props }: React.ComponentProps<"input">) {

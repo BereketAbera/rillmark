@@ -1,7 +1,7 @@
 "use client"
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/rillmark-utils'
 export interface PaginationProps extends Omit<React.ComponentProps<'nav'>, 'onChange'> { page: number; pageCount: number; onPageChange: (page: number) => void }
 export function Pagination({ page, pageCount, onPageChange, className, ...props }: PaginationProps) {
   const total = Math.max(1, Math.floor(pageCount))

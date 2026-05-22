@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Select as SelectPrimitive } from "radix-ui"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/rillmark-utils"
 import { useFieldControl } from "@/components/ui/field"
 
 export function Select(props: React.ComponentProps<typeof SelectPrimitive.Root>) {
