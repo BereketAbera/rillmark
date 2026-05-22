@@ -1,0 +1,48 @@
+# Rillmark
+
+> Expressive React components. Editable source, Tailwind CSS 4, Radix primitives. Install individual items with the official shadcn CLI. No Rillmark runtime.
+
+## Start here
+
+- [Setup and install](./docs/getting-started.md): use this first; includes local serving and namespace configuration.
+- [Foundations](./docs/foundations.md): tokens, dark mode, customization and accessibility.
+- [AI setup](./docs/ai.md): consuming skill, shadcn MCP, progressive discovery.
+- [Registry](./r/registry.json): searchable catalog.
+- [Generated API](./api.json): exports and locally declared props from implementation.
+
+## Components
+
+- [Accordion](./docs/components/accordion.md): Detail when it is needed.
+- [AlertDialog](./docs/components/alert-dialog.md): A deliberate pause before a consequence.
+- [Alert](./docs/components/alert.md): Feedback with enough context to act.
+- [Avatar](./docs/components/avatar.md): A recognizable presence, even without an image.
+- [Badge](./docs/components/badge.md): A small, readable signal.
+- [Breadcrumbs](./docs/components/breadcrumbs.md): A useful trail back.
+- [ButtonGroup](./docs/components/button-group.md): Related actions, kept together.
+- [Button](./docs/components/button.md): A clear next step, with quiet alternatives.
+- [Card](./docs/components/card.md): A home for related information.
+- [Checkbox](./docs/components/checkbox.md): An independent choice, clearly marked.
+- [Combobox](./docs/components/combobox.md): Find a choice without losing your place.
+- [Dialog](./docs/components/dialog.md): A focused task, with a clear way back.
+- [DropdownMenu](./docs/components/dropdown-menu.md): Actions, right where they belong.
+- [EmptyState](./docs/components/empty-state.md): A useful next step when there is nothing here.
+- [Field](./docs/components/field.md): Labels, help and errors that stay connected.
+- [IconButton](./docs/components/icon-button.md): A compact action with a name.
+- [Input](./docs/components/input.md): A familiar place to begin.
+- [Pagination](./docs/components/pagination.md): Move through a manageable set.
+- [Popover](./docs/components/popover.md): Context within reach.
+- [Progress](./docs/components/progress.md): A sense of how far along.
+- [RadioGroup](./docs/components/radio-group.md): One choice from a visible set.
+- [Select](./docs/components/select.md): A focused list of choices.
+- [Separator](./docs/components/separator.md): A pause between related things.
+- [Sheet](./docs/components/sheet.md): A little more room, alongside the work.
+- [Skeleton](./docs/components/skeleton.md): A quiet placeholder for what comes next.
+- [Slider](./docs/components/slider.md): Fine control across a range.
+- [Switch](./docs/components/switch.md): An immediate on or off decision.
+- [Table](./docs/components/table.md): Readable data, with room to grow.
+- [Tabs](./docs/components/tabs.md): One workspace, several views.
+- [Textarea](./docs/components/textarea.md): Room for a longer thought.
+- [Toast](./docs/components/toast.md): An update that respects the current task.
+- [Tooltip](./docs/components/tooltip.md): A short, optional explanation.
+
+Read only the relevant component pages. Their examples compile as part of the site. Local edits are yours; use className and semantic CSS variables before adding variants.

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "table-demo",
+  "title": "Table example",
+  "description": "Working Table example.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/badge",
+    "@rillmark/table"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/examples/table-demo.tsx",
+      "content": "import { Badge } from \"@/components/ui/badge\"\nimport { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from \"@/components/ui/table\"\n\nconst projects = [{ name: \"Coastal restoration\", lead: \"Maya Chen\", notes: 12, status: \"In progress\" }, { name: \"Spring research\", lead: \"Ada Okafor\", notes: 8, status: \"In review\" }, { name: \"Watershed atlas\", lead: \"Niko Alvarez\", notes: 24, status: \"In progress\" }]\n\nexport default function ComponentDemo() {\n  return <Table containerLabel=\"Project overview\">\n    <TableCaption>Current research projects and their field notes.</TableCaption>\n    <TableHeader><TableRow><TableHead>Project</TableHead><TableHead>Lead</TableHead><TableHead>Status</TableHead><TableHead className=\"text-right\">Notes</TableHead></TableRow></TableHeader>\n    <TableBody>{projects.map((project) => <TableRow key={project.name}><TableCell className=\"min-w-48 font-medium\">{project.name}</TableCell><TableCell className=\"whitespace-nowrap\">{project.lead}</TableCell><TableCell><Badge variant={project.status === \"In progress\" ? \"accent\" : \"soft\"}>{project.status}</Badge></TableCell><TableCell className=\"text-right tabular-nums\">{project.notes}</TableCell></TableRow>)}</TableBody>\n  </Table>\n}\n",
+      "type": "registry:component",
+      "target": "@components/examples/table-demo.tsx"
+    }
+  ],
+  "type": "registry:example"
+}

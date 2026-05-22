@@ -1,0 +1,1387 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "rillmark",
+  "homepage": "http://localhost:5173",
+  "items": [
+    {
+      "name": "theme",
+      "title": "Rillmark foundations",
+      "type": "registry:style",
+      "description": "Fieldnotes tokens, light and dark, motion and base styles.",
+      "cssVars": {
+        "theme": {
+          "color-background": "var(--background)",
+          "color-foreground": "var(--foreground)",
+          "color-card": "var(--card)",
+          "color-card-foreground": "var(--card-foreground)",
+          "color-popover": "var(--popover)",
+          "color-popover-foreground": "var(--popover-foreground)",
+          "color-primary": "var(--primary)",
+          "color-primary-foreground": "var(--primary-foreground)",
+          "color-secondary": "var(--secondary)",
+          "color-secondary-foreground": "var(--secondary-foreground)",
+          "color-muted": "var(--muted)",
+          "color-muted-foreground": "var(--muted-foreground)",
+          "color-accent": "var(--accent)",
+          "color-accent-foreground": "var(--accent-foreground)",
+          "color-destructive": "var(--destructive)",
+          "color-destructive-foreground": "var(--destructive-foreground)",
+          "color-border": "var(--border)",
+          "color-input": "var(--input)",
+          "color-ring": "var(--ring)",
+          "font-sans": "\"DM Sans\", \"Segoe UI\", system-ui, sans-serif",
+          "font-editorial": "Georgia, \"Times New Roman\", serif",
+          "radius-sm": "0.375rem",
+          "radius-md": "0.5rem",
+          "radius-lg": "0.625rem",
+          "radius-xl": "0.75rem",
+          "radius-2xl": "1.125rem",
+          "animate-rm-enter": "rm-enter 180ms ease-out",
+          "animate-rm-exit": "rm-exit 140ms ease-in"
+        },
+        "light": {
+          "background": "#F5F4ED",
+          "foreground": "#243B3D",
+          "card": "#FFFDF7",
+          "card-foreground": "#243B3D",
+          "popover": "#FFFDF7",
+          "popover-foreground": "#243B3D",
+          "primary": "#245F55",
+          "primary-foreground": "#FFFDF7",
+          "secondary": "#DFEAE1",
+          "secondary-foreground": "#244E40",
+          "muted": "#ECEEE5",
+          "muted-foreground": "#566765",
+          "accent": "#F3DEC3",
+          "accent-foreground": "#68441F",
+          "destructive": "#9C3E35",
+          "destructive-foreground": "#FFFDF7",
+          "border": "#D2D8CD",
+          "input": "#7D8E83",
+          "ring": "#245F55",
+          "radius": "0.625rem"
+        },
+        "dark": {
+          "background": "#142725",
+          "foreground": "#EDF2E8",
+          "card": "#1D322E",
+          "card-foreground": "#EDF2E8",
+          "popover": "#1D322E",
+          "popover-foreground": "#EDF2E8",
+          "primary": "#B2D5BA",
+          "primary-foreground": "#193C2C",
+          "secondary": "#2B473C",
+          "secondary-foreground": "#DCECDF",
+          "muted": "#243C35",
+          "muted-foreground": "#B4C4B9",
+          "accent": "#453724",
+          "accent-foreground": "#F4D5AC",
+          "destructive": "#FFC2B5",
+          "destructive-foreground": "#482D2A",
+          "border": "#3E554A",
+          "input": "#71867A",
+          "ring": "#B2D5BA"
+        }
+      },
+      "css": {
+        "@layer base": {
+          "*": {
+            "border-color": "var(--border)"
+          },
+          "body": {
+            "background-color": "var(--background)",
+            "color": "var(--foreground)",
+            "font-family": "var(--font-sans)",
+            "font-feature-settings": "\"ss01\""
+          },
+          ".dark": {
+            "color-scheme": "dark"
+          },
+          "::selection": {
+            "background-color": "var(--secondary)",
+            "color": "var(--secondary-foreground)"
+          }
+        },
+        "@keyframes rm-enter": {
+          "from": {
+            "opacity": "0",
+            "transform": "translateY(4px)"
+          },
+          "to": {
+            "opacity": "1",
+            "transform": "translateY(0)"
+          }
+        },
+        "@keyframes rm-exit": {
+          "from": {
+            "opacity": "1"
+          },
+          "to": {
+            "opacity": "0"
+          }
+        },
+        "@media (prefers-reduced-motion: reduce)": {
+          "*, *::before, *::after": {
+            "animation-duration": "0.01ms !important",
+            "animation-iteration-count": "1 !important",
+            "transition-duration": "0.01ms !important",
+            "scroll-behavior": "auto !important"
+          }
+        }
+      }
+    },
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.7.0"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/lib/rillmark-utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "accordion",
+      "title": "Accordion",
+      "type": "registry:ui",
+      "description": "Detail when it is needed.",
+      "dependencies": [
+        "radix-ui@^1.8.1",
+        "lucide-react@^1.67.0"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "accordion-demo",
+      "title": "Accordion example",
+      "type": "registry:example",
+      "description": "Working Accordion example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/accordion-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/accordion-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "title": "AlertDialog",
+      "type": "registry:ui",
+      "description": "A deliberate pause before a consequence.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog-demo",
+      "title": "AlertDialog example",
+      "type": "registry:example",
+      "description": "Working AlertDialog example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button",
+        "@rillmark/alert-dialog"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/alert-dialog-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/alert-dialog-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "title": "Alert",
+      "type": "registry:ui",
+      "description": "Feedback with enough context to act.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/alert.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-demo",
+      "title": "Alert example",
+      "type": "registry:example",
+      "description": "Working Alert example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/alert"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/alert-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/alert-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar",
+      "type": "registry:ui",
+      "description": "A recognizable presence, even without an image.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar-demo",
+      "title": "Avatar example",
+      "type": "registry:example",
+      "description": "Working Avatar example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/avatar-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/avatar-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "title": "Badge",
+      "type": "registry:ui",
+      "description": "A small, readable signal.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge-demo",
+      "title": "Badge example",
+      "type": "registry:example",
+      "description": "Working Badge example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/badge"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/badge-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/badge-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumbs",
+      "title": "Breadcrumbs",
+      "type": "registry:ui",
+      "description": "A useful trail back.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/breadcrumbs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumbs-demo",
+      "title": "Breadcrumbs example",
+      "type": "registry:example",
+      "description": "Working Breadcrumbs example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/breadcrumbs"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/breadcrumbs-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/breadcrumbs-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button-group",
+      "title": "ButtonGroup",
+      "type": "registry:ui",
+      "description": "Related actions, kept together.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/button-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button-group-demo",
+      "title": "ButtonGroup example",
+      "type": "registry:example",
+      "description": "Working ButtonGroup example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button",
+        "@rillmark/button-group"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/button-group-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/button-group-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "title": "Button",
+      "type": "registry:ui",
+      "description": "A clear next step, with quiet alternatives.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button-demo",
+      "title": "Button example",
+      "type": "registry:example",
+      "description": "Working Button example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/button-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/button-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "type": "registry:ui",
+      "description": "A home for related information.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card-demo",
+      "title": "Card example",
+      "type": "registry:example",
+      "description": "Working Card example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/badge",
+        "@rillmark/button",
+        "@rillmark/card"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/card-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/card-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "title": "Checkbox",
+      "type": "registry:ui",
+      "description": "An independent choice, clearly marked.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox-demo",
+      "title": "Checkbox example",
+      "type": "registry:example",
+      "description": "Working Checkbox example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/checkbox"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/checkbox-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/checkbox-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "title": "Combobox",
+      "type": "registry:ui",
+      "description": "Find a choice without losing your place.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/combobox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "combobox-demo",
+      "title": "Combobox example",
+      "type": "registry:example",
+      "description": "Working Combobox example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/combobox",
+        "@rillmark/field"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/combobox-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/combobox-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "title": "Dialog",
+      "type": "registry:ui",
+      "description": "A focused task, with a clear way back.",
+      "dependencies": [
+        "radix-ui@^1.8.1",
+        "lucide-react@^1.67.0"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dialog-demo",
+      "title": "Dialog example",
+      "type": "registry:example",
+      "description": "Working Dialog example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button",
+        "@rillmark/field",
+        "@rillmark/input",
+        "@rillmark/dialog"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/dialog-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/dialog-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "title": "DropdownMenu",
+      "type": "registry:ui",
+      "description": "Actions, right where they belong.",
+      "dependencies": [
+        "radix-ui@^1.8.1",
+        "lucide-react@^1.67.0"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu-demo",
+      "title": "DropdownMenu example",
+      "type": "registry:example",
+      "description": "Working DropdownMenu example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button",
+        "@rillmark/dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/dropdown-menu-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/dropdown-menu-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty-state",
+      "title": "EmptyState",
+      "type": "registry:ui",
+      "description": "A useful next step when there is nothing here.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/empty-state.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "empty-state-demo",
+      "title": "EmptyState example",
+      "type": "registry:example",
+      "description": "Working EmptyState example.",
+      "dependencies": [
+        "lucide-react@^1.67.0"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button",
+        "@rillmark/empty-state"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/empty-state-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/empty-state-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "title": "Field",
+      "type": "registry:ui",
+      "description": "Labels, help and errors that stay connected.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "field-demo",
+      "title": "Field example",
+      "type": "registry:example",
+      "description": "Working Field example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button",
+        "@rillmark/field",
+        "@rillmark/input"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/field-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/field-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "icon-button",
+      "title": "IconButton",
+      "type": "registry:ui",
+      "description": "A compact action with a name.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/icon-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "icon-button-demo",
+      "title": "IconButton example",
+      "type": "registry:example",
+      "description": "Working IconButton example.",
+      "dependencies": [
+        "lucide-react@^1.67.0"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/icon-button"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/icon-button-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/icon-button-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "title": "Input",
+      "type": "registry:ui",
+      "description": "A familiar place to begin.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-demo",
+      "title": "Input example",
+      "type": "registry:example",
+      "description": "Working Input example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field",
+        "@rillmark/input"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/input-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/input-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "title": "Pagination",
+      "type": "registry:ui",
+      "description": "Move through a manageable set.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pagination-demo",
+      "title": "Pagination example",
+      "type": "registry:example",
+      "description": "Working Pagination example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/pagination"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/pagination-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/pagination-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "title": "Popover",
+      "type": "registry:ui",
+      "description": "Context within reach.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "popover-demo",
+      "title": "Popover example",
+      "type": "registry:example",
+      "description": "Working Popover example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button",
+        "@rillmark/checkbox",
+        "@rillmark/popover"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/popover-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/popover-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "title": "Progress",
+      "type": "registry:ui",
+      "description": "A sense of how far along.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "progress-demo",
+      "title": "Progress example",
+      "type": "registry:example",
+      "description": "Working Progress example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button",
+        "@rillmark/progress"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/progress-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/progress-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "title": "RadioGroup",
+      "type": "registry:ui",
+      "description": "One choice from a visible set.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/radio-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "radio-group-demo",
+      "title": "RadioGroup example",
+      "type": "registry:example",
+      "description": "Working RadioGroup example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field",
+        "@rillmark/radio-group"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/radio-group-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/radio-group-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "title": "Select",
+      "type": "registry:ui",
+      "description": "A focused list of choices.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "select-demo",
+      "title": "Select example",
+      "type": "registry:example",
+      "description": "Working Select example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field",
+        "@rillmark/select"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/select-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/select-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "title": "Separator",
+      "type": "registry:ui",
+      "description": "A pause between related things.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "separator-demo",
+      "title": "Separator example",
+      "type": "registry:example",
+      "description": "Working Separator example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/separator"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/separator-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/separator-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "title": "Sheet",
+      "type": "registry:ui",
+      "description": "A little more room, alongside the work.",
+      "dependencies": [
+        "radix-ui@^1.8.1",
+        "lucide-react@^1.67.0"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/sheet.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sheet-demo",
+      "title": "Sheet example",
+      "type": "registry:example",
+      "description": "Working Sheet example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button",
+        "@rillmark/field",
+        "@rillmark/switch",
+        "@rillmark/sheet"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/sheet-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/sheet-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton",
+      "type": "registry:ui",
+      "description": "A quiet placeholder for what comes next.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "skeleton-demo",
+      "title": "Skeleton example",
+      "type": "registry:example",
+      "description": "Working Skeleton example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button",
+        "@rillmark/skeleton"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/skeleton-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/skeleton-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "title": "Slider",
+      "type": "registry:ui",
+      "description": "Fine control across a range.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/slider.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "slider-demo",
+      "title": "Slider example",
+      "type": "registry:example",
+      "description": "Working Slider example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field",
+        "@rillmark/slider"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/slider-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/slider-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "title": "Switch",
+      "type": "registry:ui",
+      "description": "An immediate on or off decision.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "switch-demo",
+      "title": "Switch example",
+      "type": "registry:example",
+      "description": "Working Switch example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field",
+        "@rillmark/switch"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/switch-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/switch-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "title": "Table",
+      "type": "registry:ui",
+      "description": "Readable data, with room to grow.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "table-demo",
+      "title": "Table example",
+      "type": "registry:example",
+      "description": "Working Table example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/badge",
+        "@rillmark/table"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/table-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/table-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs",
+      "type": "registry:ui",
+      "description": "One workspace, several views.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tabs-demo",
+      "title": "Tabs example",
+      "type": "registry:example",
+      "description": "Working Tabs example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/tabs-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/tabs-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "title": "Textarea",
+      "type": "registry:ui",
+      "description": "Room for a longer thought.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "textarea-demo",
+      "title": "Textarea example",
+      "type": "registry:example",
+      "description": "Working Textarea example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/field",
+        "@rillmark/textarea"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/textarea-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/textarea-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toast",
+      "title": "Toast",
+      "type": "registry:ui",
+      "description": "An update that respects the current task.",
+      "dependencies": [
+        "radix-ui@^1.8.1",
+        "lucide-react@^1.67.0"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/toast.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toast-demo",
+      "title": "Toast example",
+      "type": "registry:example",
+      "description": "Working Toast example.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/button",
+        "@rillmark/toast"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/toast-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/toast-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "title": "Tooltip",
+      "type": "registry:ui",
+      "description": "A short, optional explanation.",
+      "dependencies": [
+        "radix-ui@^1.8.1"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-demo",
+      "title": "Tooltip example",
+      "type": "registry:example",
+      "description": "Working Tooltip example.",
+      "dependencies": [
+        "lucide-react@^1.67.0"
+      ],
+      "registryDependencies": [
+        "@rillmark/theme",
+        "@rillmark/utils",
+        "@rillmark/icon-button",
+        "@rillmark/tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/rillmark/examples/tooltip-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/examples/tooltip-demo.tsx"
+        }
+      ]
+    }
+  ]
+}

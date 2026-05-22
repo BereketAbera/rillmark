@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "title": "Badge",
+  "description": "A small, readable signal.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/ui/badge.tsx",
+      "content": "import * as React from 'react'\nimport { cn } from '@/lib/rillmark-utils'\nexport interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> { variant?: 'soft' | 'outline' | 'accent' | 'danger' }\nexport function Badge({ className, variant = 'soft', ...props }: BadgeProps) {\n  return <span className={cn('inline-flex max-w-full items-center gap-1.5 rounded-md border px-2 py-0.5 text-xs font-medium leading-5', { soft: 'border-transparent bg-secondary text-secondary-foreground', outline: 'border-border text-muted-foreground', accent: 'border-transparent bg-accent text-accent-foreground', danger: 'border-destructive/25 bg-destructive/10 text-destructive' }[variant], className)} {...props}/>\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field-demo",
+  "title": "Field example",
+  "description": "Working Field example.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/button",
+    "@rillmark/field",
+    "@rillmark/input"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/examples/field-demo.tsx",
+      "content": "\"use client\"\nimport { useState } from \"react\"\nimport { Button } from \"@/components/ui/button\"\nimport { Field } from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\n\nexport default function ComponentDemo() {\n  const [email, setEmail] = useState(\"\")\n  const [error, setError] = useState(\"\")\n  const [saved, setSaved] = useState(false)\n  return <form noValidate className=\"w-full max-w-sm space-y-4\" onSubmit={(event) => {\n    event.preventDefault()\n    const valid = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)\n    setError(valid ? \"\" : \"Enter a valid email address, such as maya@example.com.\")\n    setSaved(valid)\n  }}>\n    <Field label=\"Work email\" required description=\"Used for your weekly workspace summary.\" error={error}><Input type=\"email\" autoComplete=\"email\" value={email} onChange={(event) => { setEmail(event.target.value); setError(\"\"); setSaved(false) }} placeholder=\"maya@example.com\" /></Field>\n    <Button type=\"submit\">Save email</Button>\n    {saved && <p role=\"status\" className=\"text-sm text-primary\">Email saved for this demo.</p>}\n  </form>\n}\n",
+      "type": "registry:component",
+      "target": "@components/examples/field-demo.tsx"
+    }
+  ],
+  "type": "registry:example"
+}

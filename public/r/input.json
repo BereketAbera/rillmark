@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input",
+  "title": "Input",
+  "description": "A familiar place to begin.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/field"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/ui/input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/rillmark-utils\"\nimport { useFieldControl } from \"@/components/ui/field\"\n\nexport function Input({ className, type = \"text\", ...props }: React.ComponentProps<\"input\">) {\n  const control = useFieldControl(props)\n  return <input data-slot=\"input\" type={type} {...props} {...control} className={cn(\"flex h-11 w-full min-w-0 rounded-xl rounded-tr-[5px] border border-input bg-card px-3.5 py-2 text-base text-foreground shadow-xs transition-[border-color,box-shadow] placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:focus-visible:ring-destructive file:mr-3 file:border-0 file:bg-transparent file:text-sm file:font-semibold file:text-foreground md:text-sm motion-reduce:transition-none\", className)} />\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

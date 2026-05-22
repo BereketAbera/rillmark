@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "combobox-demo",
+  "title": "Combobox example",
+  "description": "Working Combobox example.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/combobox",
+    "@rillmark/field"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/examples/combobox-demo.tsx",
+      "content": "\"use client\"\nimport { useState } from \"react\"\nimport { Combobox } from \"@/components/ui/combobox\"\nimport { Field } from \"@/components/ui/field\"\n\nconst options = [{ value: \"maya\", label: \"Maya Chen\", keywords: [\"research\"] }, { value: \"niko\", label: \"Niko Alvarez\", keywords: [\"design\"] }, { value: \"ada\", label: \"Ada Okafor\", keywords: [\"ecology\"] }, { value: \"leo\", label: \"Leo Park · away\", disabled: true }]\n\nexport default function ComponentDemo() {\n  const [owner, setOwner] = useState(\"\")\n  return <Field label=\"Project lead\" description=\"Find a teammate by name or specialty.\" className=\"w-full max-w-sm\">\n    <Combobox options={options} value={owner} onValueChange={setOwner} placeholder=\"Choose a teammate\" emptyMessage=\"No teammates match. Try a different name.\" />\n  </Field>\n}\n",
+      "type": "registry:component",
+      "target": "@components/examples/combobox-demo.tsx"
+    }
+  ],
+  "type": "registry:example"
+}

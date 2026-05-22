@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar-demo",
+  "title": "Avatar example",
+  "description": "Working Avatar example.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/avatar"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/examples/avatar-demo.tsx",
+      "content": "import { Avatar, AvatarFallback } from \"@/components/ui/avatar\"\n\nexport default function ComponentDemo() {\n  return <div className=\"flex items-center gap-4\">\n    <div className=\"flex -space-x-2\"><Avatar role=\"img\" aria-label=\"Maya Chen\"><AvatarFallback>MC</AvatarFallback></Avatar><Avatar role=\"img\" aria-label=\"Ada Okafor\"><AvatarFallback className=\"bg-accent text-accent-foreground\">AO</AvatarFallback></Avatar><Avatar role=\"img\" aria-label=\"Niko Alvarez\"><AvatarFallback>NA</AvatarFallback></Avatar></div>\n    <div><p className=\"text-sm font-semibold\">The research team</p><p className=\"text-sm text-muted-foreground\">Maya, Ada, and Niko</p></div>\n  </div>\n}\n",
+      "type": "registry:component",
+      "target": "@components/examples/avatar-demo.tsx"
+    }
+  ],
+  "type": "registry:example"
+}

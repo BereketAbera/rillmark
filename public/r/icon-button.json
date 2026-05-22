@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "icon-button",
+  "title": "IconButton",
+  "description": "A compact action with a name.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/button"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/ui/icon-button.tsx",
+      "content": "\"use client\"\nimport * as React from 'react'\nimport { Button, type ButtonProps } from '@/components/ui/button'\nimport { cn } from '@/lib/rillmark-utils'\n\nexport interface IconButtonProps extends Omit<ButtonProps, 'asChild'> {\n  /** Required accessible name; tooltip is optional. */\n  label: string\n}\nexport const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton({ label, className, size = 'md', ...props }, ref) {\n  return <Button ref={ref} aria-label={label} size={size} className={cn('p-0', size === 'sm' ? 'size-9' : size === 'lg' ? 'size-12' : 'size-11', className)} {...props}/>\n})\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

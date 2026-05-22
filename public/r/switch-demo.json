@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch-demo",
+  "title": "Switch example",
+  "description": "Working Switch example.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/field",
+    "@rillmark/switch"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/examples/switch-demo.tsx",
+      "content": "\"use client\"\nimport { useState } from \"react\"\nimport { Field } from \"@/components/ui/field\"\nimport { Switch } from \"@/components/ui/switch\"\n\nexport default function ComponentDemo() {\n  const [enabled, setEnabled] = useState(true)\n  return <Field label=\"Quiet hours\" description={enabled ? \"Notifications pause from 8 pm to 8 am.\" : \"Notifications can arrive at any time.\"}>\n    <Switch checked={enabled} onCheckedChange={setEnabled} />\n  </Field>\n}\n",
+      "type": "registry:component",
+      "target": "@components/examples/switch-demo.tsx"
+    }
+  ],
+  "type": "registry:example"
+}

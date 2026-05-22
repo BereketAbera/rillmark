@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "title": "Skeleton",
+  "description": "A quiet placeholder for what comes next.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/ui/skeleton.tsx",
+      "content": "import * as React from 'react'\nimport { cn } from '@/lib/rillmark-utils'\n/** Decorative placeholder. Give its containing region aria-busy and a loading label. */\nexport function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) { return <div aria-hidden=\"true\" className={cn('rounded-md bg-muted motion-safe:animate-pulse', className)} {...props}/> }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

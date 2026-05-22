@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "utils",
+  "dependencies": [
+    "clsx@^2.1.1",
+    "tailwind-merge@^3.7.0"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/lib/rillmark-utils.ts",
+      "content": "import { clsx, type ClassValue } from 'clsx'\nimport { twMerge } from 'tailwind-merge'\n\n/** Consumer-owned class composition; caller utilities override defaults. */\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "type": "registry:lib"
+}

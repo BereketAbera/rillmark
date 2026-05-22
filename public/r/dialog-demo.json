@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dialog-demo",
+  "title": "Dialog example",
+  "description": "Working Dialog example.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/button",
+    "@rillmark/field",
+    "@rillmark/input",
+    "@rillmark/dialog"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/examples/dialog-demo.tsx",
+      "content": "\"use client\"\nimport { useState } from \"react\"\nimport { Button } from \"@/components/ui/button\"\nimport { Field } from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\nimport { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from \"@/components/ui/dialog\"\n\nexport default function ComponentDemo() {\n  const [open, setOpen] = useState(false)\n  const [name, setName] = useState(\"Fieldwork studio\")\n  const [saved, setSaved] = useState(name)\n  return <div className=\"space-y-3\">\n    <p className=\"text-sm text-muted-foreground\">Workspace: {saved}</p>\n    <Dialog open={open} onOpenChange={setOpen}>\n      <DialogTrigger asChild><Button variant=\"outline\">Edit workspace</Button></DialogTrigger>\n      <DialogContent>\n        <DialogHeader><DialogTitle>A name for your work</DialogTitle><DialogDescription>Your team will see this in their workspace switcher.</DialogDescription></DialogHeader>\n        <form className=\"space-y-5\" onSubmit={(event) => { event.preventDefault(); setSaved(name.trim()); setOpen(false) }}>\n          <Field label=\"Workspace name\" required><Input value={name} onChange={(event) => setName(event.target.value)} minLength={2} /></Field>\n          <DialogFooter><Button type=\"submit\" disabled={name.trim().length < 2}>Save name</Button></DialogFooter>\n        </form>\n      </DialogContent>\n    </Dialog>\n  </div>\n}\n",
+      "type": "registry:component",
+      "target": "@components/examples/dialog-demo.tsx"
+    }
+  ],
+  "type": "registry:example"
+}

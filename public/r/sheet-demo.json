@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sheet-demo",
+  "title": "Sheet example",
+  "description": "Working Sheet example.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/button",
+    "@rillmark/field",
+    "@rillmark/switch",
+    "@rillmark/sheet"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/examples/sheet-demo.tsx",
+      "content": "\"use client\"\nimport { useState } from \"react\"\nimport { Button } from \"@/components/ui/button\"\nimport { Field } from \"@/components/ui/field\"\nimport { Switch } from \"@/components/ui/switch\"\nimport { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from \"@/components/ui/sheet\"\n\nexport default function ComponentDemo() {\n  const [digest, setDigest] = useState(true)\n  return <Sheet>\n    <SheetTrigger asChild><Button variant=\"outline\">Notification settings</Button></SheetTrigger>\n    <SheetContent>\n      <SheetHeader><SheetTitle>A quieter workspace</SheetTitle><SheetDescription>Changes apply immediately to this demo session.</SheetDescription></SheetHeader>\n      <Field label=\"Weekly digest\" description=\"A Monday summary of projects you follow.\"><Switch checked={digest} onCheckedChange={setDigest} /></Field>\n      <p role=\"status\" className=\"text-sm text-muted-foreground\">Weekly digest is {digest ? \"on\" : \"off\"}.</p>\n      <SheetFooter><SheetClose asChild><Button>Done</Button></SheetClose></SheetFooter>\n    </SheetContent>\n  </Sheet>\n}\n",
+      "type": "registry:component",
+      "target": "@components/examples/sheet-demo.tsx"
+    }
+  ],
+  "type": "registry:example"
+}

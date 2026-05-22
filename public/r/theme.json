@@ -1,0 +1,128 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme",
+  "title": "Rillmark foundations",
+  "description": "Fieldnotes tokens, light and dark, motion and base styles.",
+  "cssVars": {
+    "theme": {
+      "color-background": "var(--background)",
+      "color-foreground": "var(--foreground)",
+      "color-card": "var(--card)",
+      "color-card-foreground": "var(--card-foreground)",
+      "color-popover": "var(--popover)",
+      "color-popover-foreground": "var(--popover-foreground)",
+      "color-primary": "var(--primary)",
+      "color-primary-foreground": "var(--primary-foreground)",
+      "color-secondary": "var(--secondary)",
+      "color-secondary-foreground": "var(--secondary-foreground)",
+      "color-muted": "var(--muted)",
+      "color-muted-foreground": "var(--muted-foreground)",
+      "color-accent": "var(--accent)",
+      "color-accent-foreground": "var(--accent-foreground)",
+      "color-destructive": "var(--destructive)",
+      "color-destructive-foreground": "var(--destructive-foreground)",
+      "color-border": "var(--border)",
+      "color-input": "var(--input)",
+      "color-ring": "var(--ring)",
+      "font-sans": "\"DM Sans\", \"Segoe UI\", system-ui, sans-serif",
+      "font-editorial": "Georgia, \"Times New Roman\", serif",
+      "radius-sm": "0.375rem",
+      "radius-md": "0.5rem",
+      "radius-lg": "0.625rem",
+      "radius-xl": "0.75rem",
+      "radius-2xl": "1.125rem",
+      "animate-rm-enter": "rm-enter 180ms ease-out",
+      "animate-rm-exit": "rm-exit 140ms ease-in"
+    },
+    "light": {
+      "background": "#F5F4ED",
+      "foreground": "#243B3D",
+      "card": "#FFFDF7",
+      "card-foreground": "#243B3D",
+      "popover": "#FFFDF7",
+      "popover-foreground": "#243B3D",
+      "primary": "#245F55",
+      "primary-foreground": "#FFFDF7",
+      "secondary": "#DFEAE1",
+      "secondary-foreground": "#244E40",
+      "muted": "#ECEEE5",
+      "muted-foreground": "#566765",
+      "accent": "#F3DEC3",
+      "accent-foreground": "#68441F",
+      "destructive": "#9C3E35",
+      "destructive-foreground": "#FFFDF7",
+      "border": "#D2D8CD",
+      "input": "#7D8E83",
+      "ring": "#245F55",
+      "radius": "0.625rem"
+    },
+    "dark": {
+      "background": "#142725",
+      "foreground": "#EDF2E8",
+      "card": "#1D322E",
+      "card-foreground": "#EDF2E8",
+      "popover": "#1D322E",
+      "popover-foreground": "#EDF2E8",
+      "primary": "#B2D5BA",
+      "primary-foreground": "#193C2C",
+      "secondary": "#2B473C",
+      "secondary-foreground": "#DCECDF",
+      "muted": "#243C35",
+      "muted-foreground": "#B4C4B9",
+      "accent": "#453724",
+      "accent-foreground": "#F4D5AC",
+      "destructive": "#FFC2B5",
+      "destructive-foreground": "#482D2A",
+      "border": "#3E554A",
+      "input": "#71867A",
+      "ring": "#B2D5BA"
+    }
+  },
+  "css": {
+    "@layer base": {
+      "*": {
+        "border-color": "var(--border)"
+      },
+      "body": {
+        "background-color": "var(--background)",
+        "color": "var(--foreground)",
+        "font-family": "var(--font-sans)",
+        "font-feature-settings": "\"ss01\""
+      },
+      ".dark": {
+        "color-scheme": "dark"
+      },
+      "::selection": {
+        "background-color": "var(--secondary)",
+        "color": "var(--secondary-foreground)"
+      }
+    },
+    "@keyframes rm-enter": {
+      "from": {
+        "opacity": "0",
+        "transform": "translateY(4px)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "translateY(0)"
+      }
+    },
+    "@keyframes rm-exit": {
+      "from": {
+        "opacity": "1"
+      },
+      "to": {
+        "opacity": "0"
+      }
+    },
+    "@media (prefers-reduced-motion: reduce)": {
+      "*, *::before, *::after": {
+        "animation-duration": "0.01ms !important",
+        "animation-iteration-count": "1 !important",
+        "transition-duration": "0.01ms !important",
+        "scroll-behavior": "auto !important"
+      }
+    }
+  },
+  "type": "registry:style"
+}

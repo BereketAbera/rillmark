@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "select-demo",
+  "title": "Select example",
+  "description": "Working Select example.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/field",
+    "@rillmark/select"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/examples/select-demo.tsx",
+      "content": "\"use client\"\nimport { useState } from \"react\"\nimport { Field } from \"@/components/ui/field\"\nimport { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from \"@/components/ui/select\"\n\nexport default function ComponentDemo() {\n  const [region, setRegion] = useState(\"east\")\n  return <Field label=\"Research region\" description=\"Your project’s primary field location.\" className=\"w-full max-w-sm\">\n    <Select value={region} onValueChange={setRegion}>\n      <SelectTrigger><SelectValue placeholder=\"Choose a region\" /></SelectTrigger>\n      <SelectContent><SelectItem value=\"east\">Eastern coast</SelectItem><SelectItem value=\"north\">Northern highlands</SelectItem><SelectItem value=\"central\">Central watershed</SelectItem><SelectItem value=\"south\" disabled>Southern reserve · full</SelectItem></SelectContent>\n    </Select>\n  </Field>\n}\n",
+      "type": "registry:component",
+      "target": "@components/examples/select-demo.tsx"
+    }
+  ],
+  "type": "registry:example"
+}

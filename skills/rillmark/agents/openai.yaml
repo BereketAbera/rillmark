@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rillmark"
+  short_description: "Build cohesive interfaces with Rillmark components"
+  default_prompt: "Use $rillmark to build a responsive workspace settings screen."

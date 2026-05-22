@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert-dialog-demo",
+  "title": "AlertDialog example",
+  "description": "Working AlertDialog example.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/button",
+    "@rillmark/alert-dialog"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/examples/alert-dialog-demo.tsx",
+      "content": "\"use client\"\nimport { useState } from \"react\"\nimport { Button } from \"@/components/ui/button\"\nimport { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from \"@/components/ui/alert-dialog\"\n\nexport default function ComponentDemo() {\n  const [archived, setArchived] = useState(false)\n  return <div className=\"space-y-3\">\n    <p role=\"status\" className=\"text-sm text-muted-foreground\">{archived ? \"Spring research was archived.\" : \"Spring research is active.\"}</p>\n    {archived ? <Button variant=\"outline\" onClick={() => setArchived(false)}>Restore project</Button> : <AlertDialog>\n      <AlertDialogTrigger asChild><Button variant=\"danger\">Archive project</Button></AlertDialogTrigger>\n      <AlertDialogContent>\n        <AlertDialogHeader><AlertDialogTitle>Archive Spring research?</AlertDialogTitle><AlertDialogDescription>The project will leave your active list. You can restore it later.</AlertDialogDescription></AlertDialogHeader>\n        <AlertDialogFooter><AlertDialogCancel>Keep active</AlertDialogCancel><AlertDialogAction onClick={() => setArchived(true)}>Archive project</AlertDialogAction></AlertDialogFooter>\n      </AlertDialogContent>\n    </AlertDialog>}\n  </div>\n}\n",
+      "type": "registry:component",
+      "target": "@components/examples/alert-dialog-demo.tsx"
+    }
+  ],
+  "type": "registry:example"
+}

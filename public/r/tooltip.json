@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "title": "Tooltip",
+  "description": "A short, optional explanation.",
+  "dependencies": [
+    "radix-ui@^1.8.1"
+  ],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/ui/tooltip.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Tooltip as TooltipPrimitive } from \"radix-ui\"\nimport { cn } from \"@/lib/rillmark-utils\"\n\nexport const Tooltip = TooltipPrimitive.Root\nexport const TooltipTrigger = TooltipPrimitive.Trigger\n\nexport function TooltipProvider({ delayDuration = 400, ...props }: React.ComponentProps<typeof TooltipPrimitive.Provider>) {\n  return <TooltipPrimitive.Provider delayDuration={delayDuration} {...props} />\n}\n\nexport function TooltipContent({ className, sideOffset = 6, collisionPadding = 12, children, ...props }: React.ComponentProps<typeof TooltipPrimitive.Content>) {\n  return <TooltipPrimitive.Portal>\n    <TooltipPrimitive.Content sideOffset={sideOffset} collisionPadding={collisionPadding} className={cn(\"z-50 max-w-64 rounded-lg border border-border bg-foreground px-3 py-2 text-xs leading-relaxed text-background shadow-md motion-safe:data-[state=delayed-open]:animate-rm-enter\", className)} {...props}>\n      {children}\n      <TooltipPrimitive.Arrow className=\"fill-foreground\" />\n    </TooltipPrimitive.Content>\n  </TooltipPrimitive.Portal>\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

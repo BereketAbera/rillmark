@@ -1,0 +1,1873 @@
+[
+  {
+    "name": "accordion",
+    "title": "Accordion",
+    "category": "Structure",
+    "description": "Detail when it is needed.",
+    "guidance": "Use type=\"single\" with collapsible or type=\"multiple\". Every item needs a unique value. Triggers preserve heading and keyboard semantics.",
+    "exports": [
+      "Accordion",
+      "AccordionItem",
+      "AccordionTrigger",
+      "AccordionContent"
+    ],
+    "api": [
+      {
+        "name": "AccordionItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "AccordionTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "AccordionContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Accordion",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1",
+      "lucide-react@^1.67.0"
+    ]
+  },
+  {
+    "name": "alert-dialog",
+    "title": "AlertDialog",
+    "category": "Overlays",
+    "description": "A deliberate pause before a consequence.",
+    "guidance": "Describe the consequence and provide Cancel and Action. Initial focus goes to Cancel. Never use this for routine success messages.",
+    "exports": [
+      "AlertDialog",
+      "AlertDialogTrigger",
+      "AlertDialogContent",
+      "AlertDialogHeader",
+      "AlertDialogFooter",
+      "AlertDialogTitle",
+      "AlertDialogDescription",
+      "AlertDialogAction",
+      "AlertDialogCancel"
+    ],
+    "api": [
+      {
+        "name": "AlertDialogContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "AlertDialogHeader",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "AlertDialogFooter",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "AlertDialogTitle",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "AlertDialogDescription",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "AlertDialogAction",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "AlertDialogCancel",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "AlertDialog",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "AlertDialogTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "alert",
+    "title": "Alert",
+    "category": "Feedback",
+    "description": "Feedback with enough context to act.",
+    "guidance": "Use soft for information, accent for attention and danger for errors. Danger uses role=alert; other variants use status. Do not repeat static notices excessively.",
+    "exports": [
+      "Alert",
+      "AlertTitle",
+      "AlertDescription"
+    ],
+    "api": [
+      {
+        "name": "Alert",
+        "description": "",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"soft\" | \"accent\" | \"danger\"",
+            "required": false,
+            "description": "",
+            "default": "soft"
+          }
+        ]
+      },
+      {
+        "name": "AlertTitle",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "AlertDescription",
+        "description": "",
+        "props": []
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "avatar",
+    "title": "Avatar",
+    "category": "Feedback",
+    "description": "A recognizable presence, even without an image.",
+    "guidance": "Compose AvatarImage with descriptive alt and AvatarFallback. If initials are the only name, give the Avatar a role=\"img\" and aria-label.",
+    "exports": [
+      "Avatar",
+      "AvatarImage",
+      "AvatarFallback"
+    ],
+    "api": [
+      {
+        "name": "Avatar",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "AvatarImage",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "AvatarFallback",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "badge",
+    "title": "Badge",
+    "category": "Feedback",
+    "description": "A small, readable signal.",
+    "guidance": "Use text to identify the state. Color is supplemental. Badges are spans; use a Button for an interactive filter.",
+    "exports": [
+      "Badge"
+    ],
+    "api": [
+      {
+        "name": "Badge",
+        "description": "",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"soft\" | \"outline\" | \"accent\" | \"danger\"",
+            "required": false,
+            "description": "",
+            "default": "soft"
+          }
+        ]
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "breadcrumbs",
+    "title": "Breadcrumbs",
+    "category": "Structure",
+    "description": "A useful trail back.",
+    "guidance": "Compose the list with real links and a final BreadcrumbPage. Separators are hidden from assistive technology.",
+    "exports": [
+      "Breadcrumbs",
+      "BreadcrumbList",
+      "BreadcrumbItem",
+      "BreadcrumbLink",
+      "BreadcrumbPage",
+      "BreadcrumbSeparator"
+    ],
+    "api": [
+      {
+        "name": "Breadcrumbs",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "BreadcrumbList",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "BreadcrumbItem",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "BreadcrumbLink",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "BreadcrumbPage",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "BreadcrumbSeparator",
+        "description": "",
+        "props": []
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "button-group",
+    "title": "ButtonGroup",
+    "category": "Actions",
+    "description": "Related actions, kept together.",
+    "guidance": "Supply aria-label to explain the group. Use buttons for actions and Tabs for switching a content panel.",
+    "exports": [
+      "ButtonGroup"
+    ],
+    "api": [
+      {
+        "name": "ButtonGroup",
+        "description": "",
+        "props": [
+          {
+            "name": "orientation",
+            "type": "\"horizontal\" | \"vertical\"",
+            "required": false,
+            "description": "",
+            "default": "horizontal"
+          }
+        ]
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "button",
+    "title": "Button",
+    "category": "Actions",
+    "description": "A clear next step, with quiet alternatives.",
+    "guidance": "Use solid for the primary action, soft for a companion, outline for a boundary and ghost for a quiet action. Loading preserves the label and blocks repeated clicks.",
+    "exports": [
+      "buttonVariants",
+      "Button"
+    ],
+    "api": [
+      {
+        "name": "buttonVariants",
+        "description": "",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"solid\" | \"soft\" | \"outline\" | \"ghost\" | \"danger\"",
+            "required": false,
+            "description": "",
+            "default": "solid"
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": "",
+            "default": "md"
+          },
+          {
+            "name": "className",
+            "type": "string",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Button",
+        "description": "",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"solid\" | \"soft\" | \"outline\" | \"ghost\" | \"danger\"",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "loading",
+            "type": "boolean",
+            "required": false,
+            "description": "Keeps the label visible and prevents repeated submission.",
+            "default": false
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": "Compose a single element, such as an anchor.",
+            "default": false
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "card",
+    "title": "Card",
+    "category": "Structure",
+    "description": "A home for related information.",
+    "guidance": "Compose Header, Title, Description, Content and Footer. Choose a heading level with CardTitle as=\"h2\" (or h3–h6) appropriate to your page; Card itself is a plain div.",
+    "exports": [
+      "Card",
+      "CardHeader",
+      "CardTitle",
+      "CardDescription",
+      "CardContent",
+      "CardFooter"
+    ],
+    "api": [
+      {
+        "name": "CardHeader",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "CardTitle",
+        "description": "",
+        "props": [
+          {
+            "name": "as",
+            "type": "\"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\"",
+            "required": false,
+            "description": "",
+            "default": "h3"
+          }
+        ]
+      },
+      {
+        "name": "CardDescription",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "CardContent",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "CardFooter",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "Card",
+        "description": "",
+        "props": []
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "checkbox",
+    "title": "Checkbox",
+    "category": "Forms",
+    "description": "An independent choice, clearly marked.",
+    "guidance": "Supports checked, defaultChecked and onCheckedChange, including indeterminate state. Name the control with Field or aria-label.",
+    "exports": [
+      "Checkbox"
+    ],
+    "api": [
+      {
+        "name": "Checkbox",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "combobox",
+    "title": "Combobox",
+    "category": "Forms",
+    "description": "Find a choice without losing your place.",
+    "guidance": "Pass options with unique value and label. Typing filters; arrows move, Enter selects, Escape closes. Field supplies the accessible label. Use required when a real option must be selected.",
+    "exports": [
+      "Combobox"
+    ],
+    "api": [
+      {
+        "name": "Combobox",
+        "description": "Searchable single selection. Focus stays in the input while the listbox is open.",
+        "props": [
+          {
+            "name": "options",
+            "type": "ComboboxOption[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "defaultValue",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": ""
+          },
+          {
+            "name": "onValueChange",
+            "type": "((value: string) => void)",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "searchPlaceholder",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Search options…"
+          },
+          {
+            "name": "emptyMessage",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "No matches found."
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "dialog",
+    "title": "Dialog",
+    "category": "Overlays",
+    "description": "A focused task, with a clear way back.",
+    "guidance": "Include DialogTitle and DialogDescription. The trigger receives focus again on close. Do not nest unrelated modal workflows.",
+    "exports": [
+      "Dialog",
+      "DialogTrigger",
+      "DialogClose",
+      "DialogContent",
+      "DialogHeader",
+      "DialogFooter",
+      "DialogTitle",
+      "DialogDescription"
+    ],
+    "api": [
+      {
+        "name": "DialogContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DialogHeader",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "DialogFooter",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "DialogTitle",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DialogDescription",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Dialog",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "DialogTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DialogClose",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1",
+      "lucide-react@^1.67.0"
+    ]
+  },
+  {
+    "name": "dropdown-menu",
+    "title": "DropdownMenu",
+    "category": "Overlays",
+    "description": "Actions, right where they belong.",
+    "guidance": "Radix supports arrow keys, typeahead, checkbox/radio items and submenus. Use onSelect for actions; avoid nested interactive elements inside items.",
+    "exports": [
+      "DropdownMenu",
+      "DropdownMenuTrigger",
+      "DropdownMenuGroup",
+      "DropdownMenuRadioGroup",
+      "DropdownMenuSub",
+      "DropdownMenuContent",
+      "DropdownMenuItem",
+      "DropdownMenuCheckboxItem",
+      "DropdownMenuRadioItem",
+      "DropdownMenuLabel",
+      "DropdownMenuSeparator",
+      "DropdownMenuSubTrigger",
+      "DropdownMenuSubContent"
+    ],
+    "api": [
+      {
+        "name": "DropdownMenuContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "variant",
+            "type": "\"default\" | \"danger\"",
+            "required": false,
+            "description": "",
+            "default": "default"
+          },
+          {
+            "name": "inset",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuCheckboxItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuRadioItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuLabel",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuSeparator",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuSubTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuSubContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenu",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "DropdownMenuTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuGroup",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuRadioGroup",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenuSub",
+        "description": "",
+        "props": []
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1",
+      "lucide-react@^1.67.0"
+    ]
+  },
+  {
+    "name": "empty-state",
+    "title": "EmptyState",
+    "category": "Patterns",
+    "description": "A useful next step when there is nothing here.",
+    "guidance": "Explain the current state and offer one relevant action. Distinguish an empty collection from a filter with no matching results.",
+    "exports": [
+      "EmptyState"
+    ],
+    "api": [
+      {
+        "name": "EmptyState",
+        "description": "",
+        "props": [
+          {
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "icon",
+            "type": "ReactNode",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "action",
+            "type": "ReactNode",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "field",
+    "title": "Field",
+    "category": "Forms",
+    "description": "Labels, help and errors that stay connected.",
+    "guidance": "Wrap one control per Field. Label, description and error props automatically connect to Rillmark controls. Always describe errors in text.",
+    "exports": [
+      "Field",
+      "useFieldControl"
+    ],
+    "api": [
+      {
+        "name": "Field",
+        "description": "A labeled control with automatically associated help and validation text.",
+        "props": [
+          {
+            "name": "label",
+            "type": "ReactNode",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "description",
+            "type": "ReactNode",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "error",
+            "type": "ReactNode",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "useFieldControl",
+        "description": "Used by Rillmark controls; also useful when adapting a custom control to Field.",
+        "props": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "icon-button",
+    "title": "IconButton",
+    "category": "Actions",
+    "description": "A compact action with a name.",
+    "guidance": "The label prop is required. Icons alone are not accessible names. Default to the 44px size for touch.",
+    "exports": [
+      "IconButton"
+    ],
+    "api": [
+      {
+        "name": "IconButton",
+        "description": "",
+        "props": [
+          {
+            "name": "label",
+            "type": "string",
+            "required": true,
+            "description": "Required accessible name; tooltip is optional."
+          },
+          {
+            "name": "variant",
+            "type": "\"solid\" | \"soft\" | \"outline\" | \"ghost\" | \"danger\"",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": "",
+            "default": "md"
+          },
+          {
+            "name": "loading",
+            "type": "boolean",
+            "required": false,
+            "description": "Keeps the label visible and prevents repeated submission."
+          }
+        ]
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "input",
+    "title": "Input",
+    "category": "Forms",
+    "description": "A familiar place to begin.",
+    "guidance": "Native input props and ref are supported. Use Field for a persistent label; placeholders are hints, not labels.",
+    "exports": [
+      "Input"
+    ],
+    "api": [
+      {
+        "name": "Input",
+        "description": "",
+        "props": []
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "pagination",
+    "title": "Pagination",
+    "category": "Structure",
+    "description": "Move through a manageable set.",
+    "guidance": "Control page, pageCount and onPageChange. It disables boundary actions and announces page changes. Filter data before calculating the page count.",
+    "exports": [
+      "Pagination"
+    ],
+    "api": [
+      {
+        "name": "Pagination",
+        "description": "",
+        "props": [
+          {
+            "name": "page",
+            "type": "number",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "pageCount",
+            "type": "number",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "onPageChange",
+            "type": "(page: number) => void",
+            "required": true,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "popover",
+    "title": "Popover",
+    "category": "Overlays",
+    "description": "Context within reach.",
+    "guidance": "Small interactive supporting content. Use a Dialog for a task that requires a modal focus boundary. Label interactive controls inside the content.",
+    "exports": [
+      "Popover",
+      "PopoverTrigger",
+      "PopoverAnchor",
+      "PopoverClose",
+      "PopoverContent"
+    ],
+    "api": [
+      {
+        "name": "PopoverContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Popover",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "PopoverTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "PopoverAnchor",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "PopoverClose",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "progress",
+    "title": "Progress",
+    "category": "Feedback",
+    "description": "A sense of how far along.",
+    "guidance": "Always supply aria-label or aria-labelledby. A null value is indeterminate. Explicit values are clamped between zero and max.",
+    "exports": [
+      "Progress"
+    ],
+    "api": [
+      {
+        "name": "Progress",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "radio-group",
+    "title": "RadioGroup",
+    "category": "Forms",
+    "description": "One choice from a visible set.",
+    "guidance": "Label the group with Field, and each RadioGroupItem using a label or aria-label. Radix handles roving arrow-key focus.",
+    "exports": [
+      "RadioGroup",
+      "RadioGroupItem"
+    ],
+    "api": [
+      {
+        "name": "RadioGroup",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "RadioGroupItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "select",
+    "title": "Select",
+    "category": "Forms",
+    "description": "A focused list of choices.",
+    "guidance": "Compose Select, SelectTrigger, SelectValue, SelectContent and SelectItem. Radix supplies typeahead and keyboard selection. Item values must be nonempty.",
+    "exports": [
+      "Select",
+      "SelectGroup",
+      "SelectValue",
+      "SelectTrigger",
+      "SelectContent",
+      "SelectItem",
+      "SelectLabel",
+      "SelectSeparator"
+    ],
+    "api": [
+      {
+        "name": "Select",
+        "description": "",
+        "props": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "defaultValue",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onValueChange",
+            "type": "((value: string) => void)",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "SelectTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "SelectContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "SelectItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "SelectLabel",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "SelectSeparator",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "SelectGroup",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "SelectValue",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "separator",
+    "title": "Separator",
+    "category": "Structure",
+    "description": "A pause between related things.",
+    "guidance": "Decorative by default. Set decorative={false} when the separator communicates a structural division to assistive technology.",
+    "exports": [
+      "Separator"
+    ],
+    "api": [
+      {
+        "name": "Separator",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "sheet",
+    "title": "Sheet",
+    "category": "Overlays",
+    "description": "A little more room, alongside the work.",
+    "guidance": "Built on the same Radix Dialog foundation. Use side=\"right\" or side=\"left\". Include SheetTitle and SheetDescription.",
+    "exports": [
+      "Sheet",
+      "SheetTrigger",
+      "SheetClose",
+      "SheetContent",
+      "SheetHeader",
+      "SheetFooter",
+      "SheetTitle",
+      "SheetDescription"
+    ],
+    "api": [
+      {
+        "name": "SheetContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "side",
+            "type": "\"left\" | \"right\"",
+            "required": false,
+            "description": "",
+            "default": "right"
+          }
+        ]
+      },
+      {
+        "name": "SheetHeader",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "SheetFooter",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "SheetTitle",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "SheetDescription",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Sheet",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "SheetTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "SheetClose",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1",
+      "lucide-react@^1.67.0"
+    ]
+  },
+  {
+    "name": "skeleton",
+    "title": "Skeleton",
+    "category": "Feedback",
+    "description": "A quiet placeholder for what comes next.",
+    "guidance": "Skeleton is decorative and hidden from assistive technology. Mark the containing region aria-busy and provide a loading label. Motion stops under reduced motion.",
+    "exports": [
+      "Skeleton"
+    ],
+    "api": [
+      {
+        "name": "Skeleton",
+        "description": "Decorative placeholder. Give its containing region aria-busy and a loading label.",
+        "props": []
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "slider",
+    "title": "Slider",
+    "category": "Forms",
+    "description": "Fine control across a range.",
+    "guidance": "Values are number arrays, as in Radix. Use thumbLabels for multiple thumbs and a Field label for the overall control. Arrow keys adjust values.",
+    "exports": [
+      "Slider"
+    ],
+    "api": [
+      {
+        "name": "Slider",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "thumbLabels",
+            "type": "string[]",
+            "required": false,
+            "description": "Accessible names for each thumb; particularly useful for range sliders."
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "switch",
+    "title": "Switch",
+    "category": "Forms",
+    "description": "An immediate on or off decision.",
+    "guidance": "Use checked/onCheckedChange or defaultChecked. Include a persistent label; use a checkbox for consent or form submission choices.",
+    "exports": [
+      "Switch"
+    ],
+    "api": [
+      {
+        "name": "Switch",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "table",
+    "title": "Table",
+    "category": "Feedback",
+    "description": "Readable data, with room to grow.",
+    "guidance": "Use a caption, scoped headers and aria-sort for sortable columns. The overflow region is keyboard focusable. Sorting, filtering and selection belong in the application.",
+    "exports": [
+      "Table",
+      "TableHeader",
+      "TableBody",
+      "TableFooter",
+      "TableRow",
+      "TableHead",
+      "TableCell",
+      "TableCaption"
+    ],
+    "api": [
+      {
+        "name": "Table",
+        "description": "",
+        "props": [
+          {
+            "name": "containerLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Scrollable table"
+          }
+        ]
+      },
+      {
+        "name": "TableHeader",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "TableBody",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "TableFooter",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "TableRow",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "TableHead",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "TableCell",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "TableCaption",
+        "description": "",
+        "props": []
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "tabs",
+    "title": "Tabs",
+    "category": "Structure",
+    "description": "One workspace, several views.",
+    "guidance": "Compose TabsList, TabsTrigger and TabsContent with matching values. Label the list. Radix handles arrow keys, Home and End.",
+    "exports": [
+      "Tabs",
+      "TabsList",
+      "TabsTrigger",
+      "TabsContent"
+    ],
+    "api": [
+      {
+        "name": "Tabs",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "TabsList",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "TabsTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "TabsContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "textarea",
+    "title": "Textarea",
+    "category": "Forms",
+    "description": "Room for a longer thought.",
+    "guidance": "A resizable native textarea. Use Field for a label and validation; retain resizing when space allows.",
+    "exports": [
+      "Textarea"
+    ],
+    "api": [
+      {
+        "name": "Textarea",
+        "description": "",
+        "props": []
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "toast",
+    "title": "Toast",
+    "category": "Feedback",
+    "description": "An update that respects the current task.",
+    "guidance": "Use ToastProvider and one ToastViewport. Control each Toast open state. Keep important errors visible inline too; transient messages are not a substitute for validation.",
+    "exports": [
+      "ToastProvider",
+      "Toast",
+      "ToastTitle",
+      "ToastDescription",
+      "ToastAction",
+      "ToastClose",
+      "ToastViewport"
+    ],
+    "api": [
+      {
+        "name": "ToastProvider",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "Toast",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "variant",
+            "type": "\"default\" | \"success\" | \"danger\"",
+            "required": false,
+            "description": "",
+            "default": "default"
+          }
+        ]
+      },
+      {
+        "name": "ToastTitle",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ToastDescription",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ToastAction",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ToastClose",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ToastViewport",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1",
+      "lucide-react@^1.67.0"
+    ]
+  },
+  {
+    "name": "tooltip",
+    "title": "Tooltip",
+    "category": "Overlays",
+    "description": "A short, optional explanation.",
+    "guidance": "Wrap the relevant tree in TooltipProvider. Trigger must be focusable and already have a name. Do not put essential instructions only in a tooltip.",
+    "exports": [
+      "Tooltip",
+      "TooltipTrigger",
+      "TooltipProvider",
+      "TooltipContent"
+    ],
+    "api": [
+      {
+        "name": "TooltipProvider",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "TooltipContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Tooltip",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "TooltipTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  }
+]

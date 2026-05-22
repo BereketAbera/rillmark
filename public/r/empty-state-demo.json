@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state-demo",
+  "title": "EmptyState example",
+  "description": "Working EmptyState example.",
+  "dependencies": [
+    "lucide-react@^1.67.0"
+  ],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/button",
+    "@rillmark/empty-state"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/examples/empty-state-demo.tsx",
+      "content": "\"use client\"\nimport { useState } from \"react\"\nimport { FolderPlus } from \"lucide-react\"\nimport { Button } from \"@/components/ui/button\"\nimport { EmptyState } from \"@/components/ui/empty-state\"\n\nexport default function ComponentDemo() {\n  const [created, setCreated] = useState(false)\n  return created ? <div className=\"space-y-3\"><p role=\"status\" className=\"text-sm font-semibold\">Untitled collection created.</p><p className=\"text-sm text-muted-foreground\">Your first collection is ready for observations.</p><Button variant=\"outline\" onClick={() => setCreated(false)}>Reset demo</Button></div> : <EmptyState title=\"Room for a new perspective\" description=\"Gather the projects and observations you want to return to.\" icon={<FolderPlus size={24} />} action={<Button onClick={() => setCreated(true)}>Create a collection</Button>} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/examples/empty-state-demo.tsx"
+    }
+  ],
+  "type": "registry:example"
+}

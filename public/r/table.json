@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "table",
+  "title": "Table",
+  "description": "Readable data, with room to grow.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/ui/table.tsx",
+      "content": "import * as React from 'react'\nimport { cn } from '@/lib/rillmark-utils'\nexport interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> { containerLabel?: string }\nexport function Table({ className, containerLabel = 'Scrollable table', ...props }: TableProps) { return <div role=\"region\" aria-label={containerLabel} tabIndex={0} className=\"w-full overflow-x-auto rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"><table className={cn('w-full caption-bottom text-left text-sm', className)} {...props}/></div> }\nexport function TableHeader({ className, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) { return <thead className={cn('border-b border-border bg-muted/60', className)} {...props}/> }\nexport function TableBody({ className, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) { return <tbody className={cn('[&_tr:last-child]:border-0', className)} {...props}/> }\nexport function TableFooter({ className, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) { return <tfoot className={cn('border-t border-border bg-muted font-medium', className)} {...props}/> }\nexport function TableRow({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) { return <tr className={cn('border-b border-border transition-colors hover:bg-muted/50 data-[selected=true]:bg-secondary motion-reduce:transition-none', className)} {...props}/> }\nexport function TableHead({ className, scope = 'col', ...props }: React.ThHTMLAttributes<HTMLTableCellElement>) { return <th scope={scope} className={cn('h-11 whitespace-nowrap px-4 text-xs font-medium text-muted-foreground', className)} {...props}/> }\nexport function TableCell({ className, ...props }: React.TdHTMLAttributes<HTMLTableCellElement>) { return <td className={cn('px-4 py-4 align-middle', className)} {...props}/> }\nexport function TableCaption({ className, ...props }: React.HTMLAttributes<HTMLTableCaptionElement>) { return <caption className={cn('p-4 text-left text-sm text-muted-foreground', className)} {...props}/> }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

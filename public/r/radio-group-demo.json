@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radio-group-demo",
+  "title": "RadioGroup example",
+  "description": "Working RadioGroup example.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/field",
+    "@rillmark/radio-group"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/examples/radio-group-demo.tsx",
+      "content": "\"use client\"\nimport { useId, useState } from \"react\"\nimport { Field } from \"@/components/ui/field\"\nimport { RadioGroup, RadioGroupItem } from \"@/components/ui/radio-group\"\n\nexport default function ComponentDemo() {\n  const id = useId()\n  const [frequency, setFrequency] = useState(\"Weekly\")\n  return <Field label=\"Summary frequency\" description=\"Choose how often to hear from your workspace.\">\n    <RadioGroup value={frequency} onValueChange={setFrequency}>{[\"Daily\", \"Weekly\", \"Monthly\"].map((value) => <label key={value} htmlFor={`${id}-${value}`} className=\"flex cursor-pointer items-center gap-2 text-sm\"><RadioGroupItem id={`${id}-${value}`} value={value} />{value}</label>)}</RadioGroup>\n  </Field>\n}\n",
+      "type": "registry:component",
+      "target": "@components/examples/radio-group-demo.tsx"
+    }
+  ],
+  "type": "registry:example"
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sheet",
+  "title": "Sheet",
+  "description": "A little more room, alongside the work.",
+  "dependencies": [
+    "radix-ui@^1.8.1",
+    "lucide-react@^1.67.0"
+  ],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/ui/sheet.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Dialog as DialogPrimitive } from \"radix-ui\"\nimport { X } from \"lucide-react\"\nimport { cn } from \"@/lib/rillmark-utils\"\n\nexport const Sheet = DialogPrimitive.Root\nexport const SheetTrigger = DialogPrimitive.Trigger\nexport const SheetClose = DialogPrimitive.Close\n\nexport type SheetContentProps = React.ComponentProps<typeof DialogPrimitive.Content> & { side?: \"left\" | \"right\" }\n\nexport function SheetContent({ side = \"right\", className, children, ...props }: SheetContentProps) {\n  return <DialogPrimitive.Portal>\n    <DialogPrimitive.Overlay className=\"fixed inset-0 z-50 bg-black/45 backdrop-blur-[2px] motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit\" />\n    <DialogPrimitive.Content className={cn(\"fixed inset-y-0 z-50 flex w-[min(28rem,calc(100%-1rem))] flex-col gap-5 overflow-y-auto border-border bg-popover p-6 text-popover-foreground shadow-2xl outline-none motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit\", side === \"right\" ? \"right-0 rounded-l-2xl border-l\" : \"left-0 rounded-r-2xl border-r\", className)} {...props}>\n      {children}\n      <DialogPrimitive.Close aria-label=\"Close panel\" className=\"absolute right-2 top-2 inline-flex size-11 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"><X aria-hidden=\"true\" size={18} /></DialogPrimitive.Close>\n    </DialogPrimitive.Content>\n  </DialogPrimitive.Portal>\n}\n\nexport function SheetHeader({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div className={cn(\"space-y-2 pr-8\", className)} {...props} />\n}\n\nexport function SheetFooter({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div className={cn(\"mt-auto flex flex-col gap-2 pt-6 sm:flex-row sm:justify-end\", className)} {...props} />\n}\n\nexport function SheetTitle({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) {\n  return <DialogPrimitive.Title className={cn(\"text-xl font-semibold tracking-tight\", className)} {...props} />\n}\n\nexport function SheetDescription({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Description>) {\n  return <DialogPrimitive.Description className={cn(\"text-sm leading-relaxed text-muted-foreground\", className)} {...props} />\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

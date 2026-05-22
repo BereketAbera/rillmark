@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert-demo",
+  "title": "Alert example",
+  "description": "Working Alert example.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@rillmark/theme",
+    "@rillmark/utils",
+    "@rillmark/alert"
+  ],
+  "files": [
+    {
+      "path": "registry/rillmark/examples/alert-demo.tsx",
+      "content": "import { Alert, AlertDescription, AlertTitle } from \"@/components/ui/alert\"\n\nexport default function ComponentDemo() {\n  return <div className=\"w-full max-w-lg space-y-4\">\n    <Alert variant=\"accent\"><AlertTitle>Ready for the next chapter</AlertTitle><AlertDescription>All 12 observations have been reviewed. Your team can begin the synthesis.</AlertDescription></Alert>\n    <Alert variant=\"danger\"><AlertTitle>Two notes need attention</AlertTitle><AlertDescription>Add a site location to each note before including it in your report.</AlertDescription></Alert>\n  </div>\n}\n",
+      "type": "registry:component",
+      "target": "@components/examples/alert-demo.tsx"
+    }
+  ],
+  "type": "registry:example"
+}
