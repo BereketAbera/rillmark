@@ -82,7 +82,7 @@ export function Combobox({ options, value, defaultValue = "", onValueChange, pla
       return
     }
     const current = enabledIndices.indexOf(activeIndex)
-    const next = (current + direction + enabledIndices.length) % enabledIndices.length
+    const next = current < 0 ? (direction === 1 ? 0 : enabledIndices.length - 1) : (current + direction + enabledIndices.length) % enabledIndices.length
     setActiveIndex(enabledIndices[next] ?? -1)
   }
 

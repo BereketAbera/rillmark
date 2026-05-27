@@ -13,6 +13,7 @@ type FieldContextValue = {
   hasError: boolean
   required?: boolean
   disabled?: boolean
+  registerControlId: (id: string | undefined) => void
 }
 
 const FieldContext = React.createContext<FieldContextValue | undefined>(undefined)
@@ -28,17 +29,22 @@ export type FieldProps = React.ComponentProps<"div"> & {
 /** A labeled control with automatically associated help and validation text. */
 export function Field({ id, label, description, error, required, disabled, className, children, ...props }: FieldProps) {
   const generatedId = React.useId()
-  const controlId = id ?? `field-${generatedId}`
+  const [registeredId, registerControlId] = React.useState<string>()
+  const child = React.isValidElement<{ id?: string }>(children) ? children : undefined
+  const directControlId = child && (typeof child.type !== "string" || ["input", "textarea", "select", "button"].includes(child.type)) ? child.props.id : undefined
+  const baseId = id ?? `field-${generatedId}`
+  const controlId = registeredId ?? directControlId ?? baseId
   const context: FieldContextValue = {
     id: controlId,
-    labelId: `${controlId}-label`,
-    descriptionId: `${controlId}-description`,
-    errorId: `${controlId}-error`,
+    labelId: `${baseId}-label`,
+    descriptionId: `${baseId}-description`,
+    errorId: `${baseId}-error`,
     hasLabel: label != null,
     hasDescription: description != null,
     hasError: Boolean(error),
     required,
     disabled,
+    registerControlId,
   }
 
   return (
@@ -81,6 +87,13 @@ type ControlProps = Pick<React.AriaAttributes, "aria-describedby" | "aria-labell
 /** Used by Rillmark controls; also useful when adapting a custom control to Field. */
 export function useFieldControl(props: ControlProps = {}) {
   const field = React.useContext(FieldContext)
+  const explicitId = props.id
+  const registerControlId = field?.registerControlId
+  React.useLayoutEffect(() => {
+    if (!explicitId || !registerControlId) return
+    registerControlId(explicitId)
+    return () => registerControlId(undefined)
+  }, [explicitId, registerControlId])
   const describedBy = [props["aria-describedby"], field?.hasDescription && field.descriptionId, field?.hasError && field.errorId].filter(Boolean).join(" ") || undefined
   return {
     id: props.id ?? field?.id,

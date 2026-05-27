@@ -31,7 +31,20 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button({ className, variant, size, loading = false, disabled, asChild = false, children, onClick, type = 'button', ...props }, ref) {
   const Component = asChild ? Slot.Root : 'button'
   const unavailable = disabled || loading
+  const preventActivation = (event: React.SyntheticEvent) => { event.preventDefault(); event.stopPropagation() }
+  // Slot normally calls the child's handler first. A disabled composed link must
+  // block activation before either handler runs, including keyboard-generated clicks.
+  const content = asChild && unavailable && React.isValidElement(children)
+    ? React.cloneElement(children as React.ReactElement<React.HTMLAttributes<HTMLElement>>, {
+      'aria-disabled': true,
+      tabIndex: -1,
+      onClickCapture: preventActivation,
+      onClick: preventActivation,
+      onKeyDown: (event) => { if (event.key === 'Enter' || event.key === ' ') preventActivation(event) },
+      onKeyUp: (event) => { if (event.key === 'Enter' || event.key === ' ') preventActivation(event) },
+    })
+    : children
   return <Component ref={ref} className={buttonVariants({ variant, size, className })} type={asChild ? undefined : type} disabled={asChild ? undefined : unavailable} aria-disabled={unavailable || undefined} aria-busy={loading || undefined} onClick={(event) => { if (unavailable) { event.preventDefault(); return } onClick?.(event) }} {...props}>
-    {asChild ? children : <>{loading && <svg aria-hidden="true" className="motion-safe:animate-spin" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" opacity=".25"/><path d="M12 3a9 9 0 0 1 9 9" stroke="currentColor" strokeWidth="2"/></svg>}{children}</>}
+    {asChild ? content : <>{loading && <svg aria-hidden="true" className="motion-safe:animate-spin" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" opacity=".25"/><path d="M12 3a9 9 0 0 1 9 9" stroke="currentColor" strokeWidth="2"/></svg>}{children}</>}
   </Component>
 })

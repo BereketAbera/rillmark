@@ -12,7 +12,7 @@ export function ToastProvider({ duration = 5000, swipeDirection = "right", ...pr
 export type ToastProps = React.ComponentProps<typeof ToastPrimitive.Root> & { variant?: "default" | "success" | "danger" }
 
 export function Toast({ className, variant = "default", ...props }: ToastProps) {
-  return <ToastPrimitive.Root className={cn("pointer-events-auto relative grid w-full gap-1 overflow-hidden rounded-xl rounded-tr-sm border border-border bg-popover p-4 pr-12 text-popover-foreground shadow-xl outline-none data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[calc(100%+1rem)] motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit motion-safe:data-[swipe=cancel]:transition-transform motion-safe:data-[swipe=end]:transition-transform", variant === "success" && "border-l-4 border-l-primary", variant === "danger" && "border-l-4 border-l-destructive", className)} {...props} />
+  return <ToastPrimitive.Root className={cn("pointer-events-auto relative grid w-full gap-1 overflow-hidden rounded-xl rounded-tr-sm border border-border bg-popover p-4 pr-12 text-popover-foreground shadow-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[calc(100%+1rem)] motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit motion-safe:data-[swipe=cancel]:transition-transform motion-safe:data-[swipe=end]:transition-transform", variant === "success" && "border-l-4 border-l-primary", variant === "danger" && "border-l-4 border-l-destructive", className)} {...props} />
 }
 
 export function ToastTitle({ className, ...props }: React.ComponentProps<typeof ToastPrimitive.Title>) {
@@ -32,5 +32,5 @@ export function ToastClose({ className, children, "aria-label": ariaLabel = "Dis
 }
 
 export function ToastViewport({ className, ...props }: React.ComponentProps<typeof ToastPrimitive.Viewport>) {
-  return <ToastPrimitive.Viewport className={cn("fixed bottom-0 right-0 z-[100] flex max-h-dvh w-full max-w-sm list-none flex-col gap-2 overflow-y-auto p-4 outline-none", className)} {...props} />
+  return <ToastPrimitive.Viewport className={cn("fixed bottom-0 right-0 z-[100] flex max-h-dvh w-full max-w-sm list-none flex-col gap-2 overflow-y-auto rounded-xl p-4 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background", className)} {...props} />
 }

@@ -10,9 +10,9 @@ export type SliderProps = React.ComponentProps<typeof SliderPrimitive.Root> & {
   thumbLabels?: string[]
 }
 
-export function Slider({ className, thumbLabels, value, defaultValue = [0], ...props }: SliderProps) {
+export function Slider({ className, thumbLabels, value, defaultValue, ...props }: SliderProps) {
   const control = useFieldControl(props)
-  const values = value ?? defaultValue
+  const values = value ?? defaultValue ?? [props.min ?? 0]
   return (
     <SliderPrimitive.Root data-slot="slider" {...props} {...control} value={value} defaultValue={defaultValue} className={cn("relative flex min-h-11 w-full touch-none items-center select-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[orientation=vertical]:h-44 data-[orientation=vertical]:w-11 data-[orientation=vertical]:flex-col", className)}>
       <SliderPrimitive.Track className="relative grow overflow-hidden rounded-full bg-muted data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2">
