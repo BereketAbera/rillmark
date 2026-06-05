@@ -6,21 +6,21 @@ Radix supports arrow keys, typeahead, checkbox/radio items and submenus. Use onS
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/dropdown-menu
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1, lucide-react@^1.67.0. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/dropdown-menu`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Button } from "rillmark/button"
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "rillmark/dropdown-menu"
 
 export default function ComponentDemo() {
   const [pinned, setPinned] = useState(false)
@@ -64,4 +64,4 @@ Locally declared props (generated):
 | DropdownMenuGroup.asChild | `boolean` | Optional |  |
 | DropdownMenuRadioGroup.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/dropdown-menu.tsx) · [Registry item](../../r/dropdown-menu.json)
+[Readable source](../../source/dropdown-menu.tsx)

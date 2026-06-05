@@ -6,21 +6,21 @@ Always supply aria-label or aria-labelledby. A null value is indeterminate. Expl
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/progress
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/progress`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
+import { Button } from "rillmark/button"
+import { Progress } from "rillmark/progress"
 
 export default function ComponentDemo() {
   const [reviewed, setReviewed] = useState(6)
@@ -43,4 +43,4 @@ Locally declared props (generated):
 |---|---|---|---|
 | Progress.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/progress.tsx) · [Registry item](../../r/progress.json)
+[Readable source](../../source/progress.tsx)

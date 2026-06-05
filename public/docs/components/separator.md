@@ -6,18 +6,18 @@ Decorative by default. Set decorative={false} when the separator communicates a 
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/separator
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/separator`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
-import { Separator } from "@/components/ui/separator"
+import { Separator } from "rillmark/separator"
 
 export default function ComponentDemo() {
   return <div className="w-full max-w-sm space-y-4">
@@ -39,4 +39,4 @@ Locally declared props (generated):
 |---|---|---|---|
 | Separator.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/separator.tsx) · [Registry item](../../r/separator.json)
+[Readable source](../../source/separator.tsx)

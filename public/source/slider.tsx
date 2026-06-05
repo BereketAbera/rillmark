@@ -2,8 +2,8 @@
 
 import * as React from "react"
 import { Slider as SliderPrimitive } from "radix-ui"
-import { cn } from "@/lib/rillmark-utils"
-import { useFieldControl } from "@/components/ui/field"
+import { cn } from "../lib/rillmark-utils"
+import { useFieldControl } from "./field"
 
 export type SliderProps = React.ComponentProps<typeof SliderPrimitive.Root> & {
   /** Accessible names for each thumb; particularly useful for range sliders. */

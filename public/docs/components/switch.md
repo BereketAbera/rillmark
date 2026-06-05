@@ -6,21 +6,21 @@ Use checked/onCheckedChange or defaultChecked. Include a persistent label; use a
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/switch
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/switch`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Field } from "@/components/ui/field"
-import { Switch } from "@/components/ui/switch"
+import { Field } from "rillmark/field"
+import { Switch } from "rillmark/switch"
 
 export default function ComponentDemo() {
   const [enabled, setEnabled] = useState(true)
@@ -41,4 +41,4 @@ Locally declared props (generated):
 |---|---|---|---|
 | Switch.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/switch.tsx) · [Registry item](../../r/switch.json)
+[Readable source](../../source/switch.tsx)

@@ -2,8 +2,8 @@
 
 import * as React from "react"
 import { Popover as PopoverPrimitive } from "radix-ui"
-import { cn } from "@/lib/rillmark-utils"
-import { useFieldControl } from "@/components/ui/field"
+import { cn } from "../lib/rillmark-utils"
+import { useFieldControl } from "./field"
 
 export type ComboboxOption = {
   value: string

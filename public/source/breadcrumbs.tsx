@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { cn } from '@/lib/rillmark-utils'
+import { cn } from '../lib/rillmark-utils'
 export function Breadcrumbs({ className, ...props }: React.ComponentProps<'nav'>) { return <nav aria-label="Breadcrumb" className={className} {...props}/> }
 export function BreadcrumbList({ className, ...props }: React.ComponentProps<'ol'>) { return <ol className={cn('flex flex-wrap items-center gap-1 text-sm text-muted-foreground', className)} {...props}/> }
 export function BreadcrumbItem({ className, ...props }: React.ComponentProps<'li'>) { return <li className={cn('inline-flex min-w-0 items-center gap-1', className)} {...props}/> }

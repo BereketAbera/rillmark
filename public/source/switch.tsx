@@ -2,8 +2,8 @@
 
 import * as React from "react"
 import { Switch as SwitchPrimitive } from "radix-ui"
-import { cn } from "@/lib/rillmark-utils"
-import { useFieldControl } from "@/components/ui/field"
+import { cn } from "../lib/rillmark-utils"
+import { useFieldControl } from "./field"
 
 export function Switch({ className, ...props }: React.ComponentProps<typeof SwitchPrimitive.Root>) {
   const control = useFieldControl(props)

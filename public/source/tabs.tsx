@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Tabs as TabsPrimitive } from "radix-ui"
-import { cn } from "@/lib/rillmark-utils"
+import { cn } from "../lib/rillmark-utils"
 
 export function Tabs({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Root>) {
   return <TabsPrimitive.Root className={cn("w-full", className)} {...props} />

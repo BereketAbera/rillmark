@@ -6,23 +6,23 @@ Include DialogTitle and DialogDescription. The trigger receives focus again on c
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/dialog
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1, lucide-react@^1.67.0. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/dialog`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Field } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Button } from "rillmark/button"
+import { Field } from "rillmark/field"
+import { Input } from "rillmark/input"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "rillmark/dialog"
 
 export default function ComponentDemo() {
   const [open, setOpen] = useState(false)
@@ -59,4 +59,4 @@ Locally declared props (generated):
 | DialogTrigger.asChild | `boolean` | Optional |  |
 | DialogClose.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/dialog.tsx) · [Registry item](../../r/dialog.json)
+[Readable source](../../source/dialog.tsx)

@@ -6,13 +6,13 @@ Wrap the relevant tree in TooltipProvider. Trigger must be focusable and already
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/tooltip
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/tooltip`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
@@ -20,8 +20,8 @@ Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies insta
 "use client"
 import { useState } from "react"
 import { Bookmark } from "lucide-react"
-import { IconButton } from "@/components/ui/icon-button"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { IconButton } from "rillmark/icon-button"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "rillmark/tooltip"
 
 export default function ComponentDemo() {
   const [saved, setSaved] = useState(false)
@@ -44,4 +44,4 @@ Locally declared props (generated):
 | TooltipContent.asChild | `boolean` | Optional |  |
 | TooltipTrigger.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/tooltip.tsx) · [Registry item](../../r/tooltip.json)
+[Readable source](../../source/tooltip.tsx)

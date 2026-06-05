@@ -6,21 +6,21 @@ A resizable native textarea. Use Field for a label and validation; retain resizi
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/textarea
+npm install rillmark
 ```
 
-Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/textarea`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Field } from "@/components/ui/field"
-import { Textarea } from "@/components/ui/textarea"
+import { Field } from "rillmark/field"
+import { Textarea } from "rillmark/textarea"
 
 export default function ComponentDemo() {
   const [note, setNote] = useState("")
@@ -37,4 +37,4 @@ Exports (generated from TypeScript): `Textarea`. Native element and underlying R
 
 Use the underlying native element or Radix primitive props shown in the example. No additional configuration is required.
 
-[Editable source](../../source/textarea.tsx) · [Registry item](../../r/textarea.json)
+[Readable source](../../source/textarea.tsx)

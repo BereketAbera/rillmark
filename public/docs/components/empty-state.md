@@ -6,13 +6,13 @@ Explain the current state and offer one relevant action. Distinguish an empty co
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/empty-state
+npm install rillmark
 ```
 
-Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/empty-state`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
@@ -20,8 +20,8 @@ Theme and local source dependencies install automatically. React is supplied by 
 "use client"
 import { useState } from "react"
 import { FolderPlus } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { EmptyState } from "@/components/ui/empty-state"
+import { Button } from "rillmark/button"
+import { EmptyState } from "rillmark/empty-state"
 
 export default function ComponentDemo() {
   const [created, setCreated] = useState(false)
@@ -43,4 +43,4 @@ Locally declared props (generated):
 | EmptyState.icon | `ReactNode` | Optional |  |
 | EmptyState.action | `ReactNode` | Optional |  |
 
-[Editable source](../../source/empty-state.tsx) · [Registry item](../../r/empty-state.json)
+[Readable source](../../source/empty-state.tsx)

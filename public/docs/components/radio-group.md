@@ -6,21 +6,21 @@ Label the group with Field, and each RadioGroupItem using a label or aria-label.
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/radio-group
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/radio-group`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useId, useState } from "react"
-import { Field } from "@/components/ui/field"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Field } from "rillmark/field"
+import { RadioGroup, RadioGroupItem } from "rillmark/radio-group"
 
 export default function ComponentDemo() {
   const id = useId()
@@ -43,4 +43,4 @@ Locally declared props (generated):
 | RadioGroup.asChild | `boolean` | Optional |  |
 | RadioGroupItem.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/radio-group.tsx) · [Registry item](../../r/radio-group.json)
+[Readable source](../../source/radio-group.tsx)

@@ -1,28 +1,20 @@
-# Distribution research
+# Distribution decision
 
-Checked against current official sources on 2026-11-03. The implementation uses the existing shadcn ecosystem: no custom CLI, schema, or MCP server.
+Rillmark ships as an independent npm package for React 19. The package contains ESM component modules, TypeScript declarations, semantic tokens and styles generated from one canonical implementation. Consumers install `rillmark` and import components directly; no project initializer, alias configuration or external component installer is required.
 
-## Registry and installation
+## Package contract
 
-- A root `registry.json` describes editable source. `npx shadcn@latest build` creates static JSON in `public/r`; any HTTP static host can serve it. `registry:ui` follows the consumer's UI alias. Explicit npm dependencies belong in `dependencies`; own source dependencies must use `@rillmark/name`, because bare names refer to the built-in shadcn registry. [Registry guide](https://ui.shadcn.com/docs/registry/getting-started), [item schema](https://ui.shadcn.com/docs/registry/registry-item-json).
-- Consumers initialize an existing React/Tailwind project with the shadcn CLI, then add `"@rillmark": "http://localhost:5173/r/{name}.json"` to `components.json` → `registries`. Install only needed items with `npx shadcn@latest add @rillmark/button`. The localhost origin is for this local release; replace it with the actual registry host when deployed. [Namespaces](https://ui.shadcn.com/docs/registry/namespace).
-- `cssVars.theme`, `.light`, and `.dark` provide Tailwind v4 theme variables. `css` can deliver layers, utilities, and keyframes. Keep these generated from one token source. `registry:file` requires a target; `registry:ui` can use automatic alias placement. Avoid overwriting user-customized files without inspecting the diff. [Item schema](https://ui.shadcn.com/docs/registry/registry-item-json).
-- The CLI offers `view`, `search`, `list`, `info --json`, and `add --dry-run`. Test the installed CLI version as well as online documentation: flags can evolve. [CLI reference](https://ui.shadcn.com/docs/cli).
+- Use `npm install rillmark` and imports such as `import { Button } from 'rillmark/button'`. Named imports from `rillmark` are also supported.
+- Import `rillmark/styles.css` once for precompiled styles. This path needs no Tailwind build, and application layout can use ordinary CSS.
+- Existing Tailwind CSS 4 applications can instead import `tailwindcss` followed by `rillmark/tailwind.css`. That entry exposes the semantic theme and registers package modules for class detection. Choose one stylesheet path to avoid duplicate styles.
+- React and React DOM are peer dependencies. Radix provides complex interaction primitives; ordinary controls use native HTML. Components expose familiar props, `className` and `ref`.
+- Customize semantic CSS variables after the stylesheet; apply `.dark` to the document root for dark mode. The package exports `rillmark/tokens.json` for tooling and `rillmark/theme.css` for its uncompiled theme. System font fallbacks work without font installation.
+- Verify the packed artifact in a clean consumer with real dependency installation, TypeScript compilation and a production build. Test both stylesheet paths against the same canonical components.
 
-## Agents
+The package is the supported consumption path. Readable source remains available in the documentation for inspection and intentional local adaptation.
 
-- `llms.txt` is a small discovery index, not an exhaustive prompt. shadcn links focused installation, component, and guide pages. Rillmark follows this structure with compiled examples and generated export metadata. [Official index](https://ui.shadcn.com/llms.txt).
-- Skills use a folder containing `SKILL.md`, YAML `name` and `description`, and optional focused references. Put the consuming skill at `skills/rillmark/SKILL.md`; keep contributor guidance in `AGENTS.md`. The skill name must match its directory. [Agent Skills specification](https://agentskills.io/specification).
-- shadcn distributes its own skill with `npx skills add shadcn/ui`. Rillmark uses that same installer. A local checkout can be installed from a consumer project with `npx skills add /absolute/path/to/rillmark --skill rillmark -a codex -a claude-code --copy -y`. The command is project scoped, with Codex in `.agents/skills` and Claude in `.claude/skills`. [shadcn Skills](https://ui.shadcn.com/docs/skills), [skills CLI](https://github.com/vercel-labs/skills/blob/main/docs/commands.md), [agent locations](https://github.com/vercel-labs/skills/blob/main/docs/agents.md).
+## Agent discovery
 
-## MCP
+[Rillmark's index](https://rillmark.vercel.app/llms.txt) routes agents to focused setup, foundation and component Markdown. Component pages contain exports and compiling examples, so an agent can read the relevant API without loading the whole catalog. The consuming skill at `skills/rillmark/SKILL.md` follows the independent [Agent Skills specification](https://agentskills.io/specification); contributor instructions remain in `AGENTS.md`.
 
-A compatible registry needs only a valid index at `/r/registry.json`; the existing shadcn MCP server discovers it through the consumer's `components.json`. Claude setup is `npx shadcn@latest mcp init --client claude`. Codex's documented manual configuration is:
-
-```toml
-[mcp_servers.shadcn]
-command = "npx"
-args = ["shadcn@latest", "mcp"]
-```
-
-Restart the agent after configuration. No Rillmark MCP endpoint or credentials are necessary for a public/local registry. [Registry MCP prerequisites](https://ui.shadcn.com/docs/registry/mcp), [client setup](https://ui.shadcn.com/docs/mcp).
+shadcn/ui informed developer-experience research: approachable React composition, discoverable examples and readable source. It supplies no Rillmark components, build tooling or installation integration. Its [documentation](https://ui.shadcn.com/docs) and [AI index](https://ui.shadcn.com/llms.txt) are inspiration references only.

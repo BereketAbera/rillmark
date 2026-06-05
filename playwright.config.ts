@@ -1,5 +1,7 @@
 import { defineConfig } from '@playwright/test'
 
+const deployedSite = process.env.RILLMARK_SITE_URL
+
 export default defineConfig({
   testDir: './tests/e2e',
   fullyParallel: false,
@@ -9,7 +11,7 @@ export default defineConfig({
   expect: { timeout: 7_000 },
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: 'http://127.0.0.1:5173',
+    baseURL: deployedSite || 'http://127.0.0.1:5173',
     headless: false,
     channel: process.env.CI ? undefined : 'chrome',
     viewport: { width: 1440, height: 1000 },
@@ -17,5 +19,5 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
-  webServer: { command: 'npm run dev -- --port 5173 --strictPort', url: 'http://127.0.0.1:5173', reuseExistingServer: !process.env.CI, timeout: 30_000 },
+  webServer: deployedSite ? undefined : { command: 'npm run dev -- --port 5173 --strictPort', url: 'http://127.0.0.1:5173', reuseExistingServer: !process.env.CI, timeout: 30_000 },
 })

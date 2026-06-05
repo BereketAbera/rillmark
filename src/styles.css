@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @import "./generated/theme.css";
-@source "../registry";
+@source "../packages/rillmark/src/ui";
+@source "../examples/components";
 @source "./";
 @source not "./generated";
 
@@ -26,7 +27,7 @@
 .header-nav a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 13px; text-decoration: none; color: var(--muted-foreground); }
 .header-nav a[aria-current="page"] { color: var(--foreground); font-weight: 600; }
 .header-actions { gap: 16px; }
-.registry-link { display: flex; align-items: center; gap: 9px; font-size: 12px; min-height: 44px; text-decoration: none; }
+.header-resource-link { display: flex; align-items: center; gap: 9px; font-size: 12px; min-height: 44px; text-decoration: none; }
 .header-divider { height: 20px; width: 1px; background: var(--border); }
 .site-layout { display: grid; grid-template-columns: 248px minmax(0, 1fr); max-width: 1800px; margin: 0 auto; }
 .desktop-sidebar { border-right: 1px solid var(--border); position: sticky; top: 78px; height: calc(100dvh - 78px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
@@ -191,7 +192,7 @@
   .site-footer { flex-wrap: wrap; gap: 10px; }
   .header-nav { gap: 16px; }
   .header-nav a { font-size: 12px; }
-  .registry-link { display: none; }
+  .header-resource-link { display: none; }
 }
 @media (max-width: 760px) {
   .site-header { height: 66px; padding: 0 16px; gap: 10px; }

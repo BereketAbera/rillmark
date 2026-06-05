@@ -1,13 +1,12 @@
 # Rillmark
 
-> Expressive React components. Editable source, Tailwind CSS 4, Radix primitives. Install individual items with the official shadcn CLI. No Rillmark runtime.
+> An independent React 19 design system. Install rillmark from npm. Original components and tokens, Radix primitives, precompiled CSS or Tailwind CSS 4 integration.
 
 ## Start here
 
-- [Setup and install](./docs/getting-started.md): use this first; includes local serving and namespace configuration.
+- [Setup and install](./docs/getting-started.md): use this first; package installation, styles, imports and React compatibility.
 - [Foundations](./docs/foundations.md): tokens, dark mode, customization and accessibility.
-- [AI setup](./docs/ai.md): consuming skill, shadcn MCP, progressive discovery.
-- [Registry](./r/registry.json): searchable catalog.
+- [AI setup](./docs/ai.md): installable consuming skill and progressive discovery.
 - [Generated API](./api.json): exports and locally declared props from implementation.
 
 ## Components
@@ -45,4 +44,4 @@
 - [Toast](./docs/components/toast.md): An update that respects the current task.
 - [Tooltip](./docs/components/tooltip.md): A short, optional explanation.
 
-Read only the relevant component pages. Their examples compile as part of the site. Local edits are yours; use className and semantic CSS variables before adding variants.
+Read only the relevant component pages. Their examples compile as part of the site. Use className and semantic CSS variables for customization. Full readable component source is linked from each page.

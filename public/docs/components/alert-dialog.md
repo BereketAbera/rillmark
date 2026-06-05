@@ -6,21 +6,21 @@ Describe the consequence and provide Cancel and Action. Initial focus goes to Ca
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/alert-dialog
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/alert-dialog`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
+import { Button } from "rillmark/button"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "rillmark/alert-dialog"
 
 export default function ComponentDemo() {
   const [archived, setArchived] = useState(false)
@@ -53,4 +53,4 @@ Locally declared props (generated):
 | AlertDialogCancel.asChild | `boolean` | Optional |  |
 | AlertDialogTrigger.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/alert-dialog.tsx) · [Registry item](../../r/alert-dialog.json)
+[Readable source](../../source/alert-dialog.tsx)

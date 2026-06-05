@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Toast as ToastPrimitive } from "radix-ui"
 import { X } from "lucide-react"
-import { cn } from "@/lib/rillmark-utils"
+import { cn } from "../lib/rillmark-utils"
 
 export function ToastProvider({ duration = 5000, swipeDirection = "right", ...props }: React.ComponentProps<typeof ToastPrimitive.Provider>) {
   return <ToastPrimitive.Provider duration={duration} swipeDirection={swipeDirection} {...props} />

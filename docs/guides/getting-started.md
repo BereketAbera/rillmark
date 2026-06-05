@@ -1,74 +1,37 @@
 # Start with something real.
 
-Rillmark gives you editable React components with considered defaults. Add only what you need. Your application owns the source.
+Rillmark is an independent React design system. Install one package, import familiar components, and get the Fieldnotes identity by default. React 19 is required.
 
-## 1. Start the registry
-
-This release is local and self-hostable. In the Rillmark repository, use Node 22.12 or newer:
+## Install
 
 ```sh
-npm ci
-npm run dev
+npm install rillmark
 ```
 
-The documentation and registry run at `http://localhost:5173`. Keep this server running while installing into another project. For distribution, run `npm run build` and serve `dist` on any static host. Replace the local URL in your consumer configuration with that host.
+Import the precompiled stylesheet once in your entry point:
 
-## 2. Prepare your React app
-
-Use a React + TypeScript project with Tailwind CSS 4. The official shadcn CLI handles setup. From your consumer project:
-
-```sh
-npx shadcn@latest init
+```ts
+import 'rillmark/styles.css'
 ```
 
-If you are starting from scratch, create a Vite React TypeScript app and follow the [official Vite installation guide](https://ui.shadcn.com/docs/installation/vite) to add Tailwind and the `@` alias before initialization. The repeatable clean-project verification in `scripts/test-consumer.mjs` shows the exact minimal configuration used for this release.
+This includes component utilities, semantic tokens, base styles, both themes and reduced-motion rules. You do not need Tailwind in your application. Use ordinary CSS for your own layout.
 
-For an agent or noninteractive shell, the tested explicit command is `npx shadcn@latest init --base radix --template vite --preset nova --no-monorepo --no-rtl --yes`. Passing `--yes` alone still leaves a preset prompt in the current CLI.
+## Build a screen
 
-For TypeScript 6 and newer, configure aliases with relative `paths`, without the deprecated/removed `baseUrl` setting. Use `"paths": { "@/*": ["./src/*"] }` in both the root and application tsconfig if your Vite template splits them; configure the same `@` alias in Vite. Rillmark's helper installs as `lib/rillmark-utils.ts`, preserving the initializer's existing `lib/utils.ts`.
-
-## 3. Register Rillmark once
-
-Add this entry to the `registries` object in your app's `components.json`:
-
-```json
-{
-  "registries": {
-    "@rillmark": "http://localhost:5173/r/{name}.json"
-  }
-}
-```
-
-Keep your existing aliases and Tailwind settings. Namespaced dependencies ensure Rillmark components install other Rillmark components.
-
-## 4. Apply the foundations once
-
-```sh
-npx shadcn@latest add @rillmark/theme
-```
-
-This explicit first install applies the Fieldnotes semantic variables and base styles, replacing the initial shadcn theme. The CLI preserves existing values when a theme is only a transitive dependency, so do not skip this step. Later component installations preserve your customized theme.
-
-## 5. Add your first components
-
-```sh
-npx shadcn@latest add @rillmark/button @rillmark/card @rillmark/input
-```
-
-The CLI installs editable source, explicit npm dependencies and shared utilities. There is no Rillmark runtime package or provider. On existing projects, inspect the CLI diff before overwriting files you already customized.
+Every component has a dedicated import path and TypeScript declarations. Root imports from `rillmark` also work.
 
 ```tsx
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Field } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+import { Button } from "rillmark/button"
+import { Card, CardContent, CardHeader, CardTitle } from "rillmark/card"
+import { Field } from "rillmark/field"
+import { Input } from "rillmark/input"
 
 export function ProjectForm() {
   return (
     <Card>
       <CardHeader><CardTitle as="h2">A new beginning</CardTitle></CardHeader>
       <CardContent>
-        <form className="grid gap-4" onSubmit={(event) => {
+        <form style={{ display: 'grid', gap: 16 }} onSubmit={(event) => {
           event.preventDefault()
           const data = new FormData(event.currentTarget)
           window.alert(`Project created: ${data.get("name")}`)
@@ -82,8 +45,32 @@ export function ProjectForm() {
 }
 ```
 
-Input brings Field as a source dependency. Every component page has a small example compiled by this repository. Example registry items can also be installed: `npx shadcn@latest add @rillmark/dialog-demo`.
+Choose components from the searchable documentation. Each page includes an example compiled from the same module as its live preview. Complex controls use Radix primitives; no application-level provider is required beyond the specific documented component composition.
 
-## Your source, your decisions
+## If your app uses Tailwind CSS 4
 
-Use `className` to adapt layout. Edit semantic CSS variables to change the system. Edit the installed source when a component needs to evolve. Start with [foundations](./foundations.md) or give your coding agent the [AI entry point](./ai.md).
+Use these imports **instead of** the precompiled stylesheet:
+
+```css
+@import "tailwindcss";
+@import "rillmark/tailwind.css";
+```
+
+The integration explicitly registers package classes for scanning and provides semantic utilities such as `bg-background` and `text-primary`. Your app's own utility classes are generated by the same build. Never import both stylesheet paths.
+
+## Theme and customize
+
+Add the `dark` class to the document root for dark mode. Override semantic CSS variables after the stylesheet to change your palette. Use `className` and standard props to adapt layout and behavior. The package exports its canonical `rillmark/tokens.json`; readable source is linked from every component page.
+
+Start with [foundations](./foundations.md), or give your coding agent the [AI entry point](./ai.md).
+
+## Work on Rillmark locally
+
+In a checkout, use Node 24:
+
+```sh
+npm ci
+npm run dev
+```
+
+The documentation runs at `http://localhost:5173`. `npm run build` produces a static site. Components in `packages/rillmark/src/` feed both the documentation and `npm run package:build`; there is only one implementation.

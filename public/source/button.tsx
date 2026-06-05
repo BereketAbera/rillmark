@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Slot } from 'radix-ui'
-import { cn } from '@/lib/rillmark-utils'
+import { cn } from '../lib/rillmark-utils'
 
 export type ButtonVariant = 'solid' | 'soft' | 'outline' | 'ghost' | 'danger'
 export type ButtonSize = 'sm' | 'md' | 'lg'

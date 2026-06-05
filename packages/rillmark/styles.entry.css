@@ -1,0 +1,4 @@
+/* Build input only. The package ships the compiled styles.css. */
+@import "tailwindcss" source(none);
+@import "../../src/generated/theme.css";
+@source "./src/ui";

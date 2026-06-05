@@ -6,20 +6,20 @@ Supports checked, defaultChecked and onCheckedChange, including indeterminate st
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/checkbox
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/checkbox`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Checkbox } from "rillmark/checkbox"
 
 export default function ComponentDemo() {
   const [checked, setChecked] = useState(true)
@@ -42,4 +42,4 @@ Locally declared props (generated):
 |---|---|---|---|
 | Checkbox.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/checkbox.tsx) · [Registry item](../../r/checkbox.json)
+[Readable source](../../source/checkbox.tsx)

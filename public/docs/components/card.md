@@ -6,22 +6,22 @@ Compose Header, Title, Description, Content and Footer. Choose a heading level w
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/card
+npm install rillmark
 ```
 
-Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/card`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "rillmark/badge"
+import { Button } from "rillmark/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "rillmark/card"
 
 export default function ComponentDemo() {
   const [following, setFollowing] = useState(false)
@@ -44,4 +44,4 @@ Locally declared props (generated):
 |---|---|---|---|
 | CardTitle.as | `"h2" \| "h3" \| "h4" \| "h5" \| "h6"` | h3 |  |
 
-[Editable source](../../source/card.tsx) · [Registry item](../../r/card.json)
+[Readable source](../../source/card.tsx)

@@ -6,21 +6,21 @@ Compose Select, SelectTrigger, SelectValue, SelectContent and SelectItem. Radix 
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/select
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/select`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Field } from "@/components/ui/field"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Field } from "rillmark/field"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "rillmark/select"
 
 export default function ComponentDemo() {
   const [region, setRegion] = useState("east")
@@ -53,4 +53,4 @@ Locally declared props (generated):
 | SelectGroup.asChild | `boolean` | Optional |  |
 | SelectValue.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/select.tsx) · [Registry item](../../r/select.json)
+[Readable source](../../source/select.tsx)

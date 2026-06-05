@@ -6,20 +6,20 @@ Use solid for the primary action, soft for a companion, outline for a boundary a
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/button
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/button`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { Button } from "rillmark/button"
 
 export default function ComponentDemo() {
   const [saved, setSaved] = useState(false)
@@ -51,4 +51,4 @@ Locally declared props (generated):
 | Button.loading | `boolean` | false | Keeps the label visible and prevents repeated submission. |
 | Button.asChild | `boolean` | false | Compose a single element, such as an anchor. |
 
-[Editable source](../../source/button.tsx) · [Registry item](../../r/button.json)
+[Readable source](../../source/button.tsx)

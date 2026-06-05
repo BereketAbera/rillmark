@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { cn } from '@/lib/rillmark-utils'
+import { cn } from '../lib/rillmark-utils'
 export const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function Card({ className, ...props }, ref) {
   return <div ref={ref} className={cn('rounded-2xl rounded-tr-md border border-border bg-card text-card-foreground', className)} {...props}/>
 })

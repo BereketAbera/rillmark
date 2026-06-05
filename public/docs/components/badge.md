@@ -6,18 +6,18 @@ Use text to identify the state. Color is supplemental. Badges are spans; use a B
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/badge
+npm install rillmark
 ```
 
-Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/badge`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "rillmark/badge"
 
 export default function ComponentDemo() {
   return <div className="flex flex-wrap items-center gap-3"><Badge variant="accent">In progress</Badge><Badge variant="soft">In review</Badge><Badge variant="outline">Archived</Badge><Badge variant="danger">Needs attention</Badge></div>
@@ -35,4 +35,4 @@ Locally declared props (generated):
 |---|---|---|---|
 | Badge.variant | `"soft" \| "outline" \| "accent" \| "danger"` | soft |  |
 
-[Editable source](../../source/badge.tsx) · [Registry item](../../r/badge.json)
+[Readable source](../../source/badge.tsx)

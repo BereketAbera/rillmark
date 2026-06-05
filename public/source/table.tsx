@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { cn } from '@/lib/rillmark-utils'
+import { cn } from '../lib/rillmark-utils'
 export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> { containerLabel?: string }
 export function Table({ className, containerLabel = 'Scrollable table', ...props }: TableProps) { return <div role="region" aria-label={containerLabel} tabIndex={0} className="w-full overflow-x-auto rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><table className={cn('w-full caption-bottom text-left text-sm', className)} {...props}/></div> }
 export function TableHeader({ className, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) { return <thead className={cn('border-b border-border bg-muted/60', className)} {...props}/> }

@@ -1,19 +1,17 @@
 import fs from 'node:fs/promises'
-import { registrySchema, registryItemSchema } from 'shadcn/schema'
 import assert from 'node:assert/strict'
 
-const registry = registrySchema.parse(JSON.parse(await fs.readFile('registry.json', 'utf8')))
-const names = new Set(registry.items.map((item) => item.name))
-assert.equal(names.size, registry.items.length, 'Registry item names must be unique')
-for (const item of registry.items) {
-  const built = registryItemSchema.parse(JSON.parse(await fs.readFile(`public/r/${item.name}.json`, 'utf8')))
-  for (const file of built.files ?? []) assert.ok(file.content?.trim(), `${item.name}: missing file content`)
-  for (const dep of item.registryDependencies ?? []) assert.ok(names.has(dep.replace('@rillmark/', '')), `${item.name}: unresolved registry dependency ${dep}`)
-  if (item.type === 'registry:ui') {
-    assert.ok(names.has(`${item.name}-demo`), `${item.name}: missing compiling example`)
-    const doc = await fs.readFile(`public/docs/components/${item.name}.md`, 'utf8')
-    assert.ok(doc.includes('```tsx\n'), `${item.name}: missing example documentation`)
-  }
+const catalog = JSON.parse(await fs.readFile('src/generated/catalog.json', 'utf8'))
+const names = new Set(catalog.map((item) => item.name))
+assert.equal(names.size, 32, 'All 32 component pages must be generated')
+assert.equal(names.size, catalog.length, 'Component names must be unique')
+for (const item of catalog) {
+  const source = await fs.readFile(`packages/rillmark/src/ui/${item.name}.tsx`, 'utf8')
+  assert.equal(await fs.readFile(`public/source/${item.name}.tsx`, 'utf8'), source, `${item.name}: stale public source`)
+  assert.equal(await fs.readFile(`examples/components/${item.name}-demo.tsx`, 'utf8'), item.example, `${item.name}: stale example`)
+  const doc = await fs.readFile(`public/docs/components/${item.name}.md`, 'utf8')
+  assert.ok(doc.includes(item.example) && doc.includes('npm install rillmark'), `${item.name}: incomplete documentation`)
+  for (const [, dependency] of item.example.matchAll(/from ['"]rillmark\/([^'"]+)['"]/g)) assert.ok(names.has(dependency), `${item.name}: unresolved component ${dependency}`)
 }
 const tokens = JSON.parse(await fs.readFile('tokens.json', 'utf8'))
 const linear = (n) => n <= 0.04045 ? n / 12.92 : ((n + 0.055) / 1.055) ** 2.4
@@ -25,4 +23,4 @@ for (const mode of ['light', 'dark']) {
     assert.ok(ratio(t[foreground], t[background]) >= minimum, `${mode} ${foreground}/${background} contrast is below ${minimum}:1`)
   }
 }
-console.log(`Validated ${registry.items.length} built items with the official shadcn schemas, dependency closure, compiling example presence, and light/dark token contrast.`)
+console.log(`Validated ${catalog.length} component sources, compiling examples, generated documentation and light/dark token contrast.`)

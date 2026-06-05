@@ -1,11 +1,46 @@
 {
   "compilerOptions": {
-    "target": "ES2022", "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext", "moduleResolution": "Bundler", "jsx": "react-jsx",
-    "strict": true, "skipLibCheck": true, "esModuleInterop": true,
-    "resolveJsonModule": true, "isolatedModules": true, "noEmit": true,
-    "allowImportingTsExtensions": true, "types": ["vite/client", "node"],
-    "paths": { "@/*": ["./src/*"], "@/components/ui/*": ["./registry/rillmark/ui/*"], "@/lib/rillmark-utils": ["./registry/rillmark/lib/rillmark-utils.ts"] }
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": [
+      "vite/client",
+      "node"
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@/components/ui/*": [
+        "./packages/rillmark/src/ui/*"
+      ],
+      "@/lib/rillmark-utils": [
+        "./packages/rillmark/src/lib/rillmark-utils.ts"
+      ],
+      "rillmark/*": [
+        "./packages/rillmark/src/ui/*"
+      ]
+    }
   },
-  "include": ["src", "registry", "tests", "vite.config.ts", "playwright.config.ts"]
+  "include": [
+    "src",
+    "packages/rillmark/src",
+    "examples/components",
+    "tests",
+    "vite.config.ts",
+    "playwright.config.ts"
+  ]
 }

@@ -6,18 +6,18 @@ Use type="single" with collapsible or type="multiple". Every item needs a unique
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/accordion
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1, lucide-react@^1.67.0. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/accordion`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "rillmark/accordion"
 
 export default function ComponentDemo() {
   return <Accordion type="single" collapsible className="w-full max-w-lg">
@@ -41,4 +41,4 @@ Locally declared props (generated):
 | AccordionContent.asChild | `boolean` | Optional |  |
 | Accordion.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/accordion.tsx) · [Registry item](../../r/accordion.json)
+[Readable source](../../source/accordion.tsx)

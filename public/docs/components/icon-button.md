@@ -6,13 +6,13 @@ The label prop is required. Icons alone are not accessible names. Default to the
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/icon-button
+npm install rillmark
 ```
 
-Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/icon-button`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
@@ -20,7 +20,7 @@ Theme and local source dependencies install automatically. React is supplied by 
 "use client"
 import { useState } from "react"
 import { Bookmark } from "lucide-react"
-import { IconButton } from "@/components/ui/icon-button"
+import { IconButton } from "rillmark/icon-button"
 
 export default function ComponentDemo() {
   const [saved, setSaved] = useState(false)
@@ -45,4 +45,4 @@ Locally declared props (generated):
 | IconButton.size | `"sm" \| "md" \| "lg"` | md |  |
 | IconButton.loading | `boolean` | Optional | Keeps the label visible and prevents repeated submission. |
 
-[Editable source](../../source/icon-button.tsx) · [Registry item](../../r/icon-button.json)
+[Readable source](../../source/icon-button.tsx)

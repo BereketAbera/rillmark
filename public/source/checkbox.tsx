@@ -2,8 +2,8 @@
 
 import * as React from "react"
 import { Checkbox as CheckboxPrimitive } from "radix-ui"
-import { cn } from "@/lib/rillmark-utils"
-import { useFieldControl } from "@/components/ui/field"
+import { cn } from "../lib/rillmark-utils"
+import { useFieldControl } from "./field"
 
 export function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>) {
   const control = useFieldControl(props)

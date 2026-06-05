@@ -1,42 +1,40 @@
 # Rillmark
 
-**Interfaces with a point of view.** An expressive, editable-source React design system for people and their coding agents. Install individual components with the official shadcn CLI, compose familiar APIs, and own every line.
+**Interfaces with a point of view.** An independent React design system for people and their coding agents, with original components, tokens and a recognizable Fieldnotes visual identity.
+
+**[Live documentation and examples](https://rillmark.vercel.app)** · **[AI entry point](https://rillmark.vercel.app/llms.txt)** · **[Private repository](https://github.com/BereketAbera/rillmark)**
 
 ![Rillmark documentation](docs/evidence/documentation-light.png)
 
-## Run locally
+## Install
 
-Use Node 22.12+ (verified on Node 24):
+For a React 19 application:
 
 ```sh
-npm ci
-npm run dev
+npm install rillmark
 ```
 
-Open [the documentation](http://localhost:5173), [workspace](http://localhost:5173/#/examples/dashboard), [settings](http://localhost:5173/#/examples/settings), or [discovery](http://localhost:5173/#/examples/discovery). All example interactions run locally; saves use this browser's storage. The examples are not connected to a backend.
+Import the stylesheet once and the components you need:
 
-## Install into an application
+```tsx
+import 'rillmark/styles.css'
+import { Button } from 'rillmark/button'
 
-Prepare a React + TypeScript + Tailwind CSS 4 app with the official shadcn CLI, then merge this namespace into its `components.json`:
-
-```json
-{
-  "registries": {
-    "@rillmark": "http://localhost:5173/r/{name}.json"
-  }
+export function SaveAction() {
+  return <Button onClick={() => console.log('Saved')}>Save changes</Button>
 }
 ```
 
-With the local registry running, install the foundations **explicitly once**, then select components:
+Root imports such as `import { Button, Field, Input } from 'rillmark'` also work. JavaScript modules and TypeScript declarations are included. The precompiled stylesheet supplies component styles and both themes without requiring Tailwind setup. Use your own CSS for application layout.
 
-```sh
-npx shadcn@latest add @rillmark/theme
-npx shadcn@latest add @rillmark/button @rillmark/card @rillmark/input
+In an existing Tailwind CSS 4 app, use these imports **instead of** `rillmark/styles.css`:
+
+```css
+@import "tailwindcss";
+@import "rillmark/tailwind.css";
 ```
 
-The explicit theme step replaces the initial shadcn palette. Later component installs preserve your customized tokens. The CLI installs dependencies and editable source; there is no Rillmark runtime or provider. Our `lib/rillmark-utils.ts` preserves the app's existing utility. A fresh shadcn init may already contain a Button: replacing that starter is intentional, while customized files should be reviewed before replacement.
-
-Follow [the complete installation guide](docs/guides/getting-started.md) for aliases, the tested noninteractive init command, and TypeScript 6/7 setup. `@rillmark/<name>-demo` installs a compiling usage example through the same CLI.
+This registers component classes for scanning and provides semantic utilities. Add `.dark` to the document root for dark mode; override semantic CSS variables for customization. See [the package guide](packages/rillmark/README.md) and [complete setup](docs/guides/getting-started.md).
 
 ## What ships
 
@@ -49,19 +47,17 @@ Follow [the complete installation guide](docs/guides/getting-started.md) for ali
 | Feedback/display | Alert, Toast, Badge, Avatar, Skeleton, Progress, Table |
 | Patterns | EmptyState; search/filtering, validated forms, sortable/filterable tables in complete examples |
 
-The static registry has 66 items: 32 components, 32 compiling examples, foundations and utilities. The documentation includes live previews, copyable source, generated local API metadata, search, light/dark mode, and mobile preview widths.
+All 32 components have compiling examples, live previews, readable source and generated local API metadata. The documentation includes search, light/dark controls, mobile previews, and three complete applications: a dense project dashboard, a settings/onboarding workflow, and an expressive discovery page. Their interactions and saved preferences work in browser-local storage; no backend is connected.
 
 ## A considered identity
 
-The selected **Fieldnotes** direction uses warm paper, mineral green, compact DM Sans, restrained apricot, and one small corner on otherwise generous surfaces. It works at table density and across expressive discovery. Compare the [three same-screen studies](public/exploration.html) and read [the short research record](docs/research.md).
+The selected **Fieldnotes** direction uses warm paper, mineral green, compact DM Sans, restrained apricot, and one small corner on otherwise generous surfaces. Compare the [three same-screen studies](public/exploration.html) and read [the research record](docs/research.md).
 
-`tokens.json` is the canonical token source. It generates semantic CSS variables, both themes, and the registry foundations. Consumers edit their installed CSS and component source. DM Sans is locally bundled for the docs; consumers get a system fallback unless they choose the documented font import.
-
-Radix is the single complex-interaction foundation: it supplies tested keyboard, focus, portal and state behavior without imposing a visual style. Native controls cover ordinary inputs. No custom CLI, MCP server, theme engine or configuration language was built.
+`tokens.json` is the canonical token source. It generates both semantic themes and the package CSS. Components live in `packages/rillmark/src/`; the documentation and npm package use that same implementation. Radix supplies complex accessible interactions; ordinary controls use native HTML. There is no custom CLI, MCP server, configuration language, or theme engine.
 
 ## Start here, agents
 
-Read [`public/llms.txt`](public/llms.txt), or fetch `/llms.txt` from the running site. Follow its setup link and only the relevant component pages. API metadata comes from TypeScript; documentation examples are the same modules used by live previews and production builds.
+Read [llms.txt](https://rillmark.vercel.app/llms.txt), follow setup, then fetch only the relevant component pages. Examples use the same imports that consumers install. API metadata comes from TypeScript implementation.
 
 Install the consuming skill from your application directory:
 
@@ -69,26 +65,37 @@ Install the consuming skill from your application directory:
 npx skills add /absolute/path/to/rillmark --skill rillmark -a codex -a claude-code --copy -y
 ```
 
-Project-scoped installation was tested for both agents. See [the skill](skills/rillmark/SKILL.md), [AI setup and standard shadcn MCP configuration](docs/guides/ai.md), and [independent agent-consumer verification](docs/agent-verification.md). The standard MCP server discovers this registry through the existing namespace; no additional server is needed.
+The skill covers npm setup, discovery, composition, customization and verification. See [the skill](skills/rillmark/SKILL.md), [AI setup](docs/guides/ai.md), and [installation verification](docs/skill-installation.md). No MCP configuration is required.
 
-## Verify and contribute
+## Develop and verify
+
+Use Node 24:
 
 ```sh
-npm run check          # official schemas, dependency closure, token contrast, TS, ESLint, Vitest
-npm run build          # static documentation + registry in dist/
-npm run test:consumer  # real fresh npm app, official init/add, all 32 demos, production build
-npm run test:mcp       # official server discovery, search, view and example retrieval
-npm run test:e2e       # headed Chrome: keyboard, focus, a11y, mobile, complete workflows
+npm ci
+npm run dev
 ```
 
-The local headed suite uses installed Google Chrome. CI installs Playwright Chromium and runs it headed under Xvfb. Screenshots and traces are produced by the tests. See [the verification report](docs/verification.md) for evidence and boundaries.
+Open [local documentation](http://localhost:5173). Sources are in `packages/rillmark/src/`, compiling examples in `examples/components/`, guides in `docs/guides/`, and tokens in `tokens.json`. Generated documentation and metadata are committed so CI can check for drift. Read [AGENTS.md](AGENTS.md) before contributing.
 
-Edit components in `registry/rillmark/ui/`, demos in `registry/rillmark/examples/`, guides in `docs/guides/`, and tokens in `tokens.json`. `npm run registry:build` generates metadata, focused docs, theme CSS and the official registry JSON. Generated assets are committed so the registry can be inspected without a build; CI checks for drift. Read [AGENTS.md](AGENTS.md) before contributing.
+```sh
+npm run check          # source/example consistency, token contrast, TS, ESLint, unit tests
+npm run build          # static documentation in dist/
+npm run package:build # JS, declarations, CSS and tokens from canonical source
+npm run test:package  # packed tarball in a fresh app; headed interaction/style tests
+npm run test:e2e      # headed Chrome: all components, a11y, mobile and complete workflows
+```
 
-## Hosting and release boundaries
+CI runs these useful repeatable checks, using headed Chromium under Xvfb. See [verification](docs/verification.md) and [release instructions](docs/releasing.md).
 
-`npm run build` produces a self-contained static site and registry. Serve `dist/` at a host root over HTTPS, then replace the localhost registry origin in consumer configuration and agent instructions. Hash routes do not require server rewrites. No production hosting account or public registry URL is configured by this release.
+## Hosting
 
-This is a first scoped release. It intentionally excludes spreadsheet grids, rich-text editing and complex charts. Browser verification covers Chromium; dedicated Safari/Firefox, real touch-device and screen-reader sessions remain unverified. Automated accessibility checks supplement the keyboard and visual checks; they do not establish complete accessibility conformance.
+The site is deployed at **[rillmark.vercel.app](https://rillmark.vercel.app)** in Vercel's `bereketaberas-projects` scope. Deployments use the local checkout; Git-triggered deployment is disabled. `npm run build` also produces a self-contained static site for another host.
 
-MIT licensed. DM Sans is distributed under its [SIL Open Font License](public/licenses/dm-sans-OFL.txt); icon and primitive dependencies retain their own licenses.
+Redeploy with `vercel deploy --prod --scope bereketaberas-projects`. A new checkout first runs `vercel link --yes --project rillmark --scope bereketaberas-projects`. Local project metadata stays in ignored `.vercel/`.
+
+## Release boundaries
+
+This scoped release excludes spreadsheet grids, rich-text editing and complex charts. Chromium is verified; dedicated Safari/Firefox, real touch-device and screen-reader sessions remain unverified. Automated accessibility checks supplement keyboard and visual review; they do not establish complete conformance.
+
+MIT licensed. The documentation bundles DM Sans under the included [SIL Open Font License](public/licenses/dm-sans-OFL.txt); package consumers can load the font separately or keep the system fallback.

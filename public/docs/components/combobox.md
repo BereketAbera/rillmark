@@ -6,21 +6,21 @@ Pass options with unique value and label. Typing filters; arrows move, Enter sel
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/combobox
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/combobox`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Combobox } from "@/components/ui/combobox"
-import { Field } from "@/components/ui/field"
+import { Combobox } from "rillmark/combobox"
+import { Field } from "rillmark/field"
 
 const options = [{ value: "maya", label: "Maya Chen", keywords: ["research"] }, { value: "niko", label: "Niko Alvarez", keywords: ["design"] }, { value: "ada", label: "Ada Okafor", keywords: ["ecology"] }, { value: "leo", label: "Leo Park · away", disabled: true }]
 
@@ -48,4 +48,4 @@ Locally declared props (generated):
 | Combobox.searchPlaceholder | `string` | Search options… |  |
 | Combobox.emptyMessage | `string` | No matches found. |  |
 
-[Editable source](../../source/combobox.tsx) · [Registry item](../../r/combobox.json)
+[Readable source](../../source/combobox.tsx)

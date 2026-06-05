@@ -6,19 +6,19 @@ Use a caption, scoped headers and aria-sort for sortable columns. The overflow r
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/table
+npm install rillmark
 ```
 
-Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/table`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
-import { Badge } from "@/components/ui/badge"
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Badge } from "rillmark/badge"
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "rillmark/table"
 
 const projects = [{ name: "Coastal restoration", lead: "Maya Chen", notes: 12, status: "In progress" }, { name: "Spring research", lead: "Ada Okafor", notes: 8, status: "In review" }, { name: "Watershed atlas", lead: "Niko Alvarez", notes: 24, status: "In progress" }]
 
@@ -42,4 +42,4 @@ Locally declared props (generated):
 |---|---|---|---|
 | Table.containerLabel | `string` | Scrollable table |  |
 
-[Editable source](../../source/table.tsx) · [Registry item](../../r/table.json)
+[Readable source](../../source/table.tsx)

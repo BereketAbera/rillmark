@@ -6,20 +6,20 @@ Control page, pageCount and onPageChange. It disables boundary actions and annou
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/pagination
+npm install rillmark
 ```
 
-Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/pagination`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Pagination } from "@/components/ui/pagination"
+import { Pagination } from "rillmark/pagination"
 
 const notes = ["Tidal pools at first light", "An unexpected nesting site", "Walking the northern edge", "Spring growth survey", "Stories from the harbor", "A map of returning birds"]
 
@@ -45,4 +45,4 @@ Locally declared props (generated):
 | Pagination.pageCount | `number` | Required |  |
 | Pagination.onPageChange | `(page: number) => void` | Required |  |
 
-[Editable source](../../source/pagination.tsx) · [Registry item](../../r/pagination.json)
+[Readable source](../../source/pagination.tsx)

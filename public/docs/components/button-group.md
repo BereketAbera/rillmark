@@ -6,21 +6,21 @@ Supply aria-label to explain the group. Use buttons for actions and Tabs for swi
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/button-group
+npm install rillmark
 ```
 
-Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/button-group`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { ButtonGroup } from "@/components/ui/button-group"
+import { Button } from "rillmark/button"
+import { ButtonGroup } from "rillmark/button-group"
 
 export default function ComponentDemo() {
   const [period, setPeriod] = useState("Week")
@@ -42,4 +42,4 @@ Locally declared props (generated):
 |---|---|---|---|
 | ButtonGroup.orientation | `"horizontal" \| "vertical"` | horizontal |  |
 
-[Editable source](../../source/button-group.tsx) · [Registry item](../../r/button-group.json)
+[Readable source](../../source/button-group.tsx)

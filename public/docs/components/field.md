@@ -6,22 +6,22 @@ Wrap one control per Field. Label, description and error props automatically con
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/field
+npm install rillmark
 ```
 
-Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/field`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Field } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+import { Button } from "rillmark/button"
+import { Field } from "rillmark/field"
+import { Input } from "rillmark/input"
 
 export default function ComponentDemo() {
   const [email, setEmail] = useState("")
@@ -58,4 +58,4 @@ Locally declared props (generated):
 | useFieldControl.required | `boolean` | Optional |  |
 | useFieldControl.disabled | `boolean` | Optional |  |
 
-[Editable source](../../source/field.tsx) · [Registry item](../../r/field.json)
+[Readable source](../../source/field.tsx)

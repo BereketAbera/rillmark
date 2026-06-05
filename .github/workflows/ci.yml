@@ -21,12 +21,12 @@ jobs:
       - run: npm ci
       - run: npm run check
       - name: Check generated source and documentation stay in sync
-        run: git diff --exit-code -- registry.json public src/generated
+        run: git diff --exit-code -- public src/generated
       - run: npm run build
       - run: npm audit --omit=dev --audit-level=low
-      - run: npm run test:consumer
-      - run: npm run test:mcp
       - run: npx playwright install --with-deps chromium
+      - name: Packed npm consumer and headed interaction checks
+        run: xvfb-run --auto-servernum npm run test:package
       - name: Headed browser interaction and accessibility checks
         run: xvfb-run --auto-servernum npm run test:e2e
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
@@ -37,9 +37,10 @@ jobs:
             playwright-report/
             test-results/
             docs/evidence/
+            evidence/npm-package/
           retention-days: 7
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
-          name: static-site-and-registry
+          name: static-site
           path: dist/
           retention-days: 7

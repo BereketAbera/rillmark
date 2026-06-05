@@ -6,23 +6,23 @@ Built on the same Radix Dialog foundation. Use side="right" or side="left". Incl
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/sheet
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1, lucide-react@^1.67.0. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/sheet`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Field } from "@/components/ui/field"
-import { Switch } from "@/components/ui/switch"
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Button } from "rillmark/button"
+import { Field } from "rillmark/field"
+import { Switch } from "rillmark/switch"
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "rillmark/sheet"
 
 export default function ComponentDemo() {
   const [digest, setDigest] = useState(true)
@@ -54,4 +54,4 @@ Locally declared props (generated):
 | SheetTrigger.asChild | `boolean` | Optional |  |
 | SheetClose.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/sheet.tsx) · [Registry item](../../r/sheet.json)
+[Readable source](../../source/sheet.tsx)

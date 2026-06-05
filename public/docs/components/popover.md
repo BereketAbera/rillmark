@@ -6,22 +6,22 @@ Small interactive supporting content. Use a Dialog for a task that requires a mo
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/popover
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/popover`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Button } from "rillmark/button"
+import { Checkbox } from "rillmark/checkbox"
+import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from "rillmark/popover"
 
 export default function ComponentDemo() {
   const [completed, setCompleted] = useState(false)
@@ -50,4 +50,4 @@ Locally declared props (generated):
 | PopoverAnchor.asChild | `boolean` | Optional |  |
 | PopoverClose.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/popover.tsx) · [Registry item](../../r/popover.json)
+[Readable source](../../source/popover.tsx)

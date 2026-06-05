@@ -1,8 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { cn } from "@/lib/rillmark-utils"
-import { useFieldControl } from "@/components/ui/field"
+import { cn } from "../lib/rillmark-utils"
+import { useFieldControl } from "./field"
 
 export function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
   const control = useFieldControl(props)

@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Accordion as AccordionPrimitive } from "radix-ui"
 import { ChevronDown } from "lucide-react"
-import { cn } from "@/lib/rillmark-utils"
+import { cn } from "../lib/rillmark-utils"
 
 export const Accordion = AccordionPrimitive.Root
 

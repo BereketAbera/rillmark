@@ -1,59 +1,58 @@
 ---
 name: rillmark
-description: Build or customize React interfaces using the Rillmark design system. Discover and install editable components, compose accessible screens, and verify the result. Use when Rillmark is requested or already present in the project.
+description: Build or customize React interfaces with the Rillmark npm package. Discover component APIs, compose accessible screens and verify interactions. Use when Rillmark is requested or already present in the project.
 ---
 
 # Rillmark
 
-Rillmark is React + TypeScript + Tailwind CSS 4, with Radix primitives. Components are copied into the consumer project by the official shadcn CLI; there is no Rillmark runtime package.
+Rillmark is an independent React 19 design system with its own components and semantic tokens. Use its npm package directly. Complex interactions use Radix primitives.
 
-## Start here
+## Read focused documentation
 
-Read the registry origin from `components.json` → `registries` → `@rillmark`. For a local checkout, run `npm ci && npm run dev` in the Rillmark repository and use `http://localhost:5173`. Use that origin for these focused resources:
+Start with [the component index](https://rillmark.vercel.app/llms.txt), then read only the relevant pages:
 
-- `/llms.txt`: short component and guide index.
-- `/docs/getting-started.md`: setup, aliases, CSS, install commands.
-- `/docs/components/<name>.md`: real exports, behavior and compiling examples. Read only the components needed.
-- `/docs/foundations.md`: theme customization and design defaults.
-- `/r/<name>.json`: exact source, package dependencies and registry dependencies.
+- [Getting started](https://rillmark.vercel.app/docs/getting-started.md): package installation and stylesheet choices.
+- `https://rillmark.vercel.app/docs/components/<name>.md`: exports, props, behavior and working examples for that component.
+- [Foundations](https://rillmark.vercel.app/docs/foundations.md): semantic tokens, typography, dark mode and customization.
 
-If the origin is unreachable, use an available local Rillmark checkout or report the missing source. Do not substitute unrelated default shadcn components while calling them Rillmark.
+Inspect the consumer's installed package version and declarations when an API differs from the live documentation. If the documentation is unreachable, use installed declarations and available local source, and identify any remaining uncertainty.
 
-## Install and compose
+## Install and import
 
-Inspect the consumer's existing framework, Tailwind version, aliases and `components.json`. Preserve its package manager and existing source edits. For a React/TypeScript/Tailwind 4 project without shadcn configuration, follow the getting-started guide and initialize with `npx shadcn@latest init --base radix --preset nova --yes --no-monorepo --no-rtl`. The explicit preset avoids a prompt that `--yes` alone does not skip; Rillmark replaces its visual tokens when installed. Preserve an existing project's RTL setting instead of passing `--no-rtl`.
-
-For TypeScript 6 or newer, configure the `@/*` alias with relative `paths` entries and omit `baseUrl`; TypeScript 7 removes that option even though some setup guides still show it.
-
-Merge this entry into `components.json` (replace the origin when hosted):
-
-```json
-"registries": {
-  "@rillmark": "http://localhost:5173/r/{name}.json"
-}
-```
-
-Install the foundations once, explicitly, then only the needed components:
+Preserve the consumer's framework and package manager. Rillmark requires React and React DOM 19. Check those versions before installation; an existing older application needs an explicit React migration decision.
 
 ```sh
-npx shadcn@latest add @rillmark/theme --yes
-npx shadcn@latest add @rillmark/button @rillmark/card @rillmark/field @rillmark/input
+npm install rillmark
 ```
 
-The explicit theme install applies Rillmark's tokens to the starter theme. A theme resolved only as a transitive dependency deliberately preserves existing values in shadcn, which would leave the neutral starter appearance. Later component installs preserve local token customization.
+Import the precompiled stylesheet once in the application's global entry point. This path needs no Tailwind build, aliases or source transforms:
 
-The registry resolves utility and component dependencies, keeping its class helper in `lib/rillmark-utils.ts` so it does not replace an existing `utils.ts`. Imports use the consumer's aliases, usually `@/components/ui/button`. Inspect copied files before composing; do not assume exports or props from a similarly named library. Do not overwrite locally customized components as a routine update.
+```tsx
+import 'rillmark/styles.css'
+import { Button } from 'rillmark/button'
+import { Field } from 'rillmark/field'
+import { Input } from 'rillmark/input'
+```
 
-For an existing shadcn MCP connection, the same namespace enables registry search, metadata viewing and installation. In shadcn 4.23, `view_items_in_registries` returns metadata rather than full source; read `/r/<name>.json` or the focused component page for implementation, or use `get_item_examples_from_registries` for example code. MCP is optional; the CLI and focused Markdown are sufficient.
+Named root imports such as `import { Button, Field, Input } from 'rillmark'` also work. Use ordinary CSS for application layout when choosing the precompiled stylesheet.
 
-## Make a coherent screen
+For an existing Tailwind CSS 4 application, use this in its global CSS **instead of** importing `rillmark/styles.css`:
 
-- Use the default Fieldnotes theme: warm paper, mineral teal, restrained apricot, a small upper-right corner. Use semantic colors; avoid hardcoded colors in application controls.
-- Keep the default component shapes and sizes. Use `className` for layout and local overrides; there are no expression modes to configure.
-- Use `Field` with `label`, `description` and `error` to associate controls and validation. Icon-only actions need an accessible name. Overlays need a title and description.
-- Use visible content hierarchy and useful spacing. Expressive discovery screens and dense tables share the same controls, tokens and type scale.
-- Customize CSS variables locally. Add `.dark` to the document root to select the dark theme; do not maintain separate component forks for each theme.
+```css
+@import "tailwindcss";
+@import "rillmark/tailwind.css";
+```
 
-## Verify
+The alternate entry exposes semantic utilities and registers package modules for Tailwind class detection. Application `className` utilities participate in the same build. Import only one of these stylesheet paths.
 
-Run the consumer's type check and production build. Exercise the actual interaction (submit, filter, sort, select, close), not only the initial render. Check keyboard focus/return, accessible names, validation messages, mobile overflow and reduced motion. Use headed browser tests when browser automation is available. Report any unverified behavior or unavailable registry origin precisely.
+## Compose and customize
+
+- Read the relevant component page before composing; use its actual exports and props. Component subpaths are `rillmark/<name>`.
+- Keep the Fieldnotes identity: warm paper, mineral teal, restrained apricot and related corner shapes. Use semantic colors and the default component sizes, with `className` for layout and local overrides.
+- Use `Field` with `label`, `description` and `error` to associate controls and validation. `IconButton` requires its `label` prop. Overlays need their title and description parts; keep the provided focus management.
+- Customize CSS variables after the stylesheet. Add `.dark` to the document root for dark mode. The package's `rillmark/tokens.json` export is available for token tooling.
+- System font fallbacks work immediately. Load DM Sans separately only when the application's typography calls for the documentation site's font.
+
+## Verify the result
+
+Run the consumer's type check and production build. Exercise the implemented interactions and check keyboard focus/return, accessible names, validation feedback, mobile overflow and reduced motion. Use headed browser tests when available. Report any verification limits precisely.

@@ -6,18 +6,18 @@ Compose AvatarImage with descriptive alt and AvatarFallback. If initials are the
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/avatar
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/avatar`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "rillmark/avatar"
 
 export default function ComponentDemo() {
   return <div className="flex items-center gap-4">
@@ -40,4 +40,4 @@ Locally declared props (generated):
 | AvatarImage.asChild | `boolean` | Optional |  |
 | AvatarFallback.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/avatar.tsx) · [Registry item](../../r/avatar.json)
+[Readable source](../../source/avatar.tsx)

@@ -22,7 +22,7 @@ Buttons use `solid`, `soft`, `outline`, `ghost` and `danger`. Sizes are `sm`, `m
 
 ## Dark mode
 
-Toggle the `dark` class on the document element. Theme tokens and Tailwind's dark variant are installed with the foundation.
+Toggle the `dark` class on the document element. Theme tokens and Tailwind's dark variant are included in either stylesheet path.
 
 ```ts
 document.documentElement.classList.toggle("dark")
@@ -32,7 +32,7 @@ Respect the system preference on first visit and save a deliberate user choice. 
 
 ## Customization
 
-In this repository, `tokens.json` is canonical. `npm run generate` creates the CSS and registry theme. In a consumer project, edit the variables installed into your application's CSS:
+In this repository, `tokens.json` is canonical. `npm run generate` creates semantic theme CSS. In a consumer project, override the variables after the package stylesheet:
 
 ```css
 :root {

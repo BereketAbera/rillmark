@@ -12,8 +12,8 @@ Example request:
 
 > Use $rillmark to build a responsive workspace settings screen with name validation and a notification preference. Install only the components it needs.
 
-The entry point routes the agent to `/llms.txt`, focused component documentation, the standard registry and existing shadcn tools. It does not require a custom MCP server or load every component into context.
+The entry point routes the agent to `/llms.txt`, focused component documentation and npm installation. It covers direct component imports and either precompiled CSS or the Tailwind CSS 4 integration without loading every component into context.
 
 ## Verification
 
-On 2026-11-03, `skills` 1.7.6 installed the local repository skill into an isolated empty project at `/tmp/rillmark-skill-smoke`. Both agent-specific destinations contained byte-identical copies of `SKILL.md`; no global agent configuration was changed. The supplied skill-creator `quick_validate.py` passed using PyYAML in an isolated temporary environment. The release's clean consumer test verifies the component installation/build path separately.
+On 2026-11-03, `skills` 1.7.6 installed the local repository skill into an isolated empty project at `/tmp/rillmark-skill-smoke`. Both agent-specific destinations contained byte-identical copies of `SKILL.md`; no global agent configuration was changed. The supplied skill-creator `quick_validate.py` passed using PyYAML in an isolated temporary environment. The consuming skill was revalidated after the npm-only revision. The packed-package consumer separately verifies installation, imports, declarations, styles, production builds and keyboard interactions.

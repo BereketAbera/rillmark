@@ -6,18 +6,18 @@ Use soft for information, accent for attention and danger for errors. Danger use
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/alert
+npm install rillmark
 ```
 
-Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/alert`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Alert, AlertDescription, AlertTitle } from "rillmark/alert"
 
 export default function ComponentDemo() {
   return <div className="w-full max-w-lg space-y-4">
@@ -38,4 +38,4 @@ Locally declared props (generated):
 |---|---|---|---|
 | Alert.variant | `"soft" \| "accent" \| "danger"` | soft |  |
 
-[Editable source](../../source/alert.tsx) · [Registry item](../../r/alert.json)
+[Readable source](../../source/alert.tsx)

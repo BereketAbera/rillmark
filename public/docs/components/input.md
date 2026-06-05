@@ -6,21 +6,21 @@ Native input props and ref are supported. Use Field for a persistent label; plac
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/input
+npm install rillmark
 ```
 
-Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/input`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Field } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+import { Field } from "rillmark/field"
+import { Input } from "rillmark/input"
 
 export default function ComponentDemo() {
   const [query, setQuery] = useState("")
@@ -40,4 +40,4 @@ Exports (generated from TypeScript): `Input`. Native element and underlying Radi
 
 Use the underlying native element or Radix primitive props shown in the example. No additional configuration is required.
 
-[Editable source](../../source/input.tsx) · [Registry item](../../r/input.json)
+[Readable source](../../source/input.tsx)

@@ -6,21 +6,21 @@ Values are number arrays, as in Radix. Use thumbLabels for multiple thumbs and a
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/slider
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/slider`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Field } from "@/components/ui/field"
-import { Slider } from "@/components/ui/slider"
+import { Field } from "rillmark/field"
+import { Slider } from "rillmark/slider"
 
 export default function ComponentDemo() {
   const [capacity, setCapacity] = useState([40])
@@ -42,4 +42,4 @@ Locally declared props (generated):
 | Slider.asChild | `boolean` | Optional |  |
 | Slider.thumbLabels | `string[]` | Optional | Accessible names for each thumb; particularly useful for range sliders. |
 
-[Editable source](../../source/slider.tsx) · [Registry item](../../r/slider.json)
+[Readable source](../../source/slider.tsx)

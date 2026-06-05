@@ -6,21 +6,21 @@ Skeleton is decorative and hidden from assistive technology. Mark the containing
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/skeleton
+npm install rillmark
 ```
 
-Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/skeleton`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Skeleton } from "@/components/ui/skeleton"
+import { Button } from "rillmark/button"
+import { Skeleton } from "rillmark/skeleton"
 
 export default function ComponentDemo() {
   const [loading, setLoading] = useState(true)
@@ -40,4 +40,4 @@ Exports (generated from TypeScript): `Skeleton`. Native element and underlying R
 
 Use the underlying native element or Radix primitive props shown in the example. No additional configuration is required.
 
-[Editable source](../../source/skeleton.tsx) · [Registry item](../../r/skeleton.json)
+[Readable source](../../source/skeleton.tsx)

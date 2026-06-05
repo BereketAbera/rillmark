@@ -6,21 +6,21 @@ Use ToastProvider and one ToastViewport. Control each Toast open state. Keep imp
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/toast
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1, lucide-react@^1.67.0. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/toast`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
 "use client"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from "@/components/ui/toast"
+import { Button } from "rillmark/button"
+import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from "rillmark/toast"
 
 export default function ComponentDemo() {
   const [open, setOpen] = useState(false)
@@ -52,4 +52,4 @@ Locally declared props (generated):
 | ToastClose.asChild | `boolean` | Optional |  |
 | ToastViewport.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/toast.tsx) · [Registry item](../../r/toast.json)
+[Readable source](../../source/toast.tsx)

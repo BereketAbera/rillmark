@@ -6,18 +6,18 @@ Compose TabsList, TabsTrigger and TabsContent with matching values. Label the li
 
 ## Install
 
-First follow [setup](../getting-started.md). Then:
+First follow [setup](../getting-started.md). Install the package once:
 
 ```sh
-npx shadcn@latest add @rillmark/tabs
+npm install rillmark
 ```
 
-Runtime dependencies: radix-ui@^1.8.1. Theme and local source dependencies install automatically. React is supplied by your application.
+Import components from `rillmark/tabs`. Load `rillmark/styles.css` once, or use the Tailwind CSS 4 integration in setup. React 19 is supplied by your application.
 
 ## Working example
 
 ```tsx
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "rillmark/tabs"
 
 export default function ComponentDemo() {
   return <Tabs defaultValue="overview">
@@ -42,4 +42,4 @@ Locally declared props (generated):
 | TabsTrigger.asChild | `boolean` | Optional |  |
 | TabsContent.asChild | `boolean` | Optional |  |
 
-[Editable source](../../source/tabs.tsx) · [Registry item](../../r/tabs.json)
+[Readable source](../../source/tabs.tsx)
