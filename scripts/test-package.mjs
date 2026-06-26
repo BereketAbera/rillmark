@@ -23,8 +23,8 @@ const run = (command, args, cwd = app, capture = false) => {
 const rootManifest = JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf8'))
 const pack = JSON.parse(run('npm', ['pack', path.join(root, 'packages/rillmark'), '--json', '--pack-destination', scratch], root, true))[0]
 const files = pack.files.map(({ path: name }) => name)
-for (const expected of ['dist/index.js', 'dist/index.d.ts', 'dist/ui/button.js', 'dist/ui/icon-button.d.ts', 'dist/styles.css', 'dist/theme.css', 'dist/tokens.json', 'src/ui/button.tsx', 'src/lib/rillmark-utils.ts', 'tailwind.css', 'LICENSE', 'README.md']) assert(files.includes(expected), `Missing packed file: ${expected}`)
-assert(files.every((file) => /^(dist\/|src\/|package\.json$|tailwind\.css$|LICENSE$|README\.md$)/.test(file)), 'Package includes unintended files')
+for (const expected of ['dist/index.js', 'dist/index.d.ts', 'dist/ui/button.js', 'dist/ui/icon-button.d.ts', 'dist/styles.css', 'dist/theme.css', 'dist/tokens.json', 'src/ui/button.tsx', 'src/lib/rillmark-utils.ts', 'tailwind.css', 'LICENSE', 'README.md', 'skills/rillmark/SKILL.md', 'skills/rillmark/agents/openai.yaml']) assert(files.includes(expected), `Missing packed file: ${expected}`)
+assert(files.every((file) => /^(dist\/|src\/|skills\/rillmark\/|package\.json$|tailwind\.css$|LICENSE$|README\.md$)/.test(file)), 'Package includes unintended files')
 assert(!files.some((file) => file.startsWith('node_modules/') || file.includes('tests/') || file.includes('styles.entry') || file.includes('tsconfig')), 'Package includes build-only files')
 
 await write('package.json', json({
@@ -74,6 +74,11 @@ await write('src/app.css', `@import "rillmark/styles.css";\n${layoutCss}\n`)
 await write('vite.config.ts', 'import { defineConfig } from "vite"\nimport react from "@vitejs/plugin-react"\nexport default defineConfig({ plugins: [react()] })\n')
 run('npm', ['install', '--no-fund', '--no-audit'])
 assert(!(await fs.lstat(path.join(app, 'node_modules/rillmark'))).isSymbolicLink(), 'Consumer must install the packed tarball, not link the workspace')
+const canonicalSkill = await fs.readFile(path.join(root, 'skills/rillmark/SKILL.md'), 'utf8')
+assert.equal(await fs.readFile(path.join(app, 'node_modules/rillmark/skills/rillmark/SKILL.md'), 'utf8'), canonicalSkill, 'Packed skill must match canonical instructions')
+run('npx', ['--yes', 'skills@latest', 'add', './node_modules/rillmark', '--skill', 'rillmark', '-a', 'codex', '-a', 'claude-code', '--copy', '-y'])
+for (const destination of ['.agents/skills/rillmark/SKILL.md', '.claude/skills/rillmark/SKILL.md']) assert.equal(await fs.readFile(path.join(app, destination), 'utf8'), canonicalSkill, `Installed skill differs: ${destination}`)
+
 const installedManifest = JSON.parse(await fs.readFile(path.join(app, 'node_modules/rillmark/package.json'), 'utf8'))
 assert.deepEqual(Object.keys(installedManifest.dependencies).sort(), ['clsx', 'lucide-react', 'radix-ui', 'tailwind-merge'], 'Only the declared component runtime dependencies should ship')
 await assert.rejects(fs.access(path.join(app, 'node_modules/tailwindcss')), 'The default CSS path must work without Tailwind')
@@ -81,7 +86,7 @@ const reactPaths = run('npm', ['ls', 'react', '--all', '--parseable'], app, true
 assert.equal(new Set(await Promise.all(reactPaths.map((entry) => fs.realpath(entry)))).size, 1, 'React must be a single shared peer, not bundled or duplicated')
 run('node', ['--input-type=module', '-e', `import assert from 'node:assert/strict'; import { createElement } from 'react'; import { renderToString } from 'react-dom/server'; import { Button as RootButton } from 'rillmark'; import { Button } from 'rillmark/button'; assert.equal(RootButton, Button); assert.match(renderToString(createElement(Button, null, 'Package ready')), /Package ready/); console.log('Node ESM imports and server rendering passed.');`])
 
-const result = { tarball: path.join(artifacts, pack.filename), consumer: app, packageSize: pack.size, unpackedSize: pack.unpackedSize, integrity: pack.integrity, packedFiles: files, react: 'single shared peer', runtimeDependencies: installedManifest.dependencies, modes: [] }
+const result = { tarball: path.join(artifacts, pack.filename), consumer: app, packageSize: pack.size, unpackedSize: pack.unpackedSize, integrity: pack.integrity, packedFiles: files, react: 'single shared peer', skill: 'Packaged canonical skill installed for Codex and Claude Code', runtimeDependencies: installedManifest.dependencies, modes: [] }
 const channel = process.env.PLAYWRIGHT_CHANNEL || (process.platform === 'darwin' ? 'chrome' : undefined)
 const browser = await chromium.launch({ headless: false, channel })
 async function verify(mode) {

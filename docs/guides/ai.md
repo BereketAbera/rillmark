@@ -15,10 +15,10 @@ The setup guide explains React 19 compatibility and styles. Each focused compone
 
 ## Install the consuming skill
 
-From your consumer project, with the Rillmark checkout available locally:
+From your consumer project, after installing the npm package:
 
 ```sh
-npx skills add /absolute/path/to/rillmark --skill rillmark -a codex -a claude-code --copy -y
+npx skills add ./node_modules/rillmark --skill rillmark -a codex -a claude-code --copy -y
 ```
 
 The standard Agent Skills installer creates project-scoped copies for Codex and Claude Code. The source is `skills/rillmark/SKILL.md`. The skill covers npm setup, discovery, composition, customization and verification. It does not load the full documentation into context.

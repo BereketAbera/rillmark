@@ -62,7 +62,7 @@ Read [llms.txt](https://rillmark.vercel.app/llms.txt), follow setup, then fetch 
 Install the consuming skill from your application directory:
 
 ```sh
-npx skills add /absolute/path/to/rillmark --skill rillmark -a codex -a claude-code --copy -y
+npx skills add ./node_modules/rillmark --skill rillmark -a codex -a claude-code --copy -y
 ```
 
 The skill covers npm setup, discovery, composition, customization and verification. See [the skill](skills/rillmark/SKILL.md), [AI setup](docs/guides/ai.md), and [installation verification](docs/skill-installation.md). No MCP configuration is required.

@@ -53,3 +53,13 @@ The package uses system font fallbacks. Load DM Sans separately if you want the 
 ## Editable source
 
 Use versioned npm imports by default. The package includes the original TypeScript in `node_modules/rillmark/src/`, and the documentation exposes the same readable source. To own an implementation, copy the needed `src/ui` files together with their referenced sibling components and `src/lib/rillmark-utils.ts`, preserving those relative paths. Keep the stylesheet import and runtime dependencies from the package manifest. Components and tokens have one canonical source in Rillmark.
+
+## Agent skill
+
+The package includes a consuming skill for Codex and Claude Code. After npm installation, run this from your application directory:
+
+```sh
+npx skills add ./node_modules/rillmark --skill rillmark -a codex -a claude-code --copy -y
+```
+
+This installs project-scoped copies through the standard Agent Skills installer. The skill starts with the focused documentation at [llms.txt](https://rillmark.vercel.app/llms.txt).

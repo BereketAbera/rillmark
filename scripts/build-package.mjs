@@ -26,6 +26,7 @@ await Promise.all([
   fs.copyFile(path.join(root, 'src/generated/theme.css'), path.join(outDir, 'theme.css')),
   fs.copyFile(path.join(root, 'tokens.json'), path.join(outDir, 'tokens.json')),
   fs.copyFile(path.join(root, 'LICENSE'), path.join(packageDir, 'LICENSE')),
+  fs.cp(path.join(root, 'skills/rillmark'), path.join(packageDir, 'skills/rillmark'), { recursive: true }),
 ])
 
 // Fail before packaging if emitted imports still require this repository's aliases.

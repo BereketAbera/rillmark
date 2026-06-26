@@ -5,6 +5,8 @@ test-results/
 playwright-report/
 /evidence/
 .consumer-test/
+.vercel/
 *.local
 .env*
 !.env.example
+/packages/rillmark/skills/

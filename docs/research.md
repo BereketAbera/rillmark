@@ -10,7 +10,6 @@ These systems inform individual decisions, not Rillmark's appearance.
 - **Carbon:** dense product interfaces need a measured type hierarchy and spacing that separates groups while keeping related information close. Rillmark adopts that discipline, with an original palette, type choice and corner language. [Typography](https://www.carbondesignsystem.com/building-blocks/foundations/typography/overview) · [Spacing](https://www.carbondesignsystem.com/building-blocks/foundations/spacing/overview)
 - **Radix Themes:** semantic color roles and contextual radii are preferable to arbitrary colors and one global corner value. A checkbox must remain visibly different from a radio. Rillmark uses semantic CSS variables and contextual shapes without a runtime theme-provider API. [Color](https://www.radix-ui.com/themes/docs/theme/color) · [Radius](https://www.radix-ui.com/themes/docs/theme/radius)
 - **Park UI:** consistent control heights and variant names make composition predictable. Rillmark aligns inputs, buttons and selects and keeps a small vocabulary; it does not expose a palette-selection or expression framework. [Theming](https://park-ui.com/docs/theming)
-- **shadcn/ui:** developer-experience inspiration for familiar React composition, readable source and focused component documentation. Rillmark has its own implementation and npm package; this reference contributes no components, tooling or installation integration. [Documentation](https://ui.shadcn.com/docs) · [AI index](https://ui.shadcn.com/llms.txt)
 
 ## Three short visual studies
 

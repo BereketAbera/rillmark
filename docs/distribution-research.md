@@ -16,5 +16,3 @@ The package is the supported consumption path. Readable source remains available
 ## Agent discovery
 
 [Rillmark's index](https://rillmark.vercel.app/llms.txt) routes agents to focused setup, foundation and component Markdown. Component pages contain exports and compiling examples, so an agent can read the relevant API without loading the whole catalog. The consuming skill at `skills/rillmark/SKILL.md` follows the independent [Agent Skills specification](https://agentskills.io/specification); contributor instructions remain in `AGENTS.md`.
-
-shadcn/ui informed developer-experience research: approachable React composition, discoverable examples and readable source. It supplies no Rillmark components, build tooling or installation integration. Its [documentation](https://ui.shadcn.com/docs) and [AI index](https://ui.shadcn.com/llms.txt) are inspiration references only.
