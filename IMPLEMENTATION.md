@@ -1,21 +1,24 @@
 # Implementation checklist
 
-- [x] Initialize local Git repository and inspect workspace guidance.
+- [x] Initialize Git and inspect workspace guidance.
 - [x] Lightweight name check: Rillmark, no matching UI library found (2026-11-03; not trademark clearance).
-- [x] Research current official distribution, AI support and design references.
-- [x] Explore three small directions on the same application screen and select one.
-- [x] Implement canonical tokens, light/dark themes and primitive foundation.
-- [x] Implement all scoped component families and practical patterns.
-- [x] Build selective shadcn registry, focused AI docs and installable skill.
-- [x] Build polished searchable docs and three working example screens.
-- [x] Verify clean consumer install, compiling examples, schemas, types, lint and production build.
-- [x] Run headed browser interaction/accessibility checks and inspect desktop/mobile themes.
-- [x] Add CI, finish documentation and commit all completed work.
+- [x] Research reference systems and explore three small same-screen directions.
+- [x] Select Fieldnotes; implement canonical tokens, light/dark themes and Radix primitives.
+- [x] Implement all 31 requested components plus EmptyState and the practical patterns.
+- [x] Build searchable documentation and three complete working example screens.
+- [x] Generate focused API/docs/examples and an installable npm-consuming agent skill.
+- [x] Use independent npm distribution and remove obsolete installer tooling.
+- [x] Package independent JavaScript, declarations, styles, tokens and editable TypeScript source.
+- [x] Complete packed-package verification, including project-scoped Codex/Claude skill installation.
+- [ ] Complete final headed browser verification against the deployed npm-only documentation.
+- [ ] Publish the exact tested package to npm.
+- [ ] Redeploy the npm-only documentation on Vercel and verify the public release.
+- [ ] Commit completed work in coherent chunks and push to BereketAbera/rillmark.
 
 ## Checkpoint
 
-The scoped release is complete: 32 components, 66 registry items, three working application screens, focused AI documentation and the installable skill. All 21 unit tests and 17 headed browser tests pass, along with schema/type/lint/build checks, an all-component clean consumer, an independent skill-driven screen, and official MCP discovery. Reviewed desktop/mobile evidence and remaining boundaries are recorded in docs/verification.md. The GitHub destination is bekabt/rillmark, verified private; the release is being pushed with the complete commit history.
+The original 32 components and all three applications are complete. Rillmark is now an independent npm design system; reference systems inform research only. Canonical code moved to packages/rillmark/src, demos to examples/components, and consumer docs use direct npm imports. npm is authenticated as bekab; publication awaits the account's required two-factor authentication; gh is authenticated as BereketAbera. The private BereketAbera/rillmark repository is created and linked. Never push to bekabt; the user deleted that earlier remote. The npm-only site is deployed on Vercel with the bundled skill instructions. Local checks pass 21 unit tests and both packed-package browser modes. The final deployed 17-test browser suite remains to run; the package artifact includes the verified consuming skill.
 
 ## Scope
 
-React + TypeScript + Tailwind CSS, Radix primitives, static shadcn registry. No custom CLI or MCP server. The release includes all 31 requested components plus EmptyState (32 total), practical patterns, three complete examples, focused Markdown documentation and a consuming agent skill.
+React 19, TypeScript, original tokens and components, Radix primitives, precompiled CSS with optional Tailwind CSS 4 integration. Standard npm publication, focused AI documentation and an installable consuming skill. No custom CLI, MCP server or configuration framework.
