@@ -2,6 +2,12 @@
 
 Verified on 2026-11-04 using Node 24.13.0 and headed Google Chrome on macOS. The release uses React 19.3.1, Tailwind 4.3.4, Radix 1.8.1, TypeScript 6.0.3 and Vite 8.3.5. Rillmark is an independent npm package; reference design systems are not distribution or implementation dependencies.
 
+## Published release
+
+`rillmark@0.1.0` was published on 2026-11-04. The public npm metadata and tarball endpoint respond successfully; published integrity matches the exact tested artifact. The package contains 110 intended files (39,970 bytes compressed), including portable TypeScript source and the consuming skill. See [npm](https://www.npmjs.com/package/rillmark) and [public consumer verification](npm-verification.md).
+
+The final local run passes all **21 unit tests and 17 headed browser tests**. Both packed-package styling modes, strict declarations, server rendering and Codex/Claude skill installation pass. The full dependency audit reports zero vulnerabilities.
+
 ## Repeatable checks
 
 | Check | Evidence |
@@ -38,6 +44,14 @@ Reviewed screenshots are in [evidence](evidence/), including [light documentatio
 - Overlay entry animation preserves centering.
 - Settings grids avoid intrinsic-width clipping on mobile; saved-item removal restores focus to a surviving control.
 - Package source uses portable relative imports. Published JavaScript and declarations resolve without repository aliases.
+
+## Hosted verification
+
+Production component pages passed automated accessibility checks in both themes, and the working example flows were exercised over HTTPS. The Select keyboard test now waits for visible option focus before sending the next key; it passed three consecutive live reruns.
+
+A longer live rerun encountered two asset-loading stalls: the main scripts remained pending until a navigation timeout, and a Discovery lazy import exceeded the test's short visibility deadline. Traces recorded no JavaScript errors or completed HTTP failures; they cannot identify whether the network path, CDN or browser transport caused the delay. The final local suite passes all 17 tests. Public documentation/API endpoints return HTTP 200 with the expected content; the removed endpoint returns HTTP 404.
+
+GitHub Actions is enabled and the release workflow is queued. At verification time GitHub had assigned no hosted runner and exposed no annotations or explanation. Remote CI completion is therefore unverified; equivalent checks were executed locally.
 
 ## Boundaries
 

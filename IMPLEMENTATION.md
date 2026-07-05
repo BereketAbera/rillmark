@@ -10,14 +10,14 @@
 - [x] Use independent npm distribution and remove obsolete installer tooling.
 - [x] Package independent JavaScript, declarations, styles, tokens and editable TypeScript source.
 - [x] Complete packed-package verification, including project-scoped Codex/Claude skill installation.
-- [ ] Complete final headed browser verification against the deployed npm-only documentation.
-- [ ] Publish the exact tested package to npm.
-- [ ] Redeploy the npm-only documentation on Vercel and verify the public release.
-- [ ] Commit completed work in coherent chunks and push to BereketAbera/rillmark.
+- [x] Verify all components and workflows in headed browsers locally and on the public site; record observed hosting delays.
+- [x] Publish the exact tested rillmark@0.1.0 package to npm.
+- [x] Deploy the independent documentation and bundled-skill instructions to Vercel.
+- [x] Commit work in coherent chunks and push to the private BereketAbera/rillmark repository.
 
 ## Checkpoint
 
-The original 32 components and all three applications are complete. Rillmark is now an independent npm design system; reference systems inform research only. Canonical code moved to packages/rillmark/src, demos to examples/components, and consumer docs use direct npm imports. npm is authenticated as bekab; publication awaits the account's required two-factor authentication; gh is authenticated as BereketAbera. The private BereketAbera/rillmark repository is created and linked. Never push to bekabt; the user deleted that earlier remote. The npm-only site is deployed on Vercel with the bundled skill instructions. Local checks pass 21 unit tests and both packed-package browser modes. The final deployed 17-test browser suite remains to run; the package artifact includes the verified consuming skill.
+The independent release is implemented and published as rillmark@0.1.0 on npm, with documentation at https://rillmark.vercel.app. Canonical code is in packages/rillmark/src; the package includes JavaScript, declarations, both styling paths, editable source and the verified consuming skill. All 21 unit tests and 17 local headed browser tests pass. Public-site checks and observed network delays are documented in docs/verification.md. GitHub source is private under BereketAbera/rillmark; do not use another account. Commit messages and current files have been cleaned up while preserving the progress history. Hosted CI is queued without an assigned runner; local release checks are complete.
 
 ## Scope
 

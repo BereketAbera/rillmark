@@ -2,7 +2,7 @@
 
 **Interfaces with a point of view.** An independent React design system for people and their coding agents, with original components, tokens and a recognizable Fieldnotes visual identity.
 
-**[Live documentation and examples](https://rillmark.vercel.app)** · **[AI entry point](https://rillmark.vercel.app/llms.txt)** · **[Private repository](https://github.com/BereketAbera/rillmark)**
+**[Live documentation and examples](https://rillmark.vercel.app)** · **[npm 0.1.0](https://www.npmjs.com/package/rillmark)** · **[AI entry point](https://rillmark.vercel.app/llms.txt)** · **[Private repository](https://github.com/BereketAbera/rillmark)**
 
 ![Rillmark documentation](docs/evidence/documentation-light.png)
 
