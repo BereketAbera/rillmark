@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ArrowUpRight, Compass, LayoutGrid, Settings2 } from 'lucide-react'
+import { ArrowUpRight, Compass, Inbox, LayoutGrid, NotebookPen, Settings2 } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from '@/components/ui/toast'
@@ -9,6 +9,8 @@ export const demoStorageKeys = {
   projects: 'rillmark-fieldwork-projects-v1',
   settings: 'rillmark-fieldwork-settings-v1',
   bookmarks: 'rillmark-fieldwork-bookmarks-v1',
+  brief: 'rillmark-fieldwork-brief-v1',
+  activity: 'rillmark-fieldwork-activity-v1',
 } as const
 
 export function readDemoValue<T>(key: string, fallback: T, validate: (value: unknown) => value is T): T {
@@ -42,6 +44,8 @@ export function useDemoNotice() {
 
 const navigation = [
   { id: 'dashboard', name: 'Workspace', icon: LayoutGrid },
+  { id: 'onboarding', name: 'Brief', icon: NotebookPen },
+  { id: 'activity', name: 'Inbox', icon: Inbox },
   { id: 'discovery', name: 'Discover', icon: Compass },
   { id: 'settings', name: 'Settings', icon: Settings2 },
 ] as const
@@ -58,7 +62,7 @@ export function ExampleShell({ active, notice, dismissNotice, children }: { acti
         <nav aria-label="Fieldwork example navigation" className="fw-nav">
           {navigation.map(({ id, name, icon: Icon }) => <a key={id} href={`#/examples/${id}`} aria-current={active === id ? 'page' : undefined}><Icon size={15} aria-hidden="true" /><span>{name}</span></a>)}
         </nav>
-        <div className="fw-header-end"><Badge variant="outline" className="fw-demo-label">Local demo</Badge><a href="#/examples/settings" aria-label="Open Alex Lee's profile" className="fw-profile-link"><Avatar className="size-8"><AvatarFallback>AL</AvatarFallback></Avatar></a></div>
+        <div className="fw-header-end"><Badge variant="outline" className="fw-demo-label">Local demo</Badge><a href="#/examples/settings" aria-label="AL — Open Alex Lee's profile" className="fw-profile-link"><Avatar className="size-8"><AvatarFallback>AL</AvatarFallback></Avatar></a></div>
       </header>
       <div className="fw-page">{children}</div>
       <footer className="fw-footer"><span><span className="fw-status-dot" /> A small studio. A shared point of view.</span><a href="#/docs/getting-started">Built with Rillmark <ArrowUpRight size={13} aria-hidden="true" /></a></footer>
