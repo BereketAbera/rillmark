@@ -23,8 +23,8 @@ export function ContextMenuTrigger({ className, tabIndex = 0, disabled, onKeyDow
 const contentStyles = "z-50 max-h-[var(--radix-context-menu-content-available-height)] min-w-48 max-w-[calc(100vw-1.5rem)] overflow-y-auto rounded-xl rounded-tr-(--radius-corner) border border-border bg-popover p-1.5 text-popover-foreground shadow-xl motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit"
 const itemStyles = "relative flex min-h-11 cursor-default select-none items-center gap-2 rounded-md px-3 py-2 text-sm outline-none transition-colors duration-(--duration-fast) focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 motion-reduce:transition-none [&>svg]:size-4 [&>svg]:shrink-0"
 
-export function ContextMenuContent({ className, collisionPadding = 12, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Content>) {
-  return <ContextMenuPrimitive.Portal><ContextMenuPrimitive.Content collisionPadding={collisionPadding} className={cn(contentStyles, className)} {...props} /></ContextMenuPrimitive.Portal>
+export function ContextMenuContent({ className, collisionPadding = 12, forceMount, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Content>) {
+  return <ContextMenuPrimitive.Portal forceMount={forceMount}><ContextMenuPrimitive.Content forceMount={forceMount} collisionPadding={collisionPadding} className={cn(contentStyles, className)} {...props} /></ContextMenuPrimitive.Portal>
 }
 
 export type ContextMenuItemProps = React.ComponentProps<typeof ContextMenuPrimitive.Item> & { variant?: "default" | "danger"; inset?: boolean }
@@ -52,6 +52,6 @@ export function ContextMenuSubTrigger({ className, children, ...props }: React.C
   return <ContextMenuPrimitive.SubTrigger className={cn(itemStyles, "data-[state=open]:bg-accent data-[state=open]:text-accent-foreground", className)} {...props}>{children}<ChevronRight aria-hidden="true" className="ml-auto" /></ContextMenuPrimitive.SubTrigger>
 }
 
-export function ContextMenuSubContent({ className, collisionPadding = 12, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.SubContent>) {
-  return <ContextMenuPrimitive.Portal><ContextMenuPrimitive.SubContent collisionPadding={collisionPadding} className={cn(contentStyles, className)} {...props} /></ContextMenuPrimitive.Portal>
+export function ContextMenuSubContent({ className, collisionPadding = 12, forceMount, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.SubContent>) {
+  return <ContextMenuPrimitive.Portal forceMount={forceMount}><ContextMenuPrimitive.SubContent forceMount={forceMount} collisionPadding={collisionPadding} className={cn(contentStyles, className)} {...props} /></ContextMenuPrimitive.Portal>
 }

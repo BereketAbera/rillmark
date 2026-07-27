@@ -75,6 +75,12 @@ describe("expanded interaction components", () => {
     await waitFor(() => expect(screen.queryByText("Components for considered work.")).not.toBeInTheDocument())
   })
 
+  it("keeps controlled portal content mounted when forceMount is requested", () => {
+    render(<><ContextMenu open={false}><ContextMenuTrigger>Closed menu</ContextMenuTrigger><ContextMenuContent forceMount data-testid="retained-menu"><ContextMenuItem>Retained action</ContextMenuItem></ContextMenuContent></ContextMenu><HoverCard open={false}><HoverCardTrigger href="#team">Team</HoverCardTrigger><HoverCardContent forceMount data-testid="retained-preview">Retained preview</HoverCardContent></HoverCard></>)
+    expect(screen.getByTestId("retained-menu")).toHaveAttribute("data-state", "closed")
+    expect(screen.getByTestId("retained-preview")).toHaveAttribute("data-state", "closed")
+  })
+
   it("opens navigation content and returns to its trigger after Escape", async () => {
     const user = userEvent.setup()
     render(<NavigationMenu aria-label="Workspace" delayDuration={0}><NavigationMenuList><NavigationMenuItem><NavigationMenuTrigger>Resources</NavigationMenuTrigger><NavigationMenuContent><NavigationMenuLink href="https://rillmark.vercel.app">Documentation</NavigationMenuLink><NavigationMenuLink href="https://rillmark.vercel.app/llms.txt">Agent index</NavigationMenuLink></NavigationMenuContent></NavigationMenuItem></NavigationMenuList></NavigationMenu>)

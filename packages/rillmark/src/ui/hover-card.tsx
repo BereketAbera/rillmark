@@ -7,9 +7,9 @@ import { cn } from "../lib/rillmark-utils"
 export const HoverCard = HoverCardPrimitive.Root
 export const HoverCardTrigger = HoverCardPrimitive.Trigger
 
-export function HoverCardContent({ className, sideOffset = 8, collisionPadding = 12, ...props }: React.ComponentProps<typeof HoverCardPrimitive.Content>) {
-  return <HoverCardPrimitive.Portal>
-    <HoverCardPrimitive.Content sideOffset={sideOffset} collisionPadding={collisionPadding} className={cn("z-50 w-80 max-w-[calc(100vw-1.5rem)] rounded-2xl rounded-tr-(--radius-corner) border border-border bg-popover p-5 text-sm leading-relaxed text-popover-foreground shadow-xl outline-none motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit", className)} {...props} />
+export function HoverCardContent({ className, sideOffset = 8, collisionPadding = 12, forceMount, ...props }: React.ComponentProps<typeof HoverCardPrimitive.Content>) {
+  return <HoverCardPrimitive.Portal forceMount={forceMount}>
+    <HoverCardPrimitive.Content forceMount={forceMount} sideOffset={sideOffset} collisionPadding={collisionPadding} className={cn("z-50 w-80 max-w-[calc(100vw-1.5rem)] rounded-2xl rounded-tr-(--radius-corner) border border-border bg-popover p-5 text-sm leading-relaxed text-popover-foreground shadow-xl outline-none motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit", className)} {...props} />
   </HoverCardPrimitive.Portal>
 }
 
