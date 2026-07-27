@@ -1,4 +1,9 @@
+import { descriptions as interactions } from './catalog-interactions.mjs'
+import { descriptions as expansion } from './catalog-expansion.mjs'
+
 export const descriptions = {
+  ...interactions,
+  ...expansion,
   button: ['Actions', 'A clear next step, with quiet alternatives.', 'Use solid for the primary action, soft for a companion, outline for a boundary and ghost for a quiet action. Loading preserves the label and blocks repeated clicks.'],
   'icon-button': ['Actions', 'A compact action with a name.', 'The label prop is required. Icons alone are not accessible names. Default to the 44px size for touch.'],
   'button-group': ['Actions', 'Related actions, kept together.', 'Supply aria-label to explain the group. Use buttons for actions and Tabs for switching a content panel.'],

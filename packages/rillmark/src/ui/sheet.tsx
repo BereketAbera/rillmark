@@ -14,7 +14,7 @@ export type SheetContentProps = React.ComponentProps<typeof DialogPrimitive.Cont
 export function SheetContent({ side = "right", className, children, ...props }: SheetContentProps) {
   return <DialogPrimitive.Portal>
     <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/45 backdrop-blur-[2px] motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit" />
-    <DialogPrimitive.Content className={cn("fixed inset-y-0 z-50 flex w-[min(28rem,calc(100%-1rem))] flex-col gap-5 overflow-y-auto border-border bg-popover p-6 text-popover-foreground shadow-2xl outline-none motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit", side === "right" ? "right-0 rounded-l-2xl border-l" : "left-0 rounded-r-2xl border-r", className)} {...props}>
+    <DialogPrimitive.Content className={cn("fixed inset-y-0 z-50 flex w-[min(28rem,calc(100%-1rem))] flex-col gap-5 overflow-y-auto border-border bg-popover p-6 text-popover-foreground shadow-overlay outline-none motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit", side === "right" ? "right-0 rounded-l-2xl border-l" : "left-0 rounded-r-2xl border-r", className)} {...props}>
       {children}
       <DialogPrimitive.Close aria-label="Close panel" className="absolute right-2 top-2 inline-flex size-11 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"><X aria-hidden="true" size={18} /></DialogPrimitive.Close>
     </DialogPrimitive.Content>

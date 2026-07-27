@@ -16,7 +16,7 @@ export const SelectValue = SelectPrimitive.Value
 export function SelectTrigger({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Trigger>) {
   const control = useFieldControl(props)
   return (
-    <SelectPrimitive.Trigger data-slot="select-trigger" {...props} id={control.id} disabled={control.disabled} aria-invalid={control["aria-invalid"]} aria-labelledby={control["aria-labelledby"]} aria-describedby={control["aria-describedby"]} className={cn("flex h-11 w-full min-w-0 items-center justify-between gap-2 rounded-xl rounded-tr-[5px] border border-input bg-card px-3.5 text-sm text-foreground shadow-xs outline-none transition-[border-color,box-shadow] data-[placeholder]:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive [&>span]:truncate motion-reduce:transition-none", className)}>
+    <SelectPrimitive.Trigger data-slot="select-trigger" {...props} id={control.id} disabled={control.disabled} aria-invalid={control["aria-invalid"]} aria-labelledby={control["aria-labelledby"]} aria-describedby={control["aria-describedby"]} className={cn("flex h-11 w-full min-w-0 items-center justify-between gap-2 rounded-xl rounded-tr-(--radius-corner) border border-input bg-card px-3.5 text-sm text-foreground shadow-xs outline-none transition-[border-color,box-shadow] data-[placeholder]:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive [&>span]:truncate motion-reduce:transition-none", className)}>
       {children}
       <SelectPrimitive.Icon asChild><Chevron /></SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
@@ -30,7 +30,7 @@ function Chevron({ className, ...props }: React.ComponentProps<"svg">) {
 export function SelectContent({ className, children, position = "popper", sideOffset = 6, ...props }: React.ComponentProps<typeof SelectPrimitive.Content>) {
   return (
     <SelectPrimitive.Portal>
-      <SelectPrimitive.Content data-slot="select-content" position={position} sideOffset={sideOffset} className={cn("relative z-50 max-h-[var(--radix-select-content-available-height)] min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-xl rounded-tr-[5px] border border-border bg-popover text-popover-foreground shadow-lg", className)} {...props}>
+      <SelectPrimitive.Content data-slot="select-content" position={position} sideOffset={sideOffset} className={cn("relative z-50 max-h-[var(--radix-select-content-available-height)] min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-xl rounded-tr-(--radius-corner) border border-border bg-popover text-popover-foreground shadow-overlay", className)} {...props}>
         <SelectPrimitive.ScrollUpButton className="flex h-7 cursor-default items-center justify-center"><Chevron className="rotate-180" /></SelectPrimitive.ScrollUpButton>
         <SelectPrimitive.Viewport className="p-1.5">{children}</SelectPrimitive.Viewport>
         <SelectPrimitive.ScrollDownButton className="flex h-7 cursor-default items-center justify-center"><Chevron /></SelectPrimitive.ScrollDownButton>

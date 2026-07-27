@@ -9,12 +9,11 @@ const write = async (file, content) => { await fs.mkdir(path.dirname(file), { re
 const json = (data) => JSON.stringify(data, null, 2) + '\n'
 const tokens = JSON.parse(await fs.readFile('tokens.json', 'utf8'))
 const colors = Object.keys(tokens.light).filter((key) => key !== 'radius')
-const theme = { ...Object.fromEntries(colors.map((key) => [`color-${key}`, `var(--${key})`])), ...tokens.theme }
+const theme = Object.fromEntries(colors.map((key) => [`color-${key}`, `var(--${key})`]))
 const css = {
   '@layer base': {
     '*': { 'border-color': 'var(--border)' },
     body: { 'background-color': 'var(--background)', color: 'var(--foreground)', 'font-family': 'var(--font-sans)', 'font-feature-settings': '"ss01"' },
-    '.dark': { 'color-scheme': 'dark' },
     '::selection': { 'background-color': 'var(--secondary)', color: 'var(--secondary-foreground)' },
   },
   '@keyframes rm-enter': { from: { opacity: '0', transform: 'translateY(4px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
@@ -25,7 +24,33 @@ function cssText(object, indent = '') {
   return Object.entries(object).map(([key, value]) => typeof value === 'object' ? `${indent}${key} {\n${cssText(value, indent + '  ')}\n${indent}}` : `${indent}${key}: ${value};`).join('\n')
 }
 const declarations = (object) => Object.fromEntries(Object.entries(object).map(([key, value]) => [`--${key}`, value]))
-await write('src/generated/theme.css', `/* Generated from tokens.json. Run npm run generate. */\n@custom-variant dark (&:is(.dark *));\n${cssText({ '@theme inline': declarations(theme), ':root': declarations(tokens.light), '.dark': declarations(tokens.dark), ...css })}\n`)
+// Presets live on the document root so portalled dialogs and menus inherit them.
+// Appearance is independent of the visual preset; explicit mode wins over legacy .dark.
+const presets = { fieldnotes: {}, ...tokens.presets }
+const palette = (preset, mode) => ({ ...tokens.light, ...tokens[mode], ...preset.light, ...(mode === 'dark' ? preset.dark : {}) })
+const rules = {
+  '@theme inline': declarations(theme),
+  '@theme': declarations(tokens.theme),
+  ':root': { ...declarations({ ...tokens.theme, ...tokens.light }), 'color-scheme': 'light' },
+  '.dark': { ...declarations(tokens.dark), 'color-scheme': 'dark' },
+}
+for (const [name, preset] of Object.entries(presets)) {
+  const selector = `:root[data-rillmark-preset="${name}"]`
+  rules[selector] = { ...declarations({ ...tokens.theme, ...preset.theme, ...palette(preset, 'light') }), 'color-scheme': 'light' }
+  rules[`${selector}.dark`] = { ...declarations(palette(preset, 'dark')), 'color-scheme': 'dark' }
+}
+for (const [name, preset] of Object.entries(presets)) {
+  const selectors = name === 'fieldnotes' ? [':root:not([data-rillmark-preset])', ':root[data-rillmark-preset="fieldnotes"]'] : [`:root[data-rillmark-preset="${name}"]`]
+  for (const mode of ['light', 'dark', 'system']) {
+    rules[selectors.map((selector) => `${selector}[data-rillmark-mode="${mode}"]`).join(', ')] = { ...declarations(palette(preset, mode === 'dark' ? 'dark' : 'light')), 'color-scheme': mode === 'dark' ? 'dark' : 'light' }
+  }
+}
+rules['@media (prefers-color-scheme: dark)'] = Object.fromEntries(Object.entries(presets).map(([name, preset]) => [
+  (name === 'fieldnotes' ? [':root:not([data-rillmark-preset])', ':root[data-rillmark-preset="fieldnotes"]'] : [`:root[data-rillmark-preset="${name}"]`]).map((selector) => `${selector}[data-rillmark-mode="system"]`).join(', '),
+  { ...declarations(palette(preset, 'dark')), 'color-scheme': 'dark' },
+]))
+const darkVariant = '@custom-variant dark {\n  &:where(.dark:not([data-rillmark-mode="light"]):not([data-rillmark-mode="system"]), .dark:not([data-rillmark-mode="light"]):not([data-rillmark-mode="system"]) *, [data-rillmark-mode="dark"], [data-rillmark-mode="dark"] *) { @slot; }\n  @media (prefers-color-scheme: dark) { &:where([data-rillmark-mode="system"], [data-rillmark-mode="system"] *) { @slot; } }\n}'
+await write('src/generated/theme.css', `/* Generated from tokens.json. Run npm run generate. */\n${darkVariant}\n${cssText({ ...rules, ...css })}\n`)
 
 const files = (await fs.readdir('packages/rillmark/src/ui')).filter((file) => file.endsWith('.tsx')).sort()
 const packageJson = JSON.parse(await fs.readFile('package.json', 'utf8'))
@@ -40,7 +65,8 @@ for (const file of files) {
   const name = file.replace('.tsx', '')
   const sourcePath = `packages/rillmark/src/ui/${file}`
   const source = await fs.readFile(sourcePath, 'utf8')
-  const [category, description, guidance] = descriptions[name] ?? ['Components', title(name), 'Use standard native and Radix props.']
+  if (!descriptions[name]) throw new Error(`Missing focused guidance for ${name}`)
+  const [category, description, guidance] = descriptions[name]
   const parsed = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
   const exports = parsed.statements.flatMap((statement) => {
     if (!statement.modifiers?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)) return []
@@ -67,5 +93,5 @@ for (const file of await fs.readdir('docs/guides')) {
     await write(`src/generated/doc-examples/${file.replace('.md', '')}-${index}.tsx`, block[1])
   }
 }
-await write('public/llms.txt', `# Rillmark\n\n> An independent React 19 design system. Install rillmark from npm. Original components and tokens, Radix primitives, precompiled CSS or Tailwind CSS 4 integration.\n\n## Start here\n\n- [Setup and install](./docs/getting-started.md): use this first; package installation, styles, imports and React compatibility.\n- [Foundations](./docs/foundations.md): tokens, dark mode, customization and accessibility.\n- [AI setup](./docs/ai.md): installable consuming skill and progressive discovery.\n- [Generated API](./api.json): exports and locally declared props from implementation.\n\n## Components\n\n${metadata.map((entry) => `- [${entry.title}](./docs/components/${entry.name}.md): ${entry.description}`).join('\n')}\n\nRead only the relevant component pages. Their examples compile as part of the site. Use className and semantic CSS variables for customization. Full readable component source is linked from each page.\n`)
+await write('public/llms.txt', `# Rillmark\n\n> An independent React 19 design system. Install rillmark from npm. Original components and tokens, Radix primitives, precompiled CSS or Tailwind CSS 4 integration.\n\n## Start here\n\n- [Setup and install](./docs/getting-started.md): use this first; package installation, styles, imports and React compatibility.\n- [Foundations](./docs/foundations.md): tokens, dark mode, customization and accessibility.\n- [Themes and presets](./docs/themes.md): Fieldnotes, Studio and Play; independent light/dark/system appearance using two root attributes.\n- [AI setup](./docs/ai.md): installable consuming skill and progressive discovery.\n- [Generated API](./api.json): exports and locally declared props from implementation.\n\n## Components\n\n${metadata.map((entry) => `- [${entry.title}](./docs/components/${entry.name}.md): ${entry.description}`).join('\n')}\n\nRead only the relevant component pages. Their examples compile as part of the site. Use className and semantic CSS variables for customization. Full readable component source is linked from each page.\n`)
 console.log(`Generated tokens, API metadata and focused documentation for ${metadata.length} components.`)

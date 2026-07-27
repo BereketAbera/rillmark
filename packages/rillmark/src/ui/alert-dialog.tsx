@@ -10,7 +10,7 @@ export const AlertDialogTrigger = AlertDialogPrimitive.Trigger
 export function AlertDialogContent({ className, ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Content>) {
   return <AlertDialogPrimitive.Portal>
     <AlertDialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/45 backdrop-blur-[2px] motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit" />
-    <AlertDialogPrimitive.Content className={cn("fixed left-1/2 top-1/2 z-50 grid max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-5 overflow-y-auto rounded-2xl rounded-tr-md border border-border bg-popover p-6 text-popover-foreground shadow-2xl outline-none motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit", className)} {...props} />
+    <AlertDialogPrimitive.Content className={cn("fixed left-1/2 top-1/2 z-50 grid max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-5 overflow-y-auto rounded-2xl rounded-tr-(--radius-corner) border border-border bg-popover p-6 text-popover-foreground shadow-overlay outline-none motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit", className)} {...props} />
   </AlertDialogPrimitive.Portal>
 }
 
@@ -31,9 +31,9 @@ export function AlertDialogDescription({ className, ...props }: React.ComponentP
 }
 
 export function AlertDialogAction({ className, ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Action>) {
-  return <AlertDialogPrimitive.Action className={cn("inline-flex min-h-11 items-center justify-center rounded-lg rounded-tr-sm bg-destructive px-4 py-2 text-sm font-semibold text-destructive-foreground transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50", className)} {...props} />
+  return <AlertDialogPrimitive.Action className={cn("inline-flex min-h-11 items-center justify-center rounded-lg rounded-tr-(--radius-corner) bg-destructive px-4 py-2 text-sm font-semibold text-destructive-foreground transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50", className)} {...props} />
 }
 
 export function AlertDialogCancel({ className, ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Cancel>) {
-  return <AlertDialogPrimitive.Cancel className={cn("inline-flex min-h-11 items-center justify-center rounded-lg rounded-tr-sm border border-border bg-background px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50", className)} {...props} />
+  return <AlertDialogPrimitive.Cancel className={cn("inline-flex min-h-11 items-center justify-center rounded-lg rounded-tr-(--radius-corner) border border-border bg-background px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50", className)} {...props} />
 }
