@@ -48,6 +48,15 @@ describe('NumberInput', () => {
     expect(screen.getByRole('button', { name: 'Increase value' })).toBeDisabled()
     expect(screen.getByRole('button', { name: 'Decrease value' })).toBeDisabled()
   })
+
+  it('keeps the controlled value when a parent declines a step change', async () => {
+    const user = userEvent.setup()
+    const change = vi.fn()
+    render(<NumberInput aria-label="Fixed seats" value={3} onValueChange={change}/>)
+    await user.click(screen.getByRole('button', { name: 'Increase value' }))
+    expect(change).toHaveBeenCalledWith(4)
+    expect(screen.getByRole('spinbutton')).toHaveValue(3)
+  })
 })
 
 describe('TagInput', () => {
@@ -94,6 +103,16 @@ describe('TagInput', () => {
 })
 
 describe('FileDropzone', () => {
+  it('clears an uncontrolled native file selection on an uncanceled form reset', async () => {
+    const user = userEvent.setup()
+    render(<form><FileDropzone aria-label="Resettable files"/><button type="reset">Reset files</button></form>)
+    const input = screen.getByLabelText('Resettable files') as HTMLInputElement
+    await user.upload(input, new File(['brief'], 'brief.pdf', { type: 'application/pdf' }))
+    await user.click(screen.getByRole('button', { name: 'Reset files' }))
+    expect(screen.queryByRole('list', { name: 'Selected files' })).not.toBeInTheDocument()
+    expect(input.files).toHaveLength(0)
+  })
+
   it('selects through the native input, removes a file and clears the actual input', async () => {
     const user = userEvent.setup()
     const change = vi.fn()
@@ -171,4 +190,21 @@ describe('progress and supporting semantics', () => {
     expect(screen.getByRole('status')).toHaveTextContent('Refreshing files')
     expect(screen.getByText('Esc').tagName).toBe('KBD')
   })
+})
+
+it('preserves form controls when the native reset event is canceled', async () => {
+  const user = userEvent.setup()
+  render(<form onReset={(event) => event.preventDefault()}>
+    <NumberInput aria-label="Seats" defaultValue={3}/>
+    <TagInput aria-label="Topics" defaultValue={['Design']}/>
+    <FileDropzone aria-label="References"/>
+    <button type="reset">Keep current values</button>
+  </form>)
+  await user.click(screen.getByRole('button', { name: 'Increase value' }))
+  await user.type(screen.getByRole('textbox'), 'Research{Enter}')
+  await user.upload(screen.getByLabelText('References'), new File(['brief'], 'brief.pdf', { type: 'application/pdf' }))
+  await user.click(screen.getByRole('button', { name: 'Keep current values' }))
+  expect.soft(screen.getByRole('spinbutton')).toHaveValue(4)
+  expect.soft(screen.queryByRole('button', { name: 'Remove Research' })).toBeInTheDocument()
+  expect.soft(screen.queryByRole('button', { name: 'Remove brief.pdf' })).toBeInTheDocument()
 })

@@ -32,7 +32,7 @@ export function NumberInput({ value, defaultValue = '', onValueChange, min, max,
   React.useEffect(() => {
     const form = inputRef.current?.form
     if (!form || controlled) return
-    const reset = () => setInternal(defaultValue)
+    const reset = (event: Event) => queueMicrotask(() => { if (!event.defaultPrevented) setInternal(defaultValue) })
     form.addEventListener('reset', reset)
     return () => form.removeEventListener('reset', reset)
   }, [controlled, defaultValue])
@@ -40,15 +40,18 @@ export function NumberInput({ value, defaultValue = '', onValueChange, min, max,
   function changeBy(direction: number) {
     const input = inputRef.current
     if (!input || control.disabled || props.readOnly) return
-    if (direction > 0) input.stepUp(); else input.stepDown()
-    if (Number.isFinite(input.valueAsNumber)) commit(clamp(input.valueAsNumber))
+    // Keep native decimal stepping without changing a controlled value before its parent accepts it.
+    const candidate = input.cloneNode() as HTMLInputElement
+    candidate.value = input.value
+    if (direction > 0) candidate.stepUp(); else candidate.stepDown()
+    if (Number.isFinite(candidate.valueAsNumber)) commit(clamp(candidate.valueAsNumber))
     input.focus()
   }
   const unavailable = control.disabled || props.readOnly
   const buttonClass = 'inline-flex size-11 shrink-0 items-center justify-center rounded-lg text-foreground hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-40'
   return <div data-slot="number-input" className={cn('flex min-w-0 items-center gap-1 rounded-xl border border-input bg-card p-1 text-foreground focus-within:border-ring has-[[aria-invalid=true]]:border-destructive', className)}>
     <button type="button" aria-label={decrementLabel} aria-controls={control.id} className={buttonClass} disabled={unavailable || (current !== '' && min !== undefined && current <= min)} onClick={() => changeBy(-1)}><Minus className="size-4" aria-hidden="true"/></button>
-    <input {...props} {...control} ref={inputRef} type="number" min={min} max={max} step={increment} value={current} className="h-11 w-full min-w-0 rounded-md bg-transparent px-2 text-center text-base tabular-nums outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" onChange={(event) => {
+    <input {...props} {...control} ref={inputRef} type="number" min={min} max={max} step={increment} value={current} className="h-11 w-full min-w-0 appearance-textfield rounded-md bg-transparent px-2 text-center text-base tabular-nums outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" onChange={(event) => {
       onChange?.(event)
       if (!event.defaultPrevented) commit(Number.isFinite(event.currentTarget.valueAsNumber) ? event.currentTarget.valueAsNumber : '')
     }} onBlur={(event) => {

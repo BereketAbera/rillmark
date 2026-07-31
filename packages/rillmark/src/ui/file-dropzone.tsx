@@ -50,7 +50,11 @@ export function FileDropzone({ files, defaultFiles = [], onFilesChange, maxSize,
   React.useEffect(() => {
     const form = inputRef.current?.form
     if (!form) return
-    const reset = () => { if (!controlled) setInternal(defaultFiles); setErrors([]) }
+    const reset = (event: Event) => queueMicrotask(() => {
+      if (event.defaultPrevented) return
+      if (!controlled) setInternal(defaultFiles)
+      setErrors([])
+    })
     form.addEventListener('reset', reset)
     return () => form.removeEventListener('reset', reset)
   }, [controlled, defaultFiles])
