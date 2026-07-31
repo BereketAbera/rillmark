@@ -27,10 +27,10 @@ test('documentation search, source, copy, theme and mobile navigation work', asy
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
 })
 
-for (const theme of ['light', 'dark'] as const) {
-  test(`all 32 live component pages meet automated accessibility checks in ${theme}`, async ({ page }) => {
+for (const preset of ['fieldnotes', 'studio', 'play']) for (const theme of ['light', 'dark'] as const) {
+  test(`all ${catalog.length} live component pages meet automated accessibility checks in ${preset}/${theme}`, async ({ page }) => {
     test.setTimeout(180_000)
-    await page.addInitScript((mode) => localStorage.setItem('rillmark-theme', mode), theme)
+    await page.addInitScript(({ mode, preset }) => { localStorage.setItem('rillmark-theme', mode); localStorage.setItem('rillmark-preset', preset) }, { mode: theme, preset })
     const errors: string[] = []
     const failures: unknown[] = []
     page.on('pageerror', (error) => errors.push(error.message))
@@ -53,7 +53,7 @@ test('guides, home and complete examples have accessible light, dark and mobile 
     await page.goto('/')
     const switcher = page.getByRole('button', { name: dark ? 'Switch to dark theme' : 'Switch to light theme' })
     if (await switcher.count()) await switcher.click()
-    for (const path of ['/', '/docs/getting-started', '/docs/foundations', '/docs/ai', '/examples/dashboard', '/examples/settings', '/examples/discovery']) {
+    for (const path of ['/', '/docs/getting-started', '/docs/foundations', '/docs/themes', '/docs/ai', '/examples/dashboard', '/examples/settings', '/examples/discovery']) {
       await page.goto(`/#${path}`)
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
       const result = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()

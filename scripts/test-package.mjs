@@ -21,7 +21,11 @@ const run = (command, args, cwd = app, capture = false) => {
   return result.stdout
 }
 const rootManifest = JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf8'))
-const pack = JSON.parse(run('npm', ['pack', path.join(root, 'packages/rillmark'), '--json', '--pack-destination', scratch], root, true))[0]
+const themeTokens = JSON.parse(await fs.readFile(path.join(root, 'tokens.json'), 'utf8'))
+const componentNames = (await fs.readdir(path.join(root, 'packages/rillmark/src/ui'))).filter((name) => name.endsWith('.tsx')).map((name) => name.slice(0, -4))
+const publishedVersion = process.env.RILLMARK_PACKAGE_VERSION
+const packageSpec = publishedVersion ? `rillmark@${publishedVersion}` : path.join(root, 'packages/rillmark')
+const pack = JSON.parse(run('npm', ['pack', packageSpec, '--registry=https://registry.npmjs.org', '--json', '--pack-destination', scratch], root, true))[0]
 const files = pack.files.map(({ path: name }) => name)
 for (const expected of ['dist/index.js', 'dist/index.d.ts', 'dist/ui/button.js', 'dist/ui/icon-button.d.ts', 'dist/styles.css', 'dist/theme.css', 'dist/tokens.json', 'src/ui/button.tsx', 'src/lib/rillmark-utils.ts', 'tailwind.css', 'LICENSE', 'README.md', 'skills/rillmark/SKILL.md', 'skills/rillmark/agents/openai.yaml']) assert(files.includes(expected), `Missing packed file: ${expected}`)
 assert(files.every((file) => /^(dist\/|src\/|skills\/rillmark\/|package\.json$|tailwind\.css$|LICENSE$|README\.md$)/.test(file)), 'Package includes unintended files')
@@ -41,6 +45,8 @@ import { Field, Input, Card, CardContent, CardHeader, CardTitle } from 'rillmark
 import { Button, type ButtonProps } from 'rillmark/button'
 import { Combobox } from 'rillmark/combobox'
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogTrigger } from 'rillmark/dialog'
+import { NumberInput } from 'rillmark/number-input'
+import { TagInput } from 'rillmark/tag-input'
 import './app.css'
 
 const props: ButtonProps = { variant: 'soft', size: 'sm' }
@@ -59,6 +65,8 @@ function App() {
       <form className="form" onSubmit={(event) => { event.preventDefault(); setSaved(true) }}>
         <Field label="Workspace name" description="Visible to your collaborators." required><Input value={name} onChange={(event) => setName(event.target.value)} minLength={2} /></Field>
         <Field label="Home base"><Combobox options={[{ value: 'ams', label: 'Amsterdam' }, { value: 'cph', label: 'Copenhagen', keywords: ['Denmark'] }]} value={location} onValueChange={setLocation} /></Field>
+        <Field label="Team size"><NumberInput defaultValue={3} min={1} max={8} /></Field>
+        <Field label="Project tags"><TagInput defaultValue={['Research']} /></Field>
         <Button type="submit">Save workspace</Button>
         {saved && <p role="status">Saved {name}.</p>}
       </form>
@@ -80,13 +88,16 @@ run('npx', ['--yes', 'skills@latest', 'add', './node_modules/rillmark', '--skill
 for (const destination of ['.agents/skills/rillmark/SKILL.md', '.claude/skills/rillmark/SKILL.md']) assert.equal(await fs.readFile(path.join(app, destination), 'utf8'), canonicalSkill, `Installed skill differs: ${destination}`)
 
 const installedManifest = JSON.parse(await fs.readFile(path.join(app, 'node_modules/rillmark/package.json'), 'utf8'))
+assert.equal(installedManifest.name, 'rillmark')
+assert.equal(installedManifest.version, publishedVersion || JSON.parse(await fs.readFile(path.join(root, 'packages/rillmark/package.json'), 'utf8')).version)
 assert.deepEqual(Object.keys(installedManifest.dependencies).sort(), ['clsx', 'lucide-react', 'radix-ui', 'tailwind-merge'], 'Only the declared component runtime dependencies should ship')
 await assert.rejects(fs.access(path.join(app, 'node_modules/tailwindcss')), 'The default CSS path must work without Tailwind')
 const reactPaths = run('npm', ['ls', 'react', '--all', '--parseable'], app, true).trim().split('\n').filter((entry) => entry.endsWith('/node_modules/react'))
 assert.equal(new Set(await Promise.all(reactPaths.map((entry) => fs.realpath(entry)))).size, 1, 'React must be a single shared peer, not bundled or duplicated')
 run('node', ['--input-type=module', '-e', `import assert from 'node:assert/strict'; import { createElement } from 'react'; import { renderToString } from 'react-dom/server'; import { Button as RootButton } from 'rillmark'; import { Button } from 'rillmark/button'; assert.equal(RootButton, Button); assert.match(renderToString(createElement(Button, null, 'Package ready')), /Package ready/); console.log('Node ESM imports and server rendering passed.');`])
+run('node', ['--input-type=module', '-e', `const names = ${JSON.stringify(componentNames)}; for (const name of names) { const module = await import('rillmark/' + name); if (!Object.keys(module).length) throw new Error('Empty subpath: ' + name); } console.log(names.length + ' published component subpaths resolve.');`])
 
-const result = { tarball: path.join(artifacts, pack.filename), consumer: app, packageSize: pack.size, unpackedSize: pack.unpackedSize, integrity: pack.integrity, packedFiles: files, react: 'single shared peer', skill: 'Packaged canonical skill installed for Codex and Claude Code', runtimeDependencies: installedManifest.dependencies, modes: [] }
+const result = { version: installedManifest.version, source: publishedVersion ? 'public npm registry' : 'local packed artifact', tarball: path.join(artifacts, pack.filename), consumer: app, packageSize: pack.size, unpackedSize: pack.unpackedSize, integrity: pack.integrity, packedFiles: files, react: 'single shared peer', skill: 'Packaged canonical skill installed for Codex and Claude Code', runtimeDependencies: installedManifest.dependencies, modes: [] }
 const channel = process.env.PLAYWRIGHT_CHANNEL || (process.platform === 'darwin' ? 'chrome' : undefined)
 const browser = await chromium.launch({ headless: false, channel })
 async function verify(mode) {
@@ -119,8 +130,16 @@ async function verify(mode) {
     await combo.fill('Denmark')
     await combo.press('Enter')
     await expect(combo).toHaveValue('Copenhagen')
+    const team = page.getByRole('spinbutton', { name: 'Team size' })
+    await team.fill('6')
+    await team.press('ArrowUp')
+    await expect(team).toHaveValue('7')
+    const tags = page.getByRole('textbox', { name: 'Project tags' })
+    await tags.fill('Ecology')
+    await tags.press('Enter')
+    await expect(page.getByRole('button', { name: 'Remove Ecology' })).toBeVisible()
     await save.click()
-    await expect(page.getByRole('status')).toHaveText('Saved Estuary collective.')
+    await expect(page.getByRole('status').filter({ hasText: 'Saved Estuary collective.' })).toHaveText('Saved Estuary collective.')
     const review = page.getByRole('button', { name: 'Review details' })
     await review.click()
     const dialog = page.getByRole('dialog', { name: 'Your workspace' })
@@ -140,8 +159,46 @@ async function verify(mode) {
     await page.setViewportSize({ width: 390, height: 844 })
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
     await page.screenshot({ path: path.join(artifacts, `${mode}-dark-mobile.png`), fullPage: true })
+    const rgb = (hex) => `rgb(${hex.slice(1).match(/../g).map((part) => parseInt(part, 16)).join(', ')})`
+    for (const [preset, overrides] of Object.entries({ fieldnotes: {}, ...themeTokens.presets })) {
+      for (const appearance of ['light', 'dark']) {
+        await page.evaluate(({ preset, appearance }) => { document.documentElement.dataset.rillmarkPreset = preset; document.documentElement.dataset.rillmarkMode = appearance }, { preset, appearance })
+        const colors = { ...themeTokens.light, ...themeTokens[appearance], ...overrides.light, ...(appearance === 'dark' ? overrides.dark : {}) }
+        await expect(save).toHaveCSS('background-color', rgb(colors.primary))
+        await expect(page.locator('body')).toHaveCSS('background-color', rgb(colors.background))
+        await expect(save).toHaveCSS('border-top-right-radius', { fieldnotes: '5px', studio: '6px', play: '22px' }[preset])
+        await expect(save).toHaveCSS('min-height', '44px')
+        await review.click()
+        await expect(dialog).toHaveCSS('background-color', rgb(colors.popover))
+        await expect(dialog).toHaveCSS('animation-duration', { fieldnotes: '0.18s', studio: '0.12s', play: '0.24s' }[preset])
+        assert(await dialog.evaluate((node) => {
+          const probe = document.createElement('div'); probe.style.boxShadow = 'var(--shadow-overlay)'; document.body.append(probe)
+          const expected = getComputedStyle(probe).boxShadow; probe.remove()
+          return getComputedStyle(node).boxShadow.endsWith(expected)
+        }), 'Portalled overlays must resolve preset shadows at runtime')
+        assert(await page.locator('.screen > div').first().evaluate((node) => {
+          const probe = document.createElement('div'); probe.style.boxShadow = 'var(--shadow-card)'; document.body.append(probe)
+          const expected = getComputedStyle(probe).boxShadow; probe.remove()
+          return getComputedStyle(node).boxShadow.endsWith(expected)
+        }), 'Cards must resolve preset shadows at runtime')
+        await page.keyboard.press('Escape')
+        await expect(review).toBeFocused()
+      }
+    }
+    // This consumer has no theme provider or media-query JavaScript: CSS must react itself.
+    await page.evaluate(() => { document.documentElement.dataset.rillmarkMode = 'system' })
+    await page.emulateMedia({ colorScheme: 'light' })
+    await expect(save).toHaveCSS('background-color', rgb(themeTokens.presets.play.light.primary))
+    await page.emulateMedia({ colorScheme: 'dark' })
+    await expect(save).toHaveCSS('background-color', rgb(themeTokens.presets.play.dark.primary))
+    await page.evaluate(() => document.documentElement.style.setProperty('--radius-xl', '14px'))
+    await expect(save).toHaveCSS('border-bottom-left-radius', '14px')
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await review.click()
+    assert(parseFloat(await dialog.evaluate((node) => getComputedStyle(node).animationDuration)) <= 0.00001, 'Reduced motion must override preset animation')
+    await page.keyboard.press('Escape')
     assert.deepEqual(errors, [])
-    result.modes.push({ mode, build: 'passed', imports: 'root + component subpath', declarations: 'strict compilation plus invalid-variant rejection', styles: 'light/dark colors and 44px control height verified', keyboard: 'field label, combobox selection, dialog focus/escape/return verified', mobile: '390px, no horizontal overflow', pageErrors: errors })
+    result.modes.push({ mode, build: 'passed', imports: `root + all ${componentNames.length} component subpaths`, declarations: 'strict compilation plus invalid-variant rejection', styles: 'All six preset/appearance palettes, corners, portal styles, motion, CSS system preference, token override and 44px controls verified', keyboard: 'field label, combobox selection, number arrows, tag creation, dialog focus/escape/return verified', mobile: '390px, no horizontal overflow', pageErrors: errors })
   } finally {
     await context.close()
     server.kill('SIGTERM')
