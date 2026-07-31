@@ -1,6 +1,6 @@
 # Rillmark
 
-Expressive React components with warm paper surfaces, mineral teal, considered shapes and accessible interaction. React 19 is required. The package and documentation use the same canonical Rillmark implementation.
+48 expressive React components with three coordinated visual presets and accessible interaction. React 19 is required. The package and documentation use the same canonical Rillmark implementation.
 
 [Documentation and live examples](https://rillmark.vercel.app)
 
@@ -10,7 +10,7 @@ Expressive React components with warm paper surfaces, mineral teal, considered s
 npm install rillmark
 ```
 
-Import the precompiled CSS once in your application's entry point. It includes the light/dark tokens, base styles and component utilities, so Tailwind is not required for this path.
+Import the precompiled CSS once in your application's entry point. It includes every preset, light/dark/system appearance, base styles and component utilities, so Tailwind is not required for this path.
 
 ```tsx
 import 'rillmark/styles.css'
@@ -44,7 +44,13 @@ This adds the semantic theme and explicitly registers the package's component mo
 
 ## Themes and customization
 
-Add `.dark` to the document root for the dark theme. Override semantic CSS variables after the stylesheet to customize the palette. The `rillmark/tokens.json` export contains the canonical tokens; `rillmark/theme.css` exports the uncompiled Tailwind theme, base styles and motion rules.
+Set two attributes on `html`:
+
+```html
+<html data-rillmark-preset="studio" data-rillmark-mode="system">
+```
+
+Choose `fieldnotes` (warm/editorial, the default), `studio` (precise/blue) or `play` (soft/violet). Independently choose `light`, `dark` or `system`. Colors, corners, fonts, shadows and motion follow; no provider or additional package is required. Portalled overlays inherit from the document root. Existing `.dark` usage is still supported; an explicit mode takes precedence. See [themes](https://rillmark.vercel.app/docs/themes.md) for CSS overrides. The `rillmark/tokens.json` export contains the canonical tokens; `rillmark/theme.css` exports the uncompiled Tailwind theme, base styles and motion rules.
 
 Keep visible labels on forms and icon actions. `Field` connects labels, descriptions and errors to Rillmark controls. Overlays use Radix focus management and need their title/description parts. Reduced motion is supported by default.
 

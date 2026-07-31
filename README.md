@@ -1,8 +1,8 @@
 # Rillmark
 
-**Interfaces with a point of view.** An independent React design system for people and their coding agents, with original components, tokens and a recognizable Fieldnotes visual identity.
+**Interfaces with a point of view.** An independent React design system for people and their coding agents, with 48 original components, three coordinated visual presets and five complete examples.
 
-**[Live documentation and examples](https://rillmark.vercel.app)** · **[npm 0.1.0](https://www.npmjs.com/package/rillmark)** · **[AI entry point](https://rillmark.vercel.app/llms.txt)** · **[Private repository](https://github.com/BereketAbera/rillmark)**
+**[Live documentation and examples](https://rillmark.vercel.app)** · **[npm 0.2.0](https://www.npmjs.com/package/rillmark)** · **[AI entry point](https://rillmark.vercel.app/llms.txt)** · **[Private repository](https://github.com/BereketAbera/rillmark)**
 
 ![Rillmark documentation](docs/evidence/documentation-light.png)
 
@@ -25,7 +25,7 @@ export function SaveAction() {
 }
 ```
 
-Root imports such as `import { Button, Field, Input } from 'rillmark'` also work. JavaScript modules and TypeScript declarations are included. The precompiled stylesheet supplies component styles and both themes without requiring Tailwind setup. Use your own CSS for application layout.
+Root imports such as `import { Button, Field, Input } from 'rillmark'` also work. JavaScript modules and TypeScript declarations are included. The precompiled stylesheet supplies component styles, all three presets and light/dark/system appearance without requiring Tailwind setup. Use your own CSS for application layout.
 
 In an existing Tailwind CSS 4 app, use these imports **instead of** `rillmark/styles.css`:
 
@@ -34,26 +34,38 @@ In an existing Tailwind CSS 4 app, use these imports **instead of** `rillmark/st
 @import "rillmark/tailwind.css";
 ```
 
-This registers component classes for scanning and provides semantic utilities. Add `.dark` to the document root for dark mode; override semantic CSS variables for customization. See [the package guide](packages/rillmark/README.md) and [complete setup](docs/guides/getting-started.md).
+This registers component classes for scanning and provides semantic utilities. Set two root attributes to choose a preset and appearance; semantic CSS variables remain customizable. See [the package guide](packages/rillmark/README.md) and [complete setup](docs/guides/getting-started.md).
 
 ## What ships
 
 | Family | Components |
 | --- | --- |
-| Actions | Button, IconButton, ButtonGroup |
-| Forms | Field, Input, Textarea, Checkbox, RadioGroup, Switch, Select, Combobox, Slider |
-| Structure | Card, Separator, Tabs, Accordion, Breadcrumbs, Pagination |
-| Overlays | Dialog, AlertDialog, Sheet, Popover, Tooltip, DropdownMenu |
-| Feedback/display | Alert, Toast, Badge, Avatar, Skeleton, Progress, Table |
-| Patterns | EmptyState; search/filtering, validated forms, sortable/filterable tables in complete examples |
+| Actions | Button, IconButton, ButtonGroup, Toggle, ToggleGroup |
+| Forms | Field, Input, Textarea, Checkbox, RadioGroup, Switch, Select, Combobox, Slider, NumberInput, TagInput, FileDropzone |
+| Structure | Card, Separator, Tabs, Accordion, Breadcrumbs, Pagination, Collapsible, NavigationMenu, ScrollArea |
+| Overlays | Dialog, AlertDialog, Sheet, Popover, Tooltip, DropdownMenu, ContextMenu, HoverCard, Command |
+| Feedback/display | Alert, Toast, Badge, Avatar, Skeleton, Progress, Table, Meter, Spinner, Kbd |
+| Patterns | EmptyState, Stepper, Timeline; complete searchable, validated and persistent workflows |
 
-All 32 components have compiling examples, live previews, readable source and generated local API metadata. The documentation includes search, light/dark controls, mobile previews, and three complete applications: a dense project dashboard, a settings/onboarding workflow, and an expressive discovery page. Their interactions and saved preferences work in browser-local storage; no backend is connected.
+All 48 components have compiling examples, live previews, readable source and generated local API metadata. The documentation includes search, preset and appearance controls, mobile previews, and five working applications: a project dashboard, workspace settings, resource discovery, a multi-step project brief and a team activity inbox. Search, validation, review, filtering, read/saved states, draft persistence and export work locally. Selected files remain on the device; no backend is connected.
 
-## A considered identity
+## A different feel in two settings
 
-The selected **Fieldnotes** direction uses warm paper, mineral green, compact DM Sans, restrained apricot, and one small corner on otherwise generous surfaces. Compare the [three same-screen studies](public/exploration.html) and read [the research record](docs/research.md).
+```html
+<html data-rillmark-preset="studio" data-rillmark-mode="system">
+```
 
-`tokens.json` is the canonical token source. It generates both semantic themes and the package CSS. Components live in `packages/rillmark/src/`; the documentation and npm package use that same implementation. Radix supplies complex accessible interactions; ordinary controls use native HTML. There is no custom CLI, MCP server, configuration language, or theme engine.
+| Preset | Character |
+| --- | --- |
+| `fieldnotes` (default) | Warm paper, mineral green, editorial accents, a signature corner |
+| `studio` | Cool neutrals, clear blue, precise corners, quicker transitions |
+| `play` | Soft violet, warm accents, generous curves, a gentler rhythm |
+
+Appearance is independently `light`, `dark` or `system`. Both stylesheet paths include every preset. No provider or extra package is needed, and portalled overlays inherit automatically. The existing `.dark` class remains supported when no explicit mode overrides it.
+
+Try the **[live preset explorer](https://rillmark.vercel.app/#/themes)** and read [the theme guide](docs/guides/themes.md) or [design-system research](docs/preset-research.md).
+
+`tokens.json` is the canonical token source. It generates all six semantic palettes, shape, typography, motion and the package CSS. Components live in `packages/rillmark/src/`; the documentation and npm package use that same implementation. Radix supplies complex accessible interactions; ordinary controls use native HTML. There is no custom CLI, MCP server, configuration language, or theme engine.
 
 ## Start here, agents
 

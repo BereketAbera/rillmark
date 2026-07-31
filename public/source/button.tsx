@@ -16,7 +16,7 @@ const variants: Record<ButtonVariant, string> = {
 const sizes: Record<ButtonSize, string> = { sm: 'min-h-9 px-3 text-sm', md: 'min-h-11 px-4 text-sm', lg: 'min-h-12 px-5 text-base' }
 
 export function buttonVariants({ variant = 'solid', size = 'md', className }: { variant?: ButtonVariant; size?: ButtonSize; className?: string } = {}) {
-  return cn('inline-flex shrink-0 items-center justify-center gap-2 rounded-xl rounded-tr-[5px] border font-medium leading-snug transition-[filter] duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 motion-reduce:transition-none [&_svg]:size-4 [&_svg]:shrink-0', variants[variant], sizes[size], className)
+  return cn('inline-flex shrink-0 items-center justify-center gap-2 rounded-xl rounded-tr-(--radius-corner) border font-medium leading-snug transition-[filter] duration-(--duration-fast) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 motion-reduce:transition-none [&_svg]:size-4 [&_svg]:shrink-0', variants[variant], sizes[size], className)
 }
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

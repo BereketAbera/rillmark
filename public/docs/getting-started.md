@@ -14,7 +14,7 @@ Import the precompiled stylesheet once in your entry point:
 import 'rillmark/styles.css'
 ```
 
-This includes component utilities, semantic tokens, base styles, both themes and reduced-motion rules. You do not need Tailwind in your application. Use ordinary CSS for your own layout.
+This includes component utilities, semantic tokens, base styles, three visual presets, light/dark/system appearance and reduced-motion rules. You do not need Tailwind in your application. Use ordinary CSS for your own layout.
 
 ## Build a screen
 
@@ -60,7 +60,7 @@ The integration explicitly registers package classes for scanning and provides s
 
 ## Theme and customize
 
-Add the `dark` class to the document root for dark mode. Override semantic CSS variables after the stylesheet to change your palette. Use `className` and standard props to adapt layout and behavior. The package exports its canonical `rillmark/tokens.json`; readable source is linked from every component page.
+Set `data-rillmark-preset="studio"` and `data-rillmark-mode="system"` on your `html` element to change the feel in two settings. Presets are Fieldnotes (default), Studio and Play; appearance is light, dark or system. The existing `dark` class remains supported. See [themes](./themes.md) for the live explorer and CSS overrides. Use `className` and standard props to adapt layout and behavior. The package exports its canonical `rillmark/tokens.json`; readable source is linked from every component page.
 
 Start with [foundations](./foundations.md), or give your coding agent the [AI entry point](./ai.md).
 

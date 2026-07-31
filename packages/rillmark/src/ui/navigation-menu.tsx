@@ -41,7 +41,7 @@ export function NavigationMenuLink({ className, ...props }: React.ComponentProps
 
 export function NavigationMenuViewport({ className, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>) {
   return <div className="absolute left-0 top-full z-50">
-    <NavigationMenuPrimitive.Viewport className={cn("relative mt-2 h-[var(--radix-navigation-menu-viewport-height)] w-[var(--radix-navigation-menu-viewport-width)] max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl rounded-tr-(--radius-corner) border border-border bg-popover text-popover-foreground shadow-xl motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit", className)} {...props} />
+    <NavigationMenuPrimitive.Viewport className={cn("relative mt-2 h-[var(--radix-navigation-menu-viewport-height)] w-[var(--radix-navigation-menu-viewport-width)] max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl rounded-tr-(--radius-corner) border border-border bg-popover text-popover-foreground shadow-(--shadow-overlay) motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit", className)} {...props} />
   </div>
 }
 

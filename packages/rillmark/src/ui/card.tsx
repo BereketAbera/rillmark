@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { cn } from '../lib/rillmark-utils'
 export const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function Card({ className, ...props }, ref) {
-  return <div ref={ref} className={cn('rounded-2xl rounded-tr-(--radius-corner) border border-border bg-card text-card-foreground shadow-card', className)} {...props}/>
+  return <div ref={ref} className={cn('rounded-2xl rounded-tr-(--radius-corner) border border-border bg-card text-card-foreground shadow-(--shadow-card)', className)} {...props}/>
 })
 export function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) { return <div className={cn('flex flex-col gap-1.5 p-5', className)} {...props}/> }
 export interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> { as?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' }

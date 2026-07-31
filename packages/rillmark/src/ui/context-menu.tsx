@@ -20,7 +20,7 @@ export function ContextMenuTrigger({ className, tabIndex = 0, disabled, onKeyDow
   }} />
 }
 
-const contentStyles = "z-50 max-h-[var(--radix-context-menu-content-available-height)] min-w-48 max-w-[calc(100vw-1.5rem)] overflow-y-auto rounded-xl rounded-tr-(--radius-corner) border border-border bg-popover p-1.5 text-popover-foreground shadow-xl motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit"
+const contentStyles = "z-50 max-h-[var(--radix-context-menu-content-available-height)] min-w-48 max-w-[calc(100vw-1.5rem)] overflow-y-auto rounded-xl rounded-tr-(--radius-corner) border border-border bg-popover p-1.5 text-popover-foreground shadow-(--shadow-overlay) motion-safe:data-[state=open]:animate-rm-enter motion-safe:data-[state=closed]:animate-rm-exit"
 const itemStyles = "relative flex min-h-11 cursor-default select-none items-center gap-2 rounded-md px-3 py-2 text-sm outline-none transition-colors duration-(--duration-fast) focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 motion-reduce:transition-none [&>svg]:size-4 [&>svg]:shrink-0"
 
 export function ContextMenuContent({ className, collisionPadding = 12, forceMount, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Content>) {

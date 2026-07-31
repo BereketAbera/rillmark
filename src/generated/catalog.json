@@ -535,6 +535,60 @@
     "example": "\"use client\"\nimport { useState } from \"react\"\nimport { Checkbox } from \"rillmark/checkbox\"\n\nexport default function ComponentDemo() {\n  const [checked, setChecked] = useState(true)\n  return <div className=\"space-y-2\">\n    <label className=\"flex cursor-pointer items-center gap-2 text-sm\"><Checkbox checked={checked} onCheckedChange={(value) => setChecked(value === true)} />Include me in the project summary</label>\n    <label className=\"flex items-center gap-2 text-sm text-muted-foreground\"><Checkbox disabled />SMS updates · unavailable on this plan</label>\n    <p role=\"status\" className=\"text-sm text-muted-foreground\">{checked ? \"You’ll receive the next summary.\" : \"Summary emails are off.\"}</p>\n  </div>\n}\n"
   },
   {
+    "name": "collapsible",
+    "title": "Collapsible",
+    "category": "Structure",
+    "description": "Supporting details, close at hand.",
+    "guidance": "Compose Collapsible, CollapsibleTrigger and CollapsibleContent. Control open/onOpenChange when needed. The trigger exposes expanded state and its relationship to the content.",
+    "exports": [
+      "Collapsible",
+      "CollapsibleTrigger",
+      "CollapsibleContent"
+    ],
+    "api": [
+      {
+        "name": "CollapsibleTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "CollapsibleContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Collapsible",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ],
+    "example": "\"use client\"\nimport { useState } from \"react\"\nimport { ChevronDown } from \"lucide-react\"\nimport { Collapsible, CollapsibleContent, CollapsibleTrigger } from \"rillmark/collapsible\"\n\nexport default function ComponentDemo() {\n  const [open, setOpen] = useState(false)\n  return <Collapsible open={open} onOpenChange={setOpen} className=\"w-full max-w-md rounded-xl border border-border p-3\"><CollapsibleTrigger className=\"w-full\">Preparation notes<ChevronDown aria-hidden=\"true\" size={18} className={open ? \"rotate-180\" : \"\"} /></CollapsibleTrigger><CollapsibleContent className=\"px-3 pb-3 pt-2 text-muted-foreground\"><ul className=\"list-disc space-y-2 pl-5\"><li>Bring the latest research summary.</li><li>Collect one question from each teammate.</li><li>Leave time to agree on the next step.</li></ul></CollapsibleContent></Collapsible>\n}\n"
+  },
+  {
     "name": "combobox",
     "title": "Combobox",
     "category": "Forms",
@@ -594,6 +648,321 @@
       "radix-ui@^1.8.1"
     ],
     "example": "\"use client\"\nimport { useState } from \"react\"\nimport { Combobox } from \"rillmark/combobox\"\nimport { Field } from \"rillmark/field\"\n\nconst options = [{ value: \"maya\", label: \"Maya Chen\", keywords: [\"research\"] }, { value: \"niko\", label: \"Niko Alvarez\", keywords: [\"design\"] }, { value: \"ada\", label: \"Ada Okafor\", keywords: [\"ecology\"] }, { value: \"leo\", label: \"Leo Park · away\", disabled: true }]\n\nexport default function ComponentDemo() {\n  const [owner, setOwner] = useState(\"\")\n  return <Field label=\"Project lead\" description=\"Find a teammate by name or specialty.\" className=\"w-full max-w-sm\">\n    <Combobox options={options} value={owner} onValueChange={setOwner} placeholder=\"Choose a teammate\" emptyMessage=\"No teammates match. Try a different name.\" />\n  </Field>\n}\n"
+  },
+  {
+    "name": "command",
+    "title": "Command",
+    "category": "Patterns",
+    "description": "Find the next action without leaving your work.",
+    "guidance": "Pass items with unique id, label and onSelect, plus optional description, keywords, icon or disabled state. Command is an inline searchable action list; CommandDialog adds a modal with a trigger and open/onOpenChange. Arrow keys move through search and enabled buttons; Enter in search runs the first enabled match. Home/End move among action buttons. Escape closes the dialog and returns focus to its trigger.",
+    "exports": [
+      "Command",
+      "CommandDialog"
+    ],
+    "api": [
+      {
+        "name": "Command",
+        "description": "",
+        "props": [
+          {
+            "name": "items",
+            "type": "CommandAction[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name for the search input.",
+            "default": "Find an action"
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Search actions…"
+          },
+          {
+            "name": "emptyMessage",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "No matching actions. Try another search."
+          },
+          {
+            "name": "onAction",
+            "type": "((action: CommandAction) => void)",
+            "required": false,
+            "description": "Runs after the selected action."
+          }
+        ]
+      },
+      {
+        "name": "CommandDialog",
+        "description": "",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": false
+          },
+          {
+            "name": "onOpenChange",
+            "type": "((open: boolean) => void)",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Workspace actions"
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Search for an action, then choose it. Use arrow keys to move between the search and actions."
+          },
+          {
+            "name": "trigger",
+            "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
+            "required": false,
+            "description": "The actual focusable opener; focus returns here when the dialog closes."
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name for the search input."
+          },
+          {
+            "name": "items",
+            "type": "CommandAction[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "emptyMessage",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onAction",
+            "type": "((action: CommandAction) => void)",
+            "required": false,
+            "description": "Runs after the selected action."
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "lucide-react@^1.67.0"
+    ],
+    "example": "\"use client\"\nimport { useState } from \"react\"\nimport { Bell, FilePlus, Star } from \"lucide-react\"\nimport { Button } from \"rillmark/button\"\nimport { CommandDialog } from \"rillmark/command\"\n\nexport default function ComponentDemo() {\n  const [result, setResult] = useState(\"Choose an action to begin.\")\n  return <div className=\"space-y-3\"><CommandDialog title=\"A little momentum\" trigger={<Button variant=\"outline\">Find an action</Button>} items={[\n    { id: \"draft\", label: \"Create a draft\", description: \"Start a new research note.\", keywords: [\"new\", \"document\"], icon: <FilePlus />, onSelect: () => setResult(\"A new draft is ready for your notes.\") },\n    { id: \"saved\", label: \"Show saved projects\", description: \"Return to work you marked for later.\", keywords: [\"favorites\"], icon: <Star />, onSelect: () => setResult(\"Your saved projects are ready to review.\") },\n    { id: \"quiet\", label: \"Pause notifications\", description: \"Make room for an hour of focus.\", keywords: [\"quiet\", \"focus\"], icon: <Bell />, onSelect: () => setResult(\"Notifications paused for one hour.\") },\n  ]} /><p role=\"status\" className=\"text-sm text-muted-foreground\">{result}</p></div>\n}\n"
+  },
+  {
+    "name": "context-menu",
+    "title": "ContextMenu",
+    "category": "Overlays",
+    "description": "Useful actions attached to the work.",
+    "guidance": "Right-click, long-press, Shift+F10 or the context-menu key opens a focusable trigger. Use onSelect for actions. Radix provides menu navigation, checkbox/radio items and submenus; offer important actions elsewhere too.",
+    "exports": [
+      "ContextMenu",
+      "ContextMenuGroup",
+      "ContextMenuRadioGroup",
+      "ContextMenuSub",
+      "ContextMenuTrigger",
+      "ContextMenuContent",
+      "ContextMenuItem",
+      "ContextMenuCheckboxItem",
+      "ContextMenuRadioItem",
+      "ContextMenuLabel",
+      "ContextMenuSeparator",
+      "ContextMenuSubTrigger",
+      "ContextMenuSubContent"
+    ],
+    "api": [
+      {
+        "name": "ContextMenuTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "variant",
+            "type": "\"default\" | \"danger\"",
+            "required": false,
+            "description": "",
+            "default": "default"
+          },
+          {
+            "name": "inset",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuCheckboxItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuRadioItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuLabel",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuSeparator",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuSubTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuSubContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenu",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "ContextMenuGroup",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuRadioGroup",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuSub",
+        "description": "",
+        "props": []
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1",
+      "lucide-react@^1.67.0"
+    ],
+    "example": "\"use client\"\nimport { useState } from \"react\"\nimport { ContextMenu, ContextMenuCheckboxItem, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuSeparator, ContextMenuTrigger } from \"rillmark/context-menu\"\n\nexport default function ComponentDemo() {\n  const [pinned, setPinned] = useState(false)\n  const [copies, setCopies] = useState(0)\n  return <div className=\"w-full max-w-md space-y-3\"><ContextMenu><ContextMenuTrigger className=\"block rounded-xl border border-dashed border-input bg-card p-8 text-center\"><p className=\"font-medium\">Coastal research brief</p><p className=\"mt-2 text-sm text-muted-foreground\">Right-click, long-press, or focus here and press Shift+F10.</p></ContextMenuTrigger><ContextMenuContent><ContextMenuLabel>Research brief</ContextMenuLabel><ContextMenuCheckboxItem checked={pinned} onCheckedChange={(value) => setPinned(value === true)}>Pin to workspace</ContextMenuCheckboxItem><ContextMenuSeparator /><ContextMenuItem onSelect={() => setCopies((count) => count + 1)}>Duplicate brief</ContextMenuItem></ContextMenuContent></ContextMenu><p role=\"status\" className=\"text-sm text-muted-foreground\">{pinned ? \"Pinned\" : \"Unpinned\"} · {copies} {copies === 1 ? \"copy\" : \"copies\"} created</p></div>\n}\n"
   },
   {
     "name": "dialog",
@@ -998,6 +1367,120 @@
     "example": "\"use client\"\nimport { useState } from \"react\"\nimport { Button } from \"rillmark/button\"\nimport { Field } from \"rillmark/field\"\nimport { Input } from \"rillmark/input\"\n\nexport default function ComponentDemo() {\n  const [email, setEmail] = useState(\"\")\n  const [error, setError] = useState(\"\")\n  const [saved, setSaved] = useState(false)\n  return <form noValidate className=\"w-full max-w-sm space-y-4\" onSubmit={(event) => {\n    event.preventDefault()\n    const valid = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)\n    setError(valid ? \"\" : \"Enter a valid email address, such as maya@example.com.\")\n    setSaved(valid)\n  }}>\n    <Field label=\"Work email\" required description=\"Used for your weekly workspace summary.\" error={error}><Input type=\"email\" autoComplete=\"email\" value={email} onChange={(event) => { setEmail(event.target.value); setError(\"\"); setSaved(false) }} placeholder=\"maya@example.com\" /></Field>\n    <Button type=\"submit\">Save email</Button>\n    {saved && <p role=\"status\" className=\"text-sm text-primary\">Email saved for this demo.</p>}\n  </form>\n}\n"
   },
   {
+    "name": "file-dropzone",
+    "title": "FileDropzone",
+    "category": "Forms",
+    "description": "Local files, ready for the next step.",
+    "guidance": "Choose or drop files; accept, maxSize in bytes and maxFiles validate the selection. A new selection replaces the previous one. Files stay on the device; sending, progress and server validation belong to your application. Use Field for the native file input label.",
+    "exports": [
+      "FileDropzone"
+    ],
+    "api": [
+      {
+        "name": "FileDropzone",
+        "description": "Local file selection and validation. Uploading belongs to the application.",
+        "props": [
+          {
+            "name": "files",
+            "type": "File[]",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "defaultFiles",
+            "type": "File[]",
+            "required": false,
+            "description": "",
+            "default": "[]"
+          },
+          {
+            "name": "onFilesChange",
+            "type": "((files: File[]) => void)",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "maxSize",
+            "type": "number",
+            "required": false,
+            "description": "Per-file limit in bytes; omitted means no size limit."
+          },
+          {
+            "name": "maxFiles",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": 5
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "lucide-react@^1.67.0"
+    ],
+    "example": "import { Field } from 'rillmark/field'\nimport { FileDropzone } from 'rillmark/file-dropzone'\n\nexport default function ComponentDemo() {\n  return <div className=\"w-full max-w-lg\"><Field label=\"Project references\" description=\"Choose PDFs or images. This preview does not upload files.\"><FileDropzone accept=\"image/*,.pdf\" maxSize={5 * 1024 * 1024} maxFiles={3}/></Field></div>\n}\n"
+  },
+  {
+    "name": "hover-card",
+    "title": "HoverCard",
+    "category": "Overlays",
+    "description": "A little context before following a link.",
+    "guidance": "Supplementary link previews on hover or keyboard focus. Keep essential information at the link destination and use Popover for interactive tasks.",
+    "exports": [
+      "HoverCard",
+      "HoverCardTrigger",
+      "HoverCardContent",
+      "HoverCardArrow"
+    ],
+    "api": [
+      {
+        "name": "HoverCardContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "HoverCardArrow",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "HoverCard",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "HoverCardTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ],
+    "example": "\"use client\"\nimport { HoverCard, HoverCardArrow, HoverCardContent, HoverCardTrigger } from \"rillmark/hover-card\"\n\nexport default function ComponentDemo() {\n  return <p className=\"text-sm leading-relaxed\">\n    Build with the <HoverCard openDelay={250}>\n      <HoverCardTrigger href=\"https://rillmark.vercel.app/docs/foundations.md\" className=\"rounded-sm font-semibold text-primary underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\">Fieldnotes foundations</HoverCardTrigger>\n      <HoverCardContent>\n        <h3 className=\"font-semibold\">Warm, clear and considered</h3>\n        <p className=\"mt-2 text-muted-foreground\">Paper surfaces, mineral accents and a shared spacing rhythm keep busy workspaces calm.</p>\n        <p className=\"mt-3 text-xs text-muted-foreground\">Follow the link for tokens, typography and both color modes.</p>\n        <HoverCardArrow />\n      </HoverCardContent>\n    </HoverCard> as a starting point.\n  </p>\n}\n"
+  },
+  {
     "name": "icon-button",
     "title": "IconButton",
     "category": "Actions",
@@ -1060,6 +1543,266 @@
     ],
     "dependencies": [],
     "example": "\"use client\"\nimport { useState } from \"react\"\nimport { Field } from \"rillmark/field\"\nimport { Input } from \"rillmark/input\"\n\nexport default function ComponentDemo() {\n  const [query, setQuery] = useState(\"\")\n  const projects = [\"Coastal restoration\", \"Spring research\", \"Watershed atlas\"].filter((name) => name.toLowerCase().includes(query.toLowerCase()))\n  return <div className=\"w-full max-w-sm space-y-4\">\n    <Field label=\"Find a project\" description=\"Search by project name.\"><Input type=\"search\" value={query} onChange={(event) => setQuery(event.target.value)} placeholder=\"Try coastal…\" /></Field>\n    <ul className=\"space-y-2 text-sm\">{projects.map((project) => <li key={project}>{project}</li>)}</ul>\n    <p role=\"status\" className=\"text-sm text-muted-foreground\">{projects.length ? `${projects.length} projects found` : \"No projects match your search.\"}</p>\n  </div>\n}\n"
+  },
+  {
+    "name": "kbd",
+    "title": "Kbd",
+    "category": "Structure",
+    "description": "A familiar hint for a keyboard shortcut.",
+    "guidance": "Kbd is a semantic kbd element. It displays the key; shortcut behavior belongs to the application. Group keys in reading order and account for platform differences.",
+    "exports": [
+      "Kbd"
+    ],
+    "api": [
+      {
+        "name": "Kbd",
+        "description": "A key or shortcut hint. This component does not register keyboard shortcuts.",
+        "props": []
+      }
+    ],
+    "dependencies": [],
+    "example": "import { useEffect, useRef } from 'react'\nimport { Kbd } from 'rillmark/kbd'\nimport { Field } from 'rillmark/field'\nimport { Input } from 'rillmark/input'\n\nexport default function ComponentDemo() {\n  const input = useRef<HTMLInputElement>(null)\n  useEffect(() => {\n    const focusSearch = (event: KeyboardEvent) => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); input.current?.focus() } }\n    window.addEventListener('keydown', focusSearch)\n    return () => window.removeEventListener('keydown', focusSearch)\n  }, [])\n  return <div className=\"w-full max-w-sm space-y-4\"><Field label=\"Find a page\"><Input ref={input} placeholder=\"Start typing…\" type=\"search\"/></Field><p className=\"flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground\">Focus search with <Kbd>⌘ / Ctrl</Kbd><span>+</span><Kbd>K</Kbd></p></div>\n}\n"
+  },
+  {
+    "name": "meter",
+    "title": "Meter",
+    "category": "Feedback",
+    "description": "A useful measure against a known range.",
+    "guidance": "Supply an accessible name and a value within min/max. This native meter represents capacity or a measurement, such as storage. Use Progress for task completion. aria-valuetext can describe units and context.",
+    "exports": [
+      "Meter"
+    ],
+    "api": [
+      {
+        "name": "Meter",
+        "description": "A measurement within a known range. Use Progress for task completion.",
+        "props": [
+          {
+            "name": "min",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": 0
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": 100
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "required": true,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [],
+    "example": "import { useState } from 'react'\nimport { Meter } from 'rillmark/meter'\nimport { Field } from 'rillmark/field'\nimport { Slider } from 'rillmark/slider'\n\nexport default function ComponentDemo() {\n  const [used, setUsed] = useState(6)\n  return <div className=\"w-full max-w-sm space-y-6\"><div><div className=\"mb-2 flex justify-between gap-4 text-sm\"><span id=\"storage-label\" className=\"font-medium\">Storage used</span><span className=\"text-muted-foreground\">{used} of 20 GB</span></div><Meter aria-labelledby=\"storage-label\" value={used} max={20} aria-valuetext={`${used} of 20 gigabytes used`}/></div><Field label=\"Preview usage\"><Slider value={[used]} onValueChange={([next]) => setUsed(next)} max={20} step={1}/></Field></div>\n}\n"
+  },
+  {
+    "name": "navigation-menu",
+    "title": "NavigationMenu",
+    "category": "Structure",
+    "description": "A clear route into a larger workspace.",
+    "guidance": "Compose List, Item, Trigger, Content and Link using real destinations. The root supplies its viewport; set viewport={false} for manual placement. Radix manages keyboard navigation and dismissal.",
+    "exports": [
+      "NavigationMenu",
+      "NavigationMenuList",
+      "NavigationMenuItem",
+      "NavigationMenuTrigger",
+      "NavigationMenuContent",
+      "NavigationMenuLink",
+      "NavigationMenuViewport",
+      "NavigationMenuIndicator"
+    ],
+    "api": [
+      {
+        "name": "NavigationMenu",
+        "description": "",
+        "props": [
+          {
+            "name": "viewport",
+            "type": "boolean",
+            "required": false,
+            "description": "Render the shared dropdown viewport automatically. Disable to place it yourself.",
+            "default": true
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuList",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuLink",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuViewport",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuIndicator",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1",
+      "lucide-react@^1.67.0"
+    ],
+    "example": "\"use client\"\nimport { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from \"rillmark/navigation-menu\"\n\nexport default function ComponentDemo() {\n  return <NavigationMenu aria-label=\"Documentation\">\n    <NavigationMenuList>\n      <NavigationMenuItem>\n        <NavigationMenuTrigger>Explore components</NavigationMenuTrigger>\n        <NavigationMenuContent>\n          <NavigationMenuLink href=\"#/components/button\" className=\"grid gap-1\"><span>Actions</span><span className=\"text-xs font-normal text-muted-foreground\">Buttons and their quiet alternatives.</span></NavigationMenuLink>\n          <NavigationMenuLink href=\"#/components/field\" className=\"grid gap-1\"><span>Forms</span><span className=\"text-xs font-normal text-muted-foreground\">Labels, descriptions and errors together.</span></NavigationMenuLink>\n          <NavigationMenuLink href=\"#/components/dialog\" className=\"grid gap-1\"><span>Focused tasks</span><span className=\"text-xs font-normal text-muted-foreground\">Dialogs with a clear way back.</span></NavigationMenuLink>\n        </NavigationMenuContent>\n      </NavigationMenuItem>\n      <NavigationMenuItem><NavigationMenuLink href=\"https://rillmark.vercel.app/docs/foundations.md\">Foundations</NavigationMenuLink></NavigationMenuItem>\n    </NavigationMenuList>\n  </NavigationMenu>\n}\n"
+  },
+  {
+    "name": "number-input",
+    "title": "NumberInput",
+    "category": "Forms",
+    "description": "A count with room to adjust.",
+    "guidance": "Use value/onValueChange or defaultValue. Empty input stays empty while editing; bounds clamp on blur or step. Native number validation, form reset and Field labels are preserved. Name increment and decrement actions when there is more than one counter.",
+    "exports": [
+      "NumberInput"
+    ],
+    "api": [
+      {
+        "name": "NumberInput",
+        "description": "A native number field that permits empty editing and clamps on blur.",
+        "props": [
+          {
+            "name": "value",
+            "type": "number | \"\"",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "defaultValue",
+            "type": "number | \"\"",
+            "required": false,
+            "description": "",
+            "default": ""
+          },
+          {
+            "name": "onValueChange",
+            "type": "((value: number | \"\") => void)",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "min",
+            "type": "number",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": 1
+          },
+          {
+            "name": "decrementLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Decrease value"
+          },
+          {
+            "name": "incrementLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Increase value"
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "lucide-react@^1.67.0"
+    ],
+    "example": "import { useState } from 'react'\nimport { Field } from 'rillmark/field'\nimport { NumberInput } from 'rillmark/number-input'\n\nexport default function ComponentDemo() {\n  const [seats, setSeats] = useState<number | ''>(4)\n  return <div className=\"w-full max-w-xs space-y-4\"><Field label=\"Team seats\" description=\"Choose between 1 and 20 seats.\"><NumberInput value={seats} onValueChange={setSeats} min={1} max={20} decrementLabel=\"Remove one seat\" incrementLabel=\"Add one seat\"/></Field><p className=\"text-sm text-muted-foreground\">{seats === '' ? 'Enter a seat count.' : `${seats} seats · $${seats * 12} per month`}</p></div>\n}\n"
   },
   {
     "name": "pagination",
@@ -1240,6 +1983,61 @@
       "radix-ui@^1.8.1"
     ],
     "example": "\"use client\"\nimport { useId, useState } from \"react\"\nimport { Field } from \"rillmark/field\"\nimport { RadioGroup, RadioGroupItem } from \"rillmark/radio-group\"\n\nexport default function ComponentDemo() {\n  const id = useId()\n  const [frequency, setFrequency] = useState(\"Weekly\")\n  return <Field label=\"Summary frequency\" description=\"Choose how often to hear from your workspace.\">\n    <RadioGroup value={frequency} onValueChange={setFrequency}>{[\"Daily\", \"Weekly\", \"Monthly\"].map((value) => <label key={value} htmlFor={`${id}-${value}`} className=\"flex cursor-pointer items-center gap-2 text-sm\"><RadioGroupItem id={`${id}-${value}`} value={value} />{value}</label>)}</RadioGroup>\n  </Field>\n}\n"
+  },
+  {
+    "name": "scroll-area",
+    "title": "ScrollArea",
+    "category": "Structure",
+    "description": "More detail within a measured space.",
+    "guidance": "Set an explicit height or width and name the scrolling region with aria-label. orientation controls scrollbars; viewportProps exposes viewport classes, native props and ref. Native keyboard scrolling remains available.",
+    "exports": [
+      "ScrollArea",
+      "ScrollBar"
+    ],
+    "api": [
+      {
+        "name": "ScrollArea",
+        "description": "",
+        "props": [
+          {
+            "name": "orientation",
+            "type": "\"vertical\" | \"horizontal\" | \"both\"",
+            "required": false,
+            "description": "Which overflow directions receive a scrollbar.",
+            "default": "vertical"
+          },
+          {
+            "name": "viewportProps",
+            "type": "(ScrollAreaViewportProps & RefAttributes<HTMLDivElement>)",
+            "required": false,
+            "description": "Props and ref for the keyboard-focusable scrolling element.",
+            "default": "{}"
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ScrollBar",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ],
+    "example": "\"use client\"\nimport { ScrollArea } from \"rillmark/scroll-area\"\n\nconst activity = [\"Maya shared the fieldwork brief\", \"Niko added the first sketches\", \"Ada reviewed the research notes\", \"Leo updated the project timeline\", \"Maya approved the direction\", \"Niko prepared the prototype\", \"Ada invited the review team\", \"Leo scheduled the next workshop\"]\n\nexport default function ComponentDemo() {\n  return <ScrollArea aria-label=\"Recent workspace activity\" className=\"h-60 w-full max-w-sm rounded-xl border border-border bg-card\">\n    <div className=\"p-4 pr-6\">\n      <h3 className=\"mb-3 text-sm font-semibold\">Recent activity</h3>\n      <ol className=\"divide-y divide-border\">\n        {activity.map((event, index) => <li key={event} className=\"py-3\"><p className=\"text-sm\">{event}</p><p className=\"mt-1 text-xs text-muted-foreground\">{index + 1} hours ago</p></li>)}\n      </ol>\n    </div>\n  </ScrollArea>\n}\n"
   },
   {
     "name": "select",
@@ -1560,6 +2358,80 @@
     "example": "\"use client\"\nimport { useState } from \"react\"\nimport { Field } from \"rillmark/field\"\nimport { Slider } from \"rillmark/slider\"\n\nexport default function ComponentDemo() {\n  const [capacity, setCapacity] = useState([40])\n  return <Field label=\"Review capacity\" description={`${capacity[0]} observations per week.`} className=\"w-full max-w-sm\">\n    <Slider value={capacity} onValueChange={setCapacity} min={10} max={100} step={5} thumbLabels={[\"Observations per week\"]} />\n  </Field>\n}\n"
   },
   {
+    "name": "spinner",
+    "title": "Spinner",
+    "category": "Feedback",
+    "description": "A small sign that work is underway.",
+    "guidance": "The default status label is Loading; provide a specific label when possible. Motion stops under reduced motion. Keep essential progress and errors in text and use one announcement per loading region.",
+    "exports": [
+      "Spinner"
+    ],
+    "api": [
+      {
+        "name": "Spinner",
+        "description": "",
+        "props": [
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Loading"
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": "",
+            "default": "md"
+          }
+        ]
+      }
+    ],
+    "dependencies": [],
+    "example": "import { useEffect, useRef, useState } from 'react'\nimport { Spinner } from 'rillmark/spinner'\nimport { Button } from 'rillmark/button'\n\nexport default function ComponentDemo() {\n  const [loading, setLoading] = useState(false)\n  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)\n  useEffect(() => () => clearTimeout(timer.current), [])\n  return <div className=\"flex flex-col items-center gap-5\"><div className=\"flex items-center gap-5\"><Spinner size=\"sm\" label=\"Small loading indicator\"/><Spinner label=\"Medium loading indicator\"/><Spinner size=\"lg\" label=\"Large loading indicator\"/></div><Button disabled={loading} onClick={() => { setLoading(true); timer.current = setTimeout(() => setLoading(false), 1800) }}>{loading ? <><Spinner label=\"Refreshing preview\" className=\"text-primary-foreground\"/> Refreshing…</> : 'Preview loading state'}</Button><p className=\"text-xs text-muted-foreground\">Animation respects reduced motion.</p></div>\n}\n"
+  },
+  {
+    "name": "stepper",
+    "title": "Stepper",
+    "category": "Patterns",
+    "description": "A clear path through a larger task.",
+    "guidance": "Pass unique step ids and the current value. Omit onValueChange for a progress-only trail; provide it to allow navigation, and disable inaccessible steps. Validate each step in your application before advancing. Current and completed states have text semantics.",
+    "exports": [
+      "Stepper"
+    ],
+    "api": [
+      {
+        "name": "Stepper",
+        "description": "An ordered progress trail, optionally allowing navigation between steps.",
+        "props": [
+          {
+            "name": "steps",
+            "type": "StepperStep[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "required": true,
+            "description": "The id of the current step."
+          },
+          {
+            "name": "onValueChange",
+            "type": "((value: string) => void)",
+            "required": false,
+            "description": "Omit for a noninteractive progress indicator. Validation belongs to the application."
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "lucide-react@^1.67.0"
+    ],
+    "example": "import { useState } from 'react'\nimport { Stepper } from 'rillmark/stepper'\nimport { Button } from 'rillmark/button'\n\nconst steps = [{ id: 'brief', title: 'Write the brief', description: 'Set your direction' }, { id: 'team', title: 'Invite your team', description: 'Choose collaborators' }, { id: 'review', title: 'Review', description: 'Ready to begin' }]\nconst descriptions = ['Give the next idea a clear starting point.', 'Bring together the people who will make it happen.', 'A thoughtful start makes the next step easier.']\n\nexport default function ComponentDemo() {\n  const [step, setStep] = useState('brief')\n  const index = steps.findIndex((item) => item.id === step)\n  return <div className=\"w-full max-w-2xl space-y-6\"><Stepper steps={steps} value={step} onValueChange={setStep} aria-label=\"Project setup\"/><div className=\"rounded-xl border border-border bg-card p-5\"><h3 className=\"font-semibold\">{steps[index].title}</h3><p className=\"mt-2 text-sm text-muted-foreground\">{descriptions[index]}</p></div><div className=\"flex justify-between gap-3\"><Button variant=\"outline\" disabled={index === 0} onClick={() => setStep(steps[index - 1].id)}>Previous</Button><Button disabled={index === steps.length - 1} onClick={() => setStep(steps[index + 1].id)}>Next step</Button></div></div>\n}\n"
+  },
+  {
     "name": "switch",
     "title": "Switch",
     "category": "Forms",
@@ -1724,6 +2596,53 @@
     "example": "import { Tabs, TabsContent, TabsList, TabsTrigger } from \"rillmark/tabs\"\n\nexport default function ComponentDemo() {\n  return <Tabs defaultValue=\"overview\">\n    <TabsList aria-label=\"Project sections\"><TabsTrigger value=\"overview\">Overview</TabsTrigger><TabsTrigger value=\"activity\">Activity</TabsTrigger><TabsTrigger value=\"files\" disabled>Restricted files</TabsTrigger></TabsList>\n    <TabsContent value=\"overview\"><p className=\"text-sm leading-relaxed\">Spring research brings together 12 field notes from the coastal restoration team. The next review is on Friday.</p></TabsContent>\n    <TabsContent value=\"activity\"><p className=\"text-sm leading-relaxed\">Maya added a field note. Niko reviewed the site survey. Three observations are ready for discussion.</p></TabsContent>\n  </Tabs>\n}\n"
   },
   {
+    "name": "tag-input",
+    "title": "TagInput",
+    "category": "Forms",
+    "description": "A small collection, one thought at a time.",
+    "guidance": "Enter or comma adds a trimmed tag. Case-insensitive duplicates are ignored. Backspace on an empty input focuses the last remove button; activating it returns focus to the input. Use name to submit repeated values and Field for a persistent label.",
+    "exports": [
+      "TagInput"
+    ],
+    "api": [
+      {
+        "name": "TagInput",
+        "description": "Enter or comma adds a tag. Backspace on an empty input focuses its last remove button.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string[]",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "defaultValue",
+            "type": "string[]",
+            "required": false,
+            "description": "",
+            "default": "[]"
+          },
+          {
+            "name": "onValueChange",
+            "type": "((value: string[]) => void)",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "maxTags",
+            "type": "number",
+            "required": false,
+            "description": "Maximum number of tags. Duplicates are ignored, ignoring case."
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "lucide-react@^1.67.0"
+    ],
+    "example": "import { useState } from 'react'\nimport { Field } from 'rillmark/field'\nimport { TagInput } from 'rillmark/tag-input'\n\nexport default function ComponentDemo() {\n  const [tags, setTags] = useState(['Research', 'Design'])\n  return <div className=\"w-full max-w-md\"><Field label=\"Project topics\" description={`${tags.length} of 5 topics added.`}><TagInput value={tags} onValueChange={setTags} maxTags={5} placeholder=\"Add a topic…\" name=\"topics\"/></Field></div>\n}\n"
+  },
+  {
     "name": "textarea",
     "title": "Textarea",
     "category": "Forms",
@@ -1741,6 +2660,70 @@
     ],
     "dependencies": [],
     "example": "\"use client\"\nimport { useState } from \"react\"\nimport { Field } from \"rillmark/field\"\nimport { Textarea } from \"rillmark/textarea\"\n\nexport default function ComponentDemo() {\n  const [note, setNote] = useState(\"\")\n  return <Field label=\"Field note\" description={`${300 - note.length} characters remaining.`} className=\"w-full max-w-md\">\n    <Textarea value={note} onChange={(event) => setNote(event.target.value)} maxLength={300} placeholder=\"What did you notice on site today?\" />\n  </Field>\n}\n"
+  },
+  {
+    "name": "timeline",
+    "title": "Timeline",
+    "category": "Patterns",
+    "description": "A readable record of what happened.",
+    "guidance": "Compose Timeline, TimelineItem, TimelineTitle, TimelineDescription and TimelineTime. Use a heading level that fits the page and dateTime for machine-readable timestamps. Icons are decorative; describe the event and its status in text.",
+    "exports": [
+      "Timeline",
+      "TimelineItem",
+      "TimelineTitle",
+      "TimelineDescription",
+      "TimelineTime"
+    ],
+    "api": [
+      {
+        "name": "Timeline",
+        "description": "A chronological list. Supply a visible heading or aria-label for context.",
+        "props": []
+      },
+      {
+        "name": "TimelineItem",
+        "description": "",
+        "props": [
+          {
+            "name": "icon",
+            "type": "ReactNode",
+            "required": false,
+            "description": "Decorative marker; include its meaning in the item's text."
+          }
+        ]
+      },
+      {
+        "name": "TimelineTitle",
+        "description": "",
+        "props": [
+          {
+            "name": "as",
+            "type": "\"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\"",
+            "required": false,
+            "description": "",
+            "default": "h3"
+          },
+          {
+            "name": "ref",
+            "type": "Ref<HTMLHeadingElement>",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "TimelineDescription",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "TimelineTime",
+        "description": "",
+        "props": []
+      }
+    ],
+    "dependencies": [],
+    "example": "import { Check, MessageSquare, Plus } from 'lucide-react'\nimport { Timeline, TimelineItem, TimelineTitle, TimelineDescription, TimelineTime } from 'rillmark/timeline'\n\nexport default function ComponentDemo() {\n  return <Timeline aria-label=\"Project activity\" className=\"w-full max-w-md\"><TimelineItem icon={<Check/>}><TimelineTitle>Direction approved</TimelineTitle><TimelineDescription>Maya signed off on the concept. The next phase is ready.</TimelineDescription><TimelineTime dateTime=\"2026-11-04T10:30:00Z\">Today, 10:30</TimelineTime></TimelineItem><TimelineItem icon={<MessageSquare/>}><TimelineTitle>Feedback shared</TimelineTitle><TimelineDescription>Three notes on the first exploration.</TimelineDescription><TimelineTime dateTime=\"2026-11-03T15:00:00Z\">Yesterday, 15:00</TimelineTime></TimelineItem><TimelineItem icon={<Plus/>}><TimelineTitle>Project created</TimelineTitle><TimelineDescription>A new place for an idea to take shape.</TimelineDescription><TimelineTime dateTime=\"2026-11-02T09:00:00Z\">November 2, 09:00</TimelineTime></TimelineItem></Timeline>\n}\n"
   },
   {
     "name": "toast",
@@ -1848,6 +2831,140 @@
       "lucide-react@^1.67.0"
     ],
     "example": "\"use client\"\nimport { useState } from \"react\"\nimport { Button } from \"rillmark/button\"\nimport { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from \"rillmark/toast\"\n\nexport default function ComponentDemo() {\n  const [open, setOpen] = useState(false)\n  const [revision, setRevision] = useState(0)\n  return <ToastProvider>\n    <Button onClick={() => { setRevision(revision + 1); setOpen(true) }}>Save changes</Button>\n    <Toast key={revision} open={open} onOpenChange={setOpen} variant=\"success\">\n      <ToastTitle>Changes saved</ToastTitle><ToastDescription>Your workspace preferences are up to date.</ToastDescription><ToastClose />\n    </Toast>\n    <ToastViewport />\n  </ToastProvider>\n}\n"
+  },
+  {
+    "name": "toggle-group",
+    "title": "ToggleGroup",
+    "category": "Actions",
+    "description": "Related choices in one compact row.",
+    "guidance": "Choose type=\"single\" or type=\"multiple\" and give the group an accessible name. Items need unique values and labels. Arrow keys move focus; Space or Enter selects. Group variant and size are inherited by items.",
+    "exports": [
+      "ToggleGroup",
+      "ToggleGroupItem"
+    ],
+    "api": [
+      {
+        "name": "ToggleGroup",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "variant",
+            "type": "\"soft\" | \"outline\"",
+            "required": false,
+            "description": "",
+            "default": "soft"
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": "",
+            "default": "md"
+          }
+        ]
+      },
+      {
+        "name": "ToggleGroupItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "variant",
+            "type": "\"soft\" | \"outline\"",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ],
+    "example": "\"use client\"\nimport { useState } from \"react\"\nimport { AlignCenter, AlignLeft, AlignRight } from \"lucide-react\"\nimport { ToggleGroup, ToggleGroupItem } from \"rillmark/toggle-group\"\n\nexport default function ComponentDemo() {\n  const [alignment, setAlignment] = useState(\"left\")\n  return <div className=\"w-full max-w-md space-y-4\"><ToggleGroup type=\"single\" value={alignment} onValueChange={(value) => { if (value) setAlignment(value) }} aria-label=\"Text alignment\" variant=\"outline\"><ToggleGroupItem value=\"left\" aria-label=\"Align left\"><AlignLeft aria-hidden=\"true\" /></ToggleGroupItem><ToggleGroupItem value=\"center\" aria-label=\"Align center\"><AlignCenter aria-hidden=\"true\" /></ToggleGroupItem><ToggleGroupItem value=\"right\" aria-label=\"Align right\"><AlignRight aria-hidden=\"true\" /></ToggleGroupItem></ToggleGroup><p className=\"rounded-xl border border-border bg-card p-4 text-sm\" style={{ textAlign: alignment as \"left\" | \"center\" | \"right\" }}>Make room for the next good idea.</p></div>\n}\n"
+  },
+  {
+    "name": "toggle",
+    "title": "Toggle",
+    "category": "Actions",
+    "description": "A small action with a persistent state.",
+    "guidance": "Use pressed/onPressedChange or defaultPressed. The button announces aria-pressed; keep its label stable while its state changes. Default controls provide a 44px touch target.",
+    "exports": [
+      "toggleStyles",
+      "Toggle"
+    ],
+    "api": [
+      {
+        "name": "toggleStyles",
+        "description": "",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"soft\" | \"outline\"",
+            "required": false,
+            "description": "",
+            "default": "soft"
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": "",
+            "default": "md"
+          },
+          {
+            "name": "className",
+            "type": "string",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Toggle",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "variant",
+            "type": "\"soft\" | \"outline\"",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ],
+    "example": "\"use client\"\nimport { useState } from \"react\"\nimport { Star } from \"lucide-react\"\nimport { Toggle } from \"rillmark/toggle\"\n\nexport default function ComponentDemo() {\n  const [saved, setSaved] = useState(false)\n  return <div className=\"space-y-3\"><Toggle pressed={saved} onPressedChange={setSaved} aria-label=\"Save this project\"><Star aria-hidden=\"true\" fill={saved ? \"currentColor\" : \"none\"} />Save project</Toggle><p role=\"status\" className=\"text-sm text-muted-foreground\">{saved ? \"Added to your saved projects.\" : \"Keep this project close for later.\"}</p></div>\n}\n"
   },
   {
     "name": "tooltip",

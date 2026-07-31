@@ -525,6 +525,59 @@
     ]
   },
   {
+    "name": "collapsible",
+    "title": "Collapsible",
+    "category": "Structure",
+    "description": "Supporting details, close at hand.",
+    "guidance": "Compose Collapsible, CollapsibleTrigger and CollapsibleContent. Control open/onOpenChange when needed. The trigger exposes expanded state and its relationship to the content.",
+    "exports": [
+      "Collapsible",
+      "CollapsibleTrigger",
+      "CollapsibleContent"
+    ],
+    "api": [
+      {
+        "name": "CollapsibleTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "CollapsibleContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Collapsible",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
     "name": "combobox",
     "title": "Combobox",
     "category": "Forms",
@@ -582,6 +635,319 @@
     ],
     "dependencies": [
       "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "command",
+    "title": "Command",
+    "category": "Patterns",
+    "description": "Find the next action without leaving your work.",
+    "guidance": "Pass items with unique id, label and onSelect, plus optional description, keywords, icon or disabled state. Command is an inline searchable action list; CommandDialog adds a modal with a trigger and open/onOpenChange. Arrow keys move through search and enabled buttons; Enter in search runs the first enabled match. Home/End move among action buttons. Escape closes the dialog and returns focus to its trigger.",
+    "exports": [
+      "Command",
+      "CommandDialog"
+    ],
+    "api": [
+      {
+        "name": "Command",
+        "description": "",
+        "props": [
+          {
+            "name": "items",
+            "type": "CommandAction[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name for the search input.",
+            "default": "Find an action"
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Search actions…"
+          },
+          {
+            "name": "emptyMessage",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "No matching actions. Try another search."
+          },
+          {
+            "name": "onAction",
+            "type": "((action: CommandAction) => void)",
+            "required": false,
+            "description": "Runs after the selected action."
+          }
+        ]
+      },
+      {
+        "name": "CommandDialog",
+        "description": "",
+        "props": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "defaultOpen",
+            "type": "boolean",
+            "required": false,
+            "description": "",
+            "default": false
+          },
+          {
+            "name": "onOpenChange",
+            "type": "((open: boolean) => void)",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Workspace actions"
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Search for an action, then choose it. Use arrow keys to move between the search and actions."
+          },
+          {
+            "name": "trigger",
+            "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
+            "required": false,
+            "description": "The actual focusable opener; focus returns here when the dialog closes."
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "Accessible name for the search input."
+          },
+          {
+            "name": "items",
+            "type": "CommandAction[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "emptyMessage",
+            "type": "string",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "onAction",
+            "type": "((action: CommandAction) => void)",
+            "required": false,
+            "description": "Runs after the selected action."
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "lucide-react@^1.67.0"
+    ]
+  },
+  {
+    "name": "context-menu",
+    "title": "ContextMenu",
+    "category": "Overlays",
+    "description": "Useful actions attached to the work.",
+    "guidance": "Right-click, long-press, Shift+F10 or the context-menu key opens a focusable trigger. Use onSelect for actions. Radix provides menu navigation, checkbox/radio items and submenus; offer important actions elsewhere too.",
+    "exports": [
+      "ContextMenu",
+      "ContextMenuGroup",
+      "ContextMenuRadioGroup",
+      "ContextMenuSub",
+      "ContextMenuTrigger",
+      "ContextMenuContent",
+      "ContextMenuItem",
+      "ContextMenuCheckboxItem",
+      "ContextMenuRadioItem",
+      "ContextMenuLabel",
+      "ContextMenuSeparator",
+      "ContextMenuSubTrigger",
+      "ContextMenuSubContent"
+    ],
+    "api": [
+      {
+        "name": "ContextMenuTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "variant",
+            "type": "\"default\" | \"danger\"",
+            "required": false,
+            "description": "",
+            "default": "default"
+          },
+          {
+            "name": "inset",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuCheckboxItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuRadioItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuLabel",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuSeparator",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuSubTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuSubContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenu",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "ContextMenuGroup",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuRadioGroup",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ContextMenuSub",
+        "description": "",
+        "props": []
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1",
+      "lucide-react@^1.67.0"
     ]
   },
   {
@@ -983,6 +1349,118 @@
     "dependencies": []
   },
   {
+    "name": "file-dropzone",
+    "title": "FileDropzone",
+    "category": "Forms",
+    "description": "Local files, ready for the next step.",
+    "guidance": "Choose or drop files; accept, maxSize in bytes and maxFiles validate the selection. A new selection replaces the previous one. Files stay on the device; sending, progress and server validation belong to your application. Use Field for the native file input label.",
+    "exports": [
+      "FileDropzone"
+    ],
+    "api": [
+      {
+        "name": "FileDropzone",
+        "description": "Local file selection and validation. Uploading belongs to the application.",
+        "props": [
+          {
+            "name": "files",
+            "type": "File[]",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "defaultFiles",
+            "type": "File[]",
+            "required": false,
+            "description": "",
+            "default": "[]"
+          },
+          {
+            "name": "onFilesChange",
+            "type": "((files: File[]) => void)",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "maxSize",
+            "type": "number",
+            "required": false,
+            "description": "Per-file limit in bytes; omitted means no size limit."
+          },
+          {
+            "name": "maxFiles",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": 5
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "lucide-react@^1.67.0"
+    ]
+  },
+  {
+    "name": "hover-card",
+    "title": "HoverCard",
+    "category": "Overlays",
+    "description": "A little context before following a link.",
+    "guidance": "Supplementary link previews on hover or keyboard focus. Keep essential information at the link destination and use Popover for interactive tasks.",
+    "exports": [
+      "HoverCard",
+      "HoverCardTrigger",
+      "HoverCardContent",
+      "HoverCardArrow"
+    ],
+    "api": [
+      {
+        "name": "HoverCardContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "HoverCardArrow",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "HoverCard",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "HoverCardTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
     "name": "icon-button",
     "title": "IconButton",
     "category": "Actions",
@@ -1043,6 +1521,262 @@
       }
     ],
     "dependencies": []
+  },
+  {
+    "name": "kbd",
+    "title": "Kbd",
+    "category": "Structure",
+    "description": "A familiar hint for a keyboard shortcut.",
+    "guidance": "Kbd is a semantic kbd element. It displays the key; shortcut behavior belongs to the application. Group keys in reading order and account for platform differences.",
+    "exports": [
+      "Kbd"
+    ],
+    "api": [
+      {
+        "name": "Kbd",
+        "description": "A key or shortcut hint. This component does not register keyboard shortcuts.",
+        "props": []
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "meter",
+    "title": "Meter",
+    "category": "Feedback",
+    "description": "A useful measure against a known range.",
+    "guidance": "Supply an accessible name and a value within min/max. This native meter represents capacity or a measurement, such as storage. Use Progress for task completion. aria-valuetext can describe units and context.",
+    "exports": [
+      "Meter"
+    ],
+    "api": [
+      {
+        "name": "Meter",
+        "description": "A measurement within a known range. Use Progress for task completion.",
+        "props": [
+          {
+            "name": "min",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": 0
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": 100
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "required": true,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "navigation-menu",
+    "title": "NavigationMenu",
+    "category": "Structure",
+    "description": "A clear route into a larger workspace.",
+    "guidance": "Compose List, Item, Trigger, Content and Link using real destinations. The root supplies its viewport; set viewport={false} for manual placement. Radix manages keyboard navigation and dismissal.",
+    "exports": [
+      "NavigationMenu",
+      "NavigationMenuList",
+      "NavigationMenuItem",
+      "NavigationMenuTrigger",
+      "NavigationMenuContent",
+      "NavigationMenuLink",
+      "NavigationMenuViewport",
+      "NavigationMenuIndicator"
+    ],
+    "api": [
+      {
+        "name": "NavigationMenu",
+        "description": "",
+        "props": [
+          {
+            "name": "viewport",
+            "type": "boolean",
+            "required": false,
+            "description": "Render the shared dropdown viewport automatically. Disable to place it yourself.",
+            "default": true
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuList",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuTrigger",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuContent",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuLink",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuViewport",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuIndicator",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "NavigationMenuItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1",
+      "lucide-react@^1.67.0"
+    ]
+  },
+  {
+    "name": "number-input",
+    "title": "NumberInput",
+    "category": "Forms",
+    "description": "A count with room to adjust.",
+    "guidance": "Use value/onValueChange or defaultValue. Empty input stays empty while editing; bounds clamp on blur or step. Native number validation, form reset and Field labels are preserved. Name increment and decrement actions when there is more than one counter.",
+    "exports": [
+      "NumberInput"
+    ],
+    "api": [
+      {
+        "name": "NumberInput",
+        "description": "A native number field that permits empty editing and clamps on blur.",
+        "props": [
+          {
+            "name": "value",
+            "type": "number | \"\"",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "defaultValue",
+            "type": "number | \"\"",
+            "required": false,
+            "description": "",
+            "default": ""
+          },
+          {
+            "name": "onValueChange",
+            "type": "((value: number | \"\") => void)",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "min",
+            "type": "number",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "max",
+            "type": "number",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "required": false,
+            "description": "",
+            "default": 1
+          },
+          {
+            "name": "decrementLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Decrease value"
+          },
+          {
+            "name": "incrementLabel",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Increase value"
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "lucide-react@^1.67.0"
+    ]
   },
   {
     "name": "pagination",
@@ -1205,6 +1939,60 @@
       },
       {
         "name": "RadioGroupItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "scroll-area",
+    "title": "ScrollArea",
+    "category": "Structure",
+    "description": "More detail within a measured space.",
+    "guidance": "Set an explicit height or width and name the scrolling region with aria-label. orientation controls scrollbars; viewportProps exposes viewport classes, native props and ref. Native keyboard scrolling remains available.",
+    "exports": [
+      "ScrollArea",
+      "ScrollBar"
+    ],
+    "api": [
+      {
+        "name": "ScrollArea",
+        "description": "",
+        "props": [
+          {
+            "name": "orientation",
+            "type": "\"vertical\" | \"horizontal\" | \"both\"",
+            "required": false,
+            "description": "Which overflow directions receive a scrollbar.",
+            "default": "vertical"
+          },
+          {
+            "name": "viewportProps",
+            "type": "(ScrollAreaViewportProps & RefAttributes<HTMLDivElement>)",
+            "required": false,
+            "description": "Props and ref for the keyboard-focusable scrolling element.",
+            "default": "{}"
+          },
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "ScrollBar",
         "description": "",
         "props": [
           {
@@ -1534,6 +2322,78 @@
     ]
   },
   {
+    "name": "spinner",
+    "title": "Spinner",
+    "category": "Feedback",
+    "description": "A small sign that work is underway.",
+    "guidance": "The default status label is Loading; provide a specific label when possible. Motion stops under reduced motion. Keep essential progress and errors in text and use one announcement per loading region.",
+    "exports": [
+      "Spinner"
+    ],
+    "api": [
+      {
+        "name": "Spinner",
+        "description": "",
+        "props": [
+          {
+            "name": "label",
+            "type": "string",
+            "required": false,
+            "description": "",
+            "default": "Loading"
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": "",
+            "default": "md"
+          }
+        ]
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "stepper",
+    "title": "Stepper",
+    "category": "Patterns",
+    "description": "A clear path through a larger task.",
+    "guidance": "Pass unique step ids and the current value. Omit onValueChange for a progress-only trail; provide it to allow navigation, and disable inaccessible steps. Validate each step in your application before advancing. Current and completed states have text semantics.",
+    "exports": [
+      "Stepper"
+    ],
+    "api": [
+      {
+        "name": "Stepper",
+        "description": "An ordered progress trail, optionally allowing navigation between steps.",
+        "props": [
+          {
+            "name": "steps",
+            "type": "StepperStep[]",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "required": true,
+            "description": "The id of the current step."
+          },
+          {
+            "name": "onValueChange",
+            "type": "((value: string) => void)",
+            "required": false,
+            "description": "Omit for a noninteractive progress indicator. Validation belongs to the application."
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "lucide-react@^1.67.0"
+    ]
+  },
+  {
     "name": "switch",
     "title": "Switch",
     "category": "Forms",
@@ -1695,6 +2555,52 @@
     ]
   },
   {
+    "name": "tag-input",
+    "title": "TagInput",
+    "category": "Forms",
+    "description": "A small collection, one thought at a time.",
+    "guidance": "Enter or comma adds a trimmed tag. Case-insensitive duplicates are ignored. Backspace on an empty input focuses the last remove button; activating it returns focus to the input. Use name to submit repeated values and Field for a persistent label.",
+    "exports": [
+      "TagInput"
+    ],
+    "api": [
+      {
+        "name": "TagInput",
+        "description": "Enter or comma adds a tag. Backspace on an empty input focuses its last remove button.",
+        "props": [
+          {
+            "name": "value",
+            "type": "string[]",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "defaultValue",
+            "type": "string[]",
+            "required": false,
+            "description": "",
+            "default": "[]"
+          },
+          {
+            "name": "onValueChange",
+            "type": "((value: string[]) => void)",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "maxTags",
+            "type": "number",
+            "required": false,
+            "description": "Maximum number of tags. Duplicates are ignored, ignoring case."
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "lucide-react@^1.67.0"
+    ]
+  },
+  {
     "name": "textarea",
     "title": "Textarea",
     "category": "Forms",
@@ -1706,6 +2612,69 @@
     "api": [
       {
         "name": "Textarea",
+        "description": "",
+        "props": []
+      }
+    ],
+    "dependencies": []
+  },
+  {
+    "name": "timeline",
+    "title": "Timeline",
+    "category": "Patterns",
+    "description": "A readable record of what happened.",
+    "guidance": "Compose Timeline, TimelineItem, TimelineTitle, TimelineDescription and TimelineTime. Use a heading level that fits the page and dateTime for machine-readable timestamps. Icons are decorative; describe the event and its status in text.",
+    "exports": [
+      "Timeline",
+      "TimelineItem",
+      "TimelineTitle",
+      "TimelineDescription",
+      "TimelineTime"
+    ],
+    "api": [
+      {
+        "name": "Timeline",
+        "description": "A chronological list. Supply a visible heading or aria-label for context.",
+        "props": []
+      },
+      {
+        "name": "TimelineItem",
+        "description": "",
+        "props": [
+          {
+            "name": "icon",
+            "type": "ReactNode",
+            "required": false,
+            "description": "Decorative marker; include its meaning in the item's text."
+          }
+        ]
+      },
+      {
+        "name": "TimelineTitle",
+        "description": "",
+        "props": [
+          {
+            "name": "as",
+            "type": "\"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\"",
+            "required": false,
+            "description": "",
+            "default": "h3"
+          },
+          {
+            "name": "ref",
+            "type": "Ref<HTMLHeadingElement>",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "TimelineDescription",
+        "description": "",
+        "props": []
+      },
+      {
+        "name": "TimelineTime",
         "description": "",
         "props": []
       }
@@ -1816,6 +2785,138 @@
     "dependencies": [
       "radix-ui@^1.8.1",
       "lucide-react@^1.67.0"
+    ]
+  },
+  {
+    "name": "toggle-group",
+    "title": "ToggleGroup",
+    "category": "Actions",
+    "description": "Related choices in one compact row.",
+    "guidance": "Choose type=\"single\" or type=\"multiple\" and give the group an accessible name. Items need unique values and labels. Arrow keys move focus; Space or Enter selects. Group variant and size are inherited by items.",
+    "exports": [
+      "ToggleGroup",
+      "ToggleGroupItem"
+    ],
+    "api": [
+      {
+        "name": "ToggleGroup",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "variant",
+            "type": "\"soft\" | \"outline\"",
+            "required": false,
+            "description": "",
+            "default": "soft"
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": "",
+            "default": "md"
+          }
+        ]
+      },
+      {
+        "name": "ToggleGroupItem",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "variant",
+            "type": "\"soft\" | \"outline\"",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
+    ]
+  },
+  {
+    "name": "toggle",
+    "title": "Toggle",
+    "category": "Actions",
+    "description": "A small action with a persistent state.",
+    "guidance": "Use pressed/onPressedChange or defaultPressed. The button announces aria-pressed; keep its label stable while its state changes. Default controls provide a 44px touch target.",
+    "exports": [
+      "toggleStyles",
+      "Toggle"
+    ],
+    "api": [
+      {
+        "name": "toggleStyles",
+        "description": "",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"soft\" | \"outline\"",
+            "required": false,
+            "description": "",
+            "default": "soft"
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": "",
+            "default": "md"
+          },
+          {
+            "name": "className",
+            "type": "string",
+            "required": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "Toggle",
+        "description": "",
+        "props": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "variant",
+            "type": "\"soft\" | \"outline\"",
+            "required": false,
+            "description": ""
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "description": ""
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      "radix-ui@^1.8.1"
     ]
   },
   {

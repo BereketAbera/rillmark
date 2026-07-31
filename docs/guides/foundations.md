@@ -1,6 +1,6 @@
 # A quiet kind of expressive.
 
-Rillmark's Fieldnotes direction pairs warm paper with mineral green, compact humanist type and one small corner on otherwise generous surfaces. Its character should remain visible in a form or a dense table.
+Rillmark's default Fieldnotes direction pairs warm paper with mineral green, compact humanist type and one small corner on otherwise generous surfaces. Its character should remain visible in a form or a dense table.
 
 ## Color has a job
 
@@ -18,32 +18,21 @@ Controls use a 44px default height. Compact 36px buttons are appropriate for den
 
 ## A small vocabulary
 
-Buttons use `solid`, `soft`, `outline`, `ghost` and `danger`. Sizes are `sm`, `md` and `lg`. Choose one primary action per context. Feedback uses `soft`, `accent` and `danger` where relevant. Do not add an expression setting, per-component palette or theme provider.
+Buttons use `solid`, `soft`, `outline`, `ghost` and `danger`. Sizes are `sm`, `md` and `lg`. Choose one primary action per context. Feedback uses `soft`, `accent` and `danger` where relevant. Use the coordinated [visual presets](./themes.md) to change the feel while keeping this vocabulary consistent.
 
-## Dark mode
+## Presets and appearance
 
-Toggle the `dark` class on the document element. Theme tokens and Tailwind's dark variant are included in either stylesheet path.
+Set two attributes on the document root:
 
-```ts
-document.documentElement.classList.toggle("dark")
+```html
+<html data-rillmark-preset="fieldnotes" data-rillmark-mode="system">
 ```
 
-Respect the system preference on first visit and save a deliberate user choice. Both palettes have checked text, control-boundary and focus-ring contrast.
+Presets are `fieldnotes`, `studio` and `play`; appearance is `light`, `dark` or `system`. These independent choices affect colors, type, corners, shadows and motion in both stylesheet paths. No provider is required. All six palettes have checked text, control-boundary and focus-ring contrast. Existing `.dark` usage still works when no explicit mode overrides it. See [the theme guide](./themes.md) for configuration, font fallbacks and custom overrides.
 
 ## Customization
 
-In this repository, `tokens.json` is canonical. `npm run generate` creates semantic theme CSS. In a consumer project, override the variables after the package stylesheet:
-
-```css
-:root {
-  --primary: #245f55;
-  --primary-foreground: #fffdf7;
-}
-.dark {
-  --primary: #b2d5ba;
-  --primary-foreground: #193c2c;
-}
-```
+In this repository, `tokens.json` is canonical. `npm run generate` creates semantic theme CSS. Consumer projects can override CSS variables after the package stylesheet, using selectors matching the root's preset and appearance. Keep paired foreground and surface values together. See the [override example](./themes.md).
 
 Use `className` for local spacing, width and layout. Shared utilities merge Tailwind classes so your additions can override defaults. Keep foreground/surface pairs together when changing tokens and recheck contrast.
 
@@ -51,6 +40,6 @@ Use `className` for local spacing, width and layout. Shared utilities merge Tail
 
 Use Field for labels and error association. Give icon-only actions a label. Include titles and descriptions in dialogs. Keep focus rings visible. Radix manages complex focus and keyboard behavior; applications still own good labels, validation messages and reading order.
 
-Motion describes a change, then stops. Overlays enter in 180ms; simple state feedback uses 150ms. Reduced-motion preferences remove transitions and movement. Avoid idle animation beyond temporary loading indicators.
+Motion describes a change, then stops. Overlay entry ranges from 120ms in Studio to 240ms in Play; Fieldnotes retains 180ms. Reduced-motion preferences remove transitions and movement. Avoid idle animation beyond temporary loading indicators.
 
-See the [three-direction study](/exploration.html) for the short decision record.
+Try the [live preset explorer](/#/themes), or revisit the [initial three-direction study](/exploration.html).

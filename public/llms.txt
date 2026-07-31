@@ -6,6 +6,7 @@
 
 - [Setup and install](./docs/getting-started.md): use this first; package installation, styles, imports and React compatibility.
 - [Foundations](./docs/foundations.md): tokens, dark mode, customization and accessibility.
+- [Themes and presets](./docs/themes.md): Fieldnotes, Studio and Play; independent light/dark/system appearance using two root attributes.
 - [AI setup](./docs/ai.md): installable consuming skill and progressive discovery.
 - [Generated API](./api.json): exports and locally declared props from implementation.
 
@@ -21,27 +22,43 @@
 - [Button](./docs/components/button.md): A clear next step, with quiet alternatives.
 - [Card](./docs/components/card.md): A home for related information.
 - [Checkbox](./docs/components/checkbox.md): An independent choice, clearly marked.
+- [Collapsible](./docs/components/collapsible.md): Supporting details, close at hand.
 - [Combobox](./docs/components/combobox.md): Find a choice without losing your place.
+- [Command](./docs/components/command.md): Find the next action without leaving your work.
+- [ContextMenu](./docs/components/context-menu.md): Useful actions attached to the work.
 - [Dialog](./docs/components/dialog.md): A focused task, with a clear way back.
 - [DropdownMenu](./docs/components/dropdown-menu.md): Actions, right where they belong.
 - [EmptyState](./docs/components/empty-state.md): A useful next step when there is nothing here.
 - [Field](./docs/components/field.md): Labels, help and errors that stay connected.
+- [FileDropzone](./docs/components/file-dropzone.md): Local files, ready for the next step.
+- [HoverCard](./docs/components/hover-card.md): A little context before following a link.
 - [IconButton](./docs/components/icon-button.md): A compact action with a name.
 - [Input](./docs/components/input.md): A familiar place to begin.
+- [Kbd](./docs/components/kbd.md): A familiar hint for a keyboard shortcut.
+- [Meter](./docs/components/meter.md): A useful measure against a known range.
+- [NavigationMenu](./docs/components/navigation-menu.md): A clear route into a larger workspace.
+- [NumberInput](./docs/components/number-input.md): A count with room to adjust.
 - [Pagination](./docs/components/pagination.md): Move through a manageable set.
 - [Popover](./docs/components/popover.md): Context within reach.
 - [Progress](./docs/components/progress.md): A sense of how far along.
 - [RadioGroup](./docs/components/radio-group.md): One choice from a visible set.
+- [ScrollArea](./docs/components/scroll-area.md): More detail within a measured space.
 - [Select](./docs/components/select.md): A focused list of choices.
 - [Separator](./docs/components/separator.md): A pause between related things.
 - [Sheet](./docs/components/sheet.md): A little more room, alongside the work.
 - [Skeleton](./docs/components/skeleton.md): A quiet placeholder for what comes next.
 - [Slider](./docs/components/slider.md): Fine control across a range.
+- [Spinner](./docs/components/spinner.md): A small sign that work is underway.
+- [Stepper](./docs/components/stepper.md): A clear path through a larger task.
 - [Switch](./docs/components/switch.md): An immediate on or off decision.
 - [Table](./docs/components/table.md): Readable data, with room to grow.
 - [Tabs](./docs/components/tabs.md): One workspace, several views.
+- [TagInput](./docs/components/tag-input.md): A small collection, one thought at a time.
 - [Textarea](./docs/components/textarea.md): Room for a longer thought.
+- [Timeline](./docs/components/timeline.md): A readable record of what happened.
 - [Toast](./docs/components/toast.md): An update that respects the current task.
+- [ToggleGroup](./docs/components/toggle-group.md): Related choices in one compact row.
+- [Toggle](./docs/components/toggle.md): A small action with a persistent state.
 - [Tooltip](./docs/components/tooltip.md): A short, optional explanation.
 
 Read only the relevant component pages. Their examples compile as part of the site. Use className and semantic CSS variables for customization. Full readable component source is linked from each page.

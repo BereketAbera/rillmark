@@ -30,7 +30,7 @@ function Chevron({ className, ...props }: React.ComponentProps<"svg">) {
 export function SelectContent({ className, children, position = "popper", sideOffset = 6, ...props }: React.ComponentProps<typeof SelectPrimitive.Content>) {
   return (
     <SelectPrimitive.Portal>
-      <SelectPrimitive.Content data-slot="select-content" position={position} sideOffset={sideOffset} className={cn("relative z-50 max-h-[var(--radix-select-content-available-height)] min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-xl rounded-tr-(--radius-corner) border border-border bg-popover text-popover-foreground shadow-overlay", className)} {...props}>
+      <SelectPrimitive.Content data-slot="select-content" position={position} sideOffset={sideOffset} className={cn("relative z-50 max-h-[var(--radix-select-content-available-height)] min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-xl rounded-tr-(--radius-corner) border border-border bg-popover text-popover-foreground shadow-(--shadow-overlay)", className)} {...props}>
         <SelectPrimitive.ScrollUpButton className="flex h-7 cursor-default items-center justify-center"><Chevron className="rotate-180" /></SelectPrimitive.ScrollUpButton>
         <SelectPrimitive.Viewport className="p-1.5">{children}</SelectPrimitive.Viewport>
         <SelectPrimitive.ScrollDownButton className="flex h-7 cursor-default items-center justify-center"><Chevron /></SelectPrimitive.ScrollDownButton>

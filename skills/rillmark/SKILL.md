@@ -13,6 +13,7 @@ Start with [the component index](https://rillmark.vercel.app/llms.txt), then rea
 
 - [Getting started](https://rillmark.vercel.app/docs/getting-started.md): package installation and stylesheet choices.
 - `https://rillmark.vercel.app/docs/components/<name>.md`: exports, props, behavior and working examples for that component.
+- [Themes](https://rillmark.vercel.app/docs/themes.md): three coordinated presets and independent light/dark/system appearance.
 - [Foundations](https://rillmark.vercel.app/docs/foundations.md): semantic tokens, typography, dark mode and customization.
 
 Inspect the consumer's installed package version and declarations when an API differs from the live documentation. If the documentation is unreachable, use installed declarations and available local source, and identify any remaining uncertainty.
@@ -48,9 +49,9 @@ The alternate entry exposes semantic utilities and registers package modules for
 ## Compose and customize
 
 - Read the relevant component page before composing; use its actual exports and props. Component subpaths are `rillmark/<name>`.
-- Keep the Fieldnotes identity: warm paper, mineral teal, restrained apricot and related corner shapes. Use semantic colors and the default component sizes, with `className` for layout and local overrides.
+- Choose a coordinated preset on `html`: `data-rillmark-preset="fieldnotes|studio|play"`. Fieldnotes is the warm editorial default, Studio is precise blue, and Play is soft violet. Use semantic colors and default component sizes, with `className` for layout.
 - Use `Field` with `label`, `description` and `error` to associate controls and validation. `IconButton` requires its `label` prop. Overlays need their title and description parts; keep the provided focus management.
-- Customize CSS variables after the stylesheet. Add `.dark` to the document root for dark mode. The package's `rillmark/tokens.json` export is available for token tooling.
+- Set `data-rillmark-mode="light|dark|system"` independently on `html`; no theme provider is needed and portals inherit from the root. `.dark` remains supported when no explicit mode overrides it. Use one actual value per attribute; the pipes above denote choices. CSS overrides need selectors matching the root attributes. The package exports `rillmark/tokens.json`.
 - System font fallbacks work immediately. Load DM Sans separately only when the application's typography calls for the documentation site's font.
 
 ## Verify the result
