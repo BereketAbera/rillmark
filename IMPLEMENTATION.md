@@ -3,14 +3,14 @@
 ## 0.2 expansion in progress
 
 - [x] Research established theme APIs and choose independent preset/appearance attributes.
-- [ ] Ship Fieldnotes, Studio and Play as coordinated color, shape, type and motion tokens.
-- [ ] Add 16 components, compiling demos and focused interaction coverage.
-- [ ] Add complete project onboarding and activity inbox examples.
-- [ ] Add a live preset explorer, persistent site controls and consumer documentation.
-- [ ] Verify all six palettes, responsive workflows, portal inheritance, system preference and both packed CSS paths.
+- [x] Ship Fieldnotes, Studio and Play as coordinated color, shape, type and motion tokens.
+- [x] Add 16 components, compiling demos and focused interaction coverage.
+- [x] Add complete project onboarding and activity inbox examples.
+- [x] Add a live preset explorer, persistent site controls and consumer documentation.
+- [x] Verify all six palettes, responsive workflows, portal inheritance, system preference and both packed CSS paths.
 - [ ] Publish a verified 0.2.0 package, deploy documentation and push coherent commits to BereketAbera.
 
-The 0.1 release remains the current public version until expansion verification is complete.
+Expansion checks pass: 48 components, five full examples, three presets, 45 unit tests and all 42 headed test cases. Both fresh packed-package CSS builds pass, including CSS-only system preference and runtime shadows. The exact 0.2.0 artifact is ready; npm publication and deployment are the remaining release steps.
 
 ## 0.1 release
 
