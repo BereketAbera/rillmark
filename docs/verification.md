@@ -2,9 +2,9 @@
 
 Verified on 2026-11-04 with Node 24.13.0 and headed Google Chrome on macOS. React 19.3.1, Tailwind 4.3.4, Radix 1.8.1, TypeScript 6.0.3 and Vite 8.3.5 remain unchanged. No runtime dependency was added for the expansion.
 
-## 0.2.0 release candidate
+## Published 0.2.0 release
 
-The exact local tarball passed both fresh consumer builds. npm publication and the production deployment are pending. The artifact contains 158 intended files, 67,793 compressed bytes, and the canonical consuming skill.
+The exact tested tarball was published as `rillmark@0.2.0`. Public npm integrity matches the prepublication artifact, and a fresh public-registry consumer passes both styling paths. The artifact contains 158 intended files, 67,793 compressed bytes, and the canonical consuming skill. See [public npm verification](npm-verification.md). The production documentation is live on Vercel.
 
 - **45 unit tests** pass, together with TypeScript, ESLint, source/docs validation and all six token-contrast palettes.
 - **42 headed browser cases** pass: six complete component-page sweeps, 27 documentation/theme/workflow regressions and nine expanded-component cases. These were run in three bounded suites against the same local preview.
@@ -43,4 +43,6 @@ For open modal context menus, axe scans the actual menu subtree while explicit T
 
 Safari, Firefox, physical touch devices and dedicated screen-reader sessions remain unverified. Automated accessibility checks plus keyboard and visual review do not prove complete conformance. Example data is fictional and browser-local; there is no backend, upload service, synchronization, production authentication, rich-text editor, spreadsheet grid or chart engine.
 
-CI runs the same meaningful checks with headed Chromium under Xvfb. Hosted CI completion will be checked after pushing this release; prior runs remained queued without an assigned runner. The documentation is deployed to [rillmark.vercel.app](https://rillmark.vercel.app), and Git source remains private under [BereketAbera/rillmark](https://github.com/BereketAbera/rillmark).
+Five targeted headed production cases pass over HTTPS: the full brief, inbox persistence, contextual/command actions, preset controls/copy/portals, and system appearance. The production theme assertion normalizes colors through the browser because minification can shorten white to `#fff`; the initial failure was in that test conversion, and the corrected case passes. Public API metadata lists all 48 components, and the theme, command, file and AI documentation endpoints return HTTP 200.
+
+CI runs the same meaningful checks with headed Chromium under Xvfb. Hosted CI completion is not established by these local and public checks; prior runs remained queued without an assigned runner. The documentation is deployed to [rillmark.vercel.app](https://rillmark.vercel.app), and Git source remains private under [BereketAbera/rillmark](https://github.com/BereketAbera/rillmark).

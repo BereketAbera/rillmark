@@ -34,9 +34,14 @@ test('presets change real controls, portal surfaces and motion; configuration pe
         const expected = getComputedStyle(probe).boxShadow; probe.remove()
         return getComputedStyle(node).boxShadow.endsWith(expected)
       })).toBe(true)
-      const styles = await dialog.evaluate((node) => ({ color: getComputedStyle(node).backgroundColor, body: getComputedStyle(document.body).getPropertyValue('--popover').trim(), root: getComputedStyle(document.documentElement).getPropertyValue('--popover').trim() }))
+      const styles = await dialog.evaluate((node) => {
+        // Let the browser normalize minified shorthand colors as well as full hex values.
+        const probe = document.createElement('div'); probe.style.backgroundColor = 'var(--popover)'; document.body.append(probe)
+        const expected = getComputedStyle(probe).backgroundColor; probe.remove()
+        return { color: getComputedStyle(node).backgroundColor, expected, body: getComputedStyle(document.body).getPropertyValue('--popover').trim(), root: getComputedStyle(document.documentElement).getPropertyValue('--popover').trim() }
+      })
       expect(styles.body).toBe(styles.root)
-      await expect(dialog).toHaveCSS('background-color', `rgb(${styles.root.slice(1).match(/../g)!.map((part) => parseInt(part, 16)).join(', ')})`)
+      expect(styles.color).toBe(styles.expected)
       await dialog.evaluate((node) => Promise.all(node.getAnimations().map((animation) => animation.finished)))
       expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()).violations).toEqual([])
       await page.keyboard.press('Escape')
