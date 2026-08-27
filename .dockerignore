@@ -1,0 +1,16 @@
+# Only what npm ci and npm run build read goes into the build context.
+.git
+.github
+.vercel
+node_modules
+dist
+evidence
+test-results
+playwright-report
+.consumer-test
+packages/rillmark/dist
+packages/rillmark/skills
+registry
+*.local
+.env*
+.DS_Store
