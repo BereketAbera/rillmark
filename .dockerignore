@@ -11,6 +11,7 @@ playwright-report
 packages/rillmark/dist
 packages/rillmark/skills
 registry
+scripts/smoke-image.sh
 *.local
 .env*
 .DS_Store
