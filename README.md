@@ -106,6 +106,20 @@ The site is deployed at **[rillmark.vercel.app](https://rillmark.vercel.app)** i
 
 Redeploy with `vercel deploy --prod --scope bereketaberas-projects`. A new checkout first runs `vercel link --yes --project rillmark --scope bereketaberas-projects`. Local project metadata stays in ignored `.vercel/`.
 
+## Container image
+
+The documentation also ships as a static nginx image for **rillmark.bereket.dev**, which the [plane-platform](https://github.com/BereketAbera/plane-platform) repository deploys. The Vercel deployment above stays until the owner retires it.
+
+```sh
+docker build -t rillmark-web:local .
+docker run --rm --read-only --tmpfs /tmp -p 127.0.0.1:8088:8080 rillmark-web:local   # http://127.0.0.1:8088
+scripts/smoke-image.sh rillmark-web:local
+```
+
+The build stage runs `npm ci` and `npm run build` on the builder's own platform and writes a `.gz` beside each text file of 1 KiB or more. The runtime stage only copies `dist/` and [`deploy/nginx/`](deploy/nginx/) onto `nginxinc/nginx-unprivileged`, which runs as uid 101 on port 8080 with only `/tmp` writable. Hashed files under `/assets/` are cached for a year, everything else revalidates, and a path with no file is a 404 because the site routes with the URL hash. `scripts/smoke-image.sh` runs an image that way on a random local port, checks status, content type, caching, security headers and gzip for the agent-facing files and the app, and always removes its container.
+
+[`images.yml`](.github/workflows/images.yml) builds and smoke-tests `linux/amd64` on pull requests. On `main` it pushes `ghcr.io/bereketabera/rillmark/web:<first 12 characters of the commit>` for `linux/amd64` and `linux/arm64`, pulls the `linux/amd64` digest back to smoke-test it and scan it with trivy, and then records the index and `linux/amd64` digests in the run summary and an `image-digests` artifact.
+
 ## Release boundaries
 
 This scoped release excludes spreadsheet grids, rich-text editing and complex charts. Chromium is verified; dedicated Safari/Firefox, real touch-device and screen-reader sessions remain unverified. Automated accessibility checks supplement keyboard and visual review; they do not establish complete conformance.
