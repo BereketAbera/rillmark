@@ -1,0 +1,173 @@
+# The documentation site's container image. The plane-platform repository runs it at rillmark.bereket.dev; nothing here
+# deploys it.
+#
+# Pull request: build linux/amd64 on this x86-64 runner, load it into Docker and run scripts/smoke-image.sh on it. Then
+# assemble linux/arm64 as well, into the build cache only, because main pushes both. Nothing is pushed.
+#
+# Push to main: build linux/amd64 and linux/arm64 and push them to GHCR as one index, tagged with the commit's first 12
+# characters. npm ci, the build and the precompression run once, natively, in the build stage. The runtime stage only copies
+# files onto nginx-unprivileged, so arm64 needs no QEMU. Then the linux/amd64 image, which the VPS runs, is pulled back by
+# digest, smoke-tested and scanned, and the job fails on a CRITICAL finding that has a fix. Only after both pass do the index
+# and linux/amd64 digests go to the job summary and the image-digests artifact, so a digest recorded there passed them.
+name: images
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions: {}
+
+# A newer push to a pull request replaces the older run. On main each commit keeps its own run, and its own tag.
+concurrency:
+  group: images-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    name: Build and smoke-test linux/amd64
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - name: Build linux/amd64 without pushing
+        run: docker buildx build --platform linux/amd64 --provenance=false --sbom=false --load --tag rillmark-web:ci .
+      - name: Smoke-test the built image
+        run: scripts/smoke-image.sh rillmark-web:ci
+      # A RUN in the runtime stage would need emulation for arm64 on main, and a base digest with no arm64 image would fail
+      # there, so both are caught here. The build stage comes from the cache, so this only assembles the arm64 runtime stage.
+      - name: Assemble linux/arm64 without emulation
+        run: |
+          if awk 'toupper($1) == "FROM" { stage = tolower($NF) } stage == "runtime" && toupper($1) == "RUN" { found = 1 } END { exit !found }' Dockerfile; then
+            echo "::error file=Dockerfile::the runtime stage has a RUN, which linux/arm64 would need emulation for"
+            exit 1
+          fi
+          docker buildx build --platform linux/arm64 --provenance=false --sbom=false --output type=cacheonly .
+
+  publish:
+    name: Push, then smoke-test and scan by digest
+    # Only the canonical repository publishes, to its own GHCR namespace.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'BereketAbera/rillmark'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write # push the image to GHCR, and pull it back
+    env:
+      IMAGE: ghcr.io/bereketabera/rillmark/web
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build linux/amd64 and linux/arm64 and push them as one index
+        id: push
+        env:
+          REVISION: ${{ github.sha }}
+          SOURCE: ${{ github.server_url }}/${{ github.repository }}
+        run: |
+          tag="$IMAGE:${REVISION:0:12}"
+          docker buildx build --platform linux/amd64,linux/arm64 --provenance=false --sbom=false \
+            --label "org.opencontainers.image.revision=$REVISION" \
+            --label "org.opencontainers.image.source=$SOURCE" \
+            --metadata-file "$RUNNER_TEMP/build-metadata.json" --tag "$tag" --push .
+          echo "tag=$tag" >>"$GITHUB_OUTPUT"
+      # Read back from GHCR, so what follows names what the registry serves, not only what buildx reported.
+      - name: Resolve the index and linux/amd64 digests
+        id: digests
+        env:
+          TAG: ${{ steps.push.outputs.tag }}
+        run: |
+          pushed="$(jq -r '."containerimage.digest" // ""' "$RUNNER_TEMP/build-metadata.json")"
+          manifest="$(docker buildx imagetools inspect --format '{{json .Manifest}}' "$TAG")"
+          index="$(jq -r '.digest // ""' <<<"$manifest")"
+          platforms="$(jq -r '[.manifests[]?.platform | "\(.os)/\(.architecture)"] | sort | join(" ")' <<<"$manifest")"
+          amd64="$(jq -r '[.manifests[]? | select(.platform.os == "linux" and .platform.architecture == "amd64")] | if length == 1 then .[0].digest else "" end' <<<"$manifest")"
+          docker buildx imagetools inspect "$TAG"
+          [[ "$index" =~ ^sha256:[0-9a-f]{64}$ && "$index" == "$pushed" ]] || { echo "::error::$TAG is '$index' on GHCR, and buildx pushed '$pushed'"; exit 1; }
+          [[ "$platforms" == "linux/amd64 linux/arm64" ]] || { echo "::error::$TAG holds '$platforms', not linux/amd64 and linux/arm64 alone"; exit 1; }
+          [[ "$amd64" =~ ^sha256:[0-9a-f]{64}$ ]] || { echo "::error::$TAG has no single linux/amd64 image"; exit 1; }
+          echo "index=$index" >>"$GITHUB_OUTPUT"
+          echo "amd64=$amd64" >>"$GITHUB_OUTPUT"
+      # This runner is x86-64, as the VPS is, so the checks below run that exact image natively.
+      - name: Pull the linux/amd64 digest back from GHCR
+        env:
+          REF: ${{ env.IMAGE }}@${{ steps.digests.outputs.amd64 }}
+          REVISION: ${{ github.sha }}
+        run: |
+          docker pull --platform linux/amd64 "$REF"
+          platform="$(docker image inspect --format '{{.Os}}/{{.Architecture}}' "$REF")"
+          revision="$(docker image inspect --format '{{index .Config.Labels "org.opencontainers.image.revision"}}' "$REF")"
+          [[ "$platform" == linux/amd64 ]] || { echo "::error::$REF is $platform"; exit 1; }
+          [[ "$revision" == "$REVISION" ]] || { echo "::error::$REF is labelled revision '$revision', not $REVISION"; exit 1; }
+      - name: Smoke-test that digest
+        env:
+          REF: ${{ env.IMAGE }}@${{ steps.digests.outputs.amd64 }}
+        run: scripts/smoke-image.sh "$REF"
+      # The version and linux_amd64 sha256 that plane-platform's tools.lock pins for trivy. Change both together.
+      - name: Fetch trivy and check its sha256
+        env:
+          TRIVY_URL: https://github.com/aquasecurity/trivy/releases/download/v0.76.1/trivy_0.76.1_Linux-64bit.tar.gz
+          TRIVY_SHA256: c7cbe3137fb8a48a17574bede3dd6beb16742d1e9772929940fc90082c39d9c0
+        run: |
+          mkdir -p "$RUNNER_TEMP/trivy"
+          curl -fsSL --retry 8 --retry-connrefused -o "$RUNNER_TEMP/trivy.tar.gz" "$TRIVY_URL"
+          echo "$TRIVY_SHA256  $RUNNER_TEMP/trivy.tar.gz" | sha256sum --check --strict
+          tar -xzf "$RUNNER_TEMP/trivy.tar.gz" -C "$RUNNER_TEMP/trivy" trivy
+          "$RUNNER_TEMP/trivy/trivy" --version
+      # Read from GHCR with this job's login. The first pass lists every finding; only the second can fail the job.
+      - name: Scan that digest
+        env:
+          REF: ${{ env.IMAGE }}@${{ steps.digests.outputs.amd64 }}
+        run: |
+          trivy=("$RUNNER_TEMP/trivy/trivy" image --cache-dir "$RUNNER_TEMP/trivy-cache" --image-src remote --platform linux/amd64 --scanners vuln --timeout 10m --no-progress)
+          "${trivy[@]}" --exit-code 0 "$REF"
+          "${trivy[@]}" --skip-db-update --severity CRITICAL --ignore-unfixed --exit-code 1 "$REF"
+      - name: Record the digests
+        env:
+          TAG: ${{ steps.push.outputs.tag }}
+          INDEX: ${{ steps.digests.outputs.index }}
+          AMD64: ${{ steps.digests.outputs.amd64 }}
+          REVISION: ${{ github.sha }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/digests"
+          {
+            printf 'revision\t%s\n' "$REVISION"
+            printf 'tag\t%s\n' "$TAG"
+            printf 'index\t%s@%s\n' "$IMAGE" "$INDEX"
+            printf 'linux/amd64\t%s@%s\n' "$IMAGE" "$AMD64"
+          } >"$RUNNER_TEMP/digests/digests.tsv"
+          {
+            echo '### Pushed, smoke-tested and scanned'
+            echo
+            echo '| | Reference |'
+            echo '| --- | --- |'
+            echo "| tag | \`$TAG\` |"
+            echo "| index | \`$IMAGE@$INDEX\` |"
+            echo "| linux/amd64 | \`$IMAGE@$AMD64\` |"
+            echo
+            echo '```'
+            docker buildx imagetools inspect "$IMAGE@$INDEX"
+            echo '```'
+          } >>"$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: image-digests
+          path: ${{ runner.temp }}/digests/digests.tsv
+          if-no-files-found: error
+          retention-days: 90
