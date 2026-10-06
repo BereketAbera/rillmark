@@ -121,6 +121,11 @@ expect "/healthz body" "$(curl -s -m 10 "$base/healthz" 2>/dev/null || true)" ok
 # Hash routing has no history fallback, so a path with no file is a real 404, and one nobody may keep.
 check /nope 404 "text/html; charset=utf-8" "$NO_CACHE"
 check /docs/missing.md 404 "text/html; charset=utf-8" "$NO_CACHE"
+# So is a directory, with or without its trailing slash, never a redirect to the slash and then a 403: only / has an
+# index. location / answers /docs, /docs/ and /assets; location /assets/ answers /assets/.
+for path in /docs /docs/ /assets /assets/; do
+  check "$path" 404 "text/html; charset=utf-8" "$NO_CACHE"
+done
 
 # The real hashed names, as this build's index.html links them. Vite's hashes are base64url.
 html="$(curl -s -m 10 "$base/" 2>/dev/null || true)"
@@ -150,6 +155,15 @@ check_gzip /docs/ai.md "text/markdown; charset=utf-8" "$NO_CACHE"
 check_gzip /source/button.tsx "text/plain; charset=utf-8" "$NO_CACHE"
 [[ -z "$js" ]] || check_gzip "$js" "application/javascript; charset=utf-8" "$IMMUTABLE"
 [[ -z "$css" ]] || check_gzip "$css" "text/css; charset=utf-8" "$IMMUTABLE"
+
+# Every answer above is the expected one, so none may leave a line at [error] or worse in nginx's log, where alerting
+# looks. A 403 for a directory would, for one.
+if log="$(docker logs "$container" 2>&1)"; then
+  errors="$(printf '%s\n' "$log" | awk '/\[(error|crit|alert|emerg)\]/')"
+  if [[ -z "$errors" ]]; then pass "error log: nothing at [error] or worse"; else fail "error log: $errors"; fi
+else
+  fail "error log: docker logs $container failed"
+fi
 
 finished=yes
 if [[ "$failures" -gt 0 ]]; then
