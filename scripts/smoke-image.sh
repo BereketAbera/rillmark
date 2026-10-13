@@ -126,6 +126,8 @@ check /docs/missing.md 404 "text/html; charset=utf-8" "$NO_CACHE"
 for path in /docs /docs/ /assets /assets/; do
   check "$path" 404 "text/html; charset=utf-8" "$NO_CACHE"
 done
+# The base image's own pages are no part of the site.
+check /50x.html 404 "text/html; charset=utf-8" "$NO_CACHE"
 
 # The real hashed names, as this build's index.html links them. Vite's hashes are base64url.
 html="$(curl -s -m 10 "$base/" 2>/dev/null || true)"

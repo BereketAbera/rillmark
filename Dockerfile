@@ -29,7 +29,9 @@ RUN npm run build \
 FROM ${NGINX_IMAGE} AS runtime
 COPY deploy/nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY deploy/nginx/security-headers.conf /etc/nginx/snippets/security-headers.conf
-COPY --from=build /src/dist /usr/share/nginx/html
+# Into a directory the base image leaves empty, so the site is dist/ and nothing more. A COPY into /usr/share/nginx/html
+# would keep nginx's stock 50x.html there, and the runtime stage has no RUN to delete it with.
+COPY --from=build /src/dist /srv/www
 # nginx-unprivileged runs as uid 101 and listens on 8080. Its pid and temp files live in /tmp, which Kubernetes mounts as an
 # emptyDir so the root filesystem can stay read-only.
 EXPOSE 8080
