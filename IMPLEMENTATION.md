@@ -2,13 +2,15 @@
 
 ## Container image (deploy/k3s)
 
-- [x] Serve `dist/` from nginx-unprivileged: real 404s under hash routing, UTF-8 Markdown and TSX, immutable hashed assets, revalidating stable names, and cache and security headers on every response, errors included.
+- [x] Serve `dist/`, and nothing of the base image's, from nginx-unprivileged: real 404s under hash routing, directories included, UTF-8 Markdown and TSX, immutable hashed assets, revalidating stable names, and cache and security headers on every response, errors included.
 - [x] Precompress text files at level 9 in the build stage for `gzip_static`, with on-the-fly gzip as the fallback. The runtime stage stays COPY-only.
 - [x] `scripts/smoke-image.sh` and `.github/workflows/images.yml`: build and smoke on pull requests; on main, push both platforms to GHCR, then smoke and scan the `linux/amd64` digest and record the digests.
+- [x] No external Dockerfile frontend: BuildKit's built-in one reads the Dockerfile, so no build fetches `docker/dockerfile` by a tag.
 - [ ] First runs on GitHub. Neither job of `images.yml` has run yet.
 - [ ] Deployment at rillmark.bereket.dev, through the plane-platform repository. The Vercel deployment stays until the owner retires it.
+- [ ] Pin the BuildKit image. `docker/setup-buildx-action` starts `moby/buildkit:buildx-stable-1`, a Docker Hub tag that can move, and that image now supplies the Dockerfile frontend as well. `driver-opts: image=moby/buildkit:<version>@sha256:<digest>` would pin it. plane-platform has the same gap, so change both together.
 
-Verified on the arm64 Mac only: the image builds, and `scripts/smoke-image.sh` passes all 132 checks on it and, under emulation, on the `linux/amd64` build. A cache-only two-platform build ran the build stage once and only copied into each runtime stage. A text file without a `.gz` was still compressed on the fly. Only CI can prove the rest: the native `linux/amd64` run, the GHCR push and pull-back with `GITHUB_TOKEN`, trivy's download, checksum and scan result, and the summary and artifact.
+Verified on the arm64 Mac only: the image builds, and `scripts/smoke-image.sh` passes all 158 checks on it and, under emulation, on the `linux/amd64` build. A cache-only two-platform build ran the build stage once and only copied into each runtime stage. A text file without a `.gz` was still compressed on the fly. Only CI can prove the rest: the native `linux/amd64` run, the GHCR push and pull-back with `GITHUB_TOKEN`, trivy's download, checksum and scan result, and the summary and artifact.
 
 ## 0.2 expansion
 
