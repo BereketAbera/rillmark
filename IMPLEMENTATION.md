@@ -3,14 +3,15 @@
 ## Container image (deploy/k3s)
 
 - [x] Serve `dist/`, and nothing of the base image's, from nginx-unprivileged: real 404s under hash routing, directories included, UTF-8 Markdown and TSX, immutable hashed assets, revalidating stable names, and cache and security headers on every response, errors included.
-- [x] Precompress text files at level 9 in the build stage for `gzip_static`, with on-the-fly gzip as the fallback. The runtime stage stays COPY-only.
+- [x] Precompress text files at level 9 in the build stage for `gzip_static`, with on-the-fly gzip as the fallback.
 - [x] `scripts/smoke-image.sh` and `.github/workflows/images.yml`: build and smoke on pull requests; on main, push both platforms to GHCR, then smoke and scan the `linux/amd64` digest and record the digests.
 - [x] No external Dockerfile frontend: BuildKit's built-in one reads the Dockerfile, so no build fetches `docker/dockerfile` by a tag.
-- [ ] First runs on GitHub. Neither job of `images.yml` has run yet.
+- [x] Take Alpine's security fixes when the image is built: the runtime stage runs `apk upgrade` on the pinned base, so `images.yml` sets up QEMU for `linux/arm64`, from `tonistiigi/binfmt` pinned by digest, in both jobs. An image built later from the same commit can therefore hold newer packages.
+- [ ] A passing run on GitHub. The first publish on main pushed, pulled back and smoke-tested its image, then failed trivy's gate on brotli-libs CVE-2026-111497, which the base had at 1.2.0-r1 and Alpine fixed in 1.2.1-r0. The pull request job has not run yet.
 - [ ] Deployment at rillmark.bereket.dev, through the plane-platform repository. The Vercel deployment stays until the owner retires it.
 - [ ] Pin the BuildKit image. `docker/setup-buildx-action` starts `moby/buildkit:buildx-stable-1`, a Docker Hub tag that can move, and that image now supplies the Dockerfile frontend as well. `driver-opts: image=moby/buildkit:<version>@sha256:<digest>` would pin it. plane-platform has the same gap, so change both together.
 
-Verified on the arm64 Mac only: the image builds, and `scripts/smoke-image.sh` passes all 158 checks on it and, under emulation, on the `linux/amd64` build. A cache-only two-platform build ran the build stage once and only copied into each runtime stage. A text file without a `.gz` was still compressed on the fly. Only CI can prove the rest: the native `linux/amd64` run, the GHCR push and pull-back with `GITHUB_TOKEN`, trivy's download, checksum and scan result, and the summary and artifact.
+Verified on the arm64 Mac only: the image builds, and `scripts/smoke-image.sh` passes all 158 checks on it and, under emulation, on the `linux/amd64` build; after `apk upgrade` both hold brotli-libs 1.2.1-r0. An uncached, cache-only two-platform build ran the build stage once and `apk upgrade` in each runtime stage. A text file without a `.gz` was still compressed on the fly. The first publish has since proved the native `linux/amd64` run, the GHCR push and pull-back with `GITHUB_TOKEN`, and trivy's download and checksum. Only CI can prove the rest: `apk upgrade` under QEMU on an x86-64 runner, a passing scan, the summary and artifact, and the pull request job.
 
 ## 0.2 expansion
 
