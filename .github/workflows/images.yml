@@ -2,13 +2,14 @@
 # deploys it.
 #
 # Pull request: build linux/amd64 on this x86-64 runner, load it into Docker and run scripts/smoke-image.sh on it. Then
-# assemble linux/arm64 as well, into the build cache only, because main pushes both. Nothing is pushed.
+# build linux/arm64 as well, under QEMU and into the build cache only, because main pushes both. Nothing is pushed.
 #
 # Push to main: build linux/amd64 and linux/arm64 and push them to GHCR as one index, tagged with the commit's first 12
-# characters. npm ci, the build and the precompression run once, natively, in the build stage. The runtime stage only copies
-# files onto nginx-unprivileged, so arm64 needs no QEMU. Then the linux/amd64 image, which the VPS runs, is pulled back by
-# digest, smoke-tested and scanned, and the job fails on a CRITICAL finding that has a fix. Only after both pass do the index
-# and linux/amd64 digests go to the job summary and the image-digests artifact, so a digest recorded there passed them.
+# characters. npm ci, the build and the precompression run once, natively, in the build stage. The runtime stage runs
+# apk upgrade on nginx-unprivileged, for the fixes Alpine has shipped since the base was built, and the arm64 half runs it
+# under QEMU. Then the linux/amd64 image, which the VPS runs, is pulled back by digest, smoke-tested and scanned, and the
+# job fails on a CRITICAL finding that has a fix. Only after both pass do the index and linux/amd64 digests go to the job
+# summary and the image-digests artifact, so a digest recorded there passed them.
 name: images
 
 on:
@@ -39,20 +40,20 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      # For the runtime stage's apk upgrade in the linux/arm64 build below. Before buildx, so the builder can run arm64.
+      - uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0
+        with:
+          image: docker.io/tonistiigi/binfmt:qemu-v10.2.3@sha256:400a4873b838d1b89194d982c45e5fb3cda4593fbfd7e08a02e76b03b21166f0
+          platforms: arm64
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
       - name: Build linux/amd64 without pushing
         run: docker buildx build --platform linux/amd64 --provenance=false --sbom=false --load --tag rillmark-web:ci .
       - name: Smoke-test the built image
         run: scripts/smoke-image.sh rillmark-web:ci
-      # A RUN in the runtime stage would need emulation for arm64 on main, and a base digest with no arm64 image would fail
-      # there, so both are caught here. The build stage comes from the cache, so this only assembles the arm64 runtime stage.
-      - name: Assemble linux/arm64 without emulation
-        run: |
-          if awk 'toupper($1) == "FROM" { stage = tolower($NF) } stage == "runtime" && toupper($1) == "RUN" { found = 1 } END { exit !found }' Dockerfile; then
-            echo "::error file=Dockerfile::the runtime stage has a RUN, which linux/arm64 would need emulation for"
-            exit 1
-          fi
-          docker buildx build --platform linux/arm64 --provenance=false --sbom=false --output type=cacheonly .
+      # main pushes linux/arm64 too, so a base digest with no arm64 image, or an apk upgrade that fails under QEMU, fails
+      # here first. The build stage comes from the cache, so this only builds the arm64 runtime stage.
+      - name: Build linux/arm64 under QEMU, into the cache only
+        run: docker buildx build --platform linux/arm64 --provenance=false --sbom=false --output type=cacheonly .
 
   publish:
     name: Push, then smoke-test and scan by digest
@@ -69,6 +70,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      # As in the build job: the linux/arm64 half of the push runs the runtime stage's apk upgrade under QEMU.
+      - uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0
+        with:
+          image: docker.io/tonistiigi/binfmt:qemu-v10.2.3@sha256:400a4873b838d1b89194d982c45e5fb3cda4593fbfd7e08a02e76b03b21166f0
+          platforms: arm64
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
       - uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
         with:
